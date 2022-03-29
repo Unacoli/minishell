@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+         #
+#    By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 22:41:32 by nargouse          #+#    #+#              #
-#    Updated: 2022/03/03 20:58:11 by nargouse         ###   ########.fr        #
+#    Updated: 2022/03/29 13:40:40 by nfelsemb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $@
+	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $@ -lreadline
 
 objs/%.o: srcs/%.c
 	mkdir -p ./objs/
