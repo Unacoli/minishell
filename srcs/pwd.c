@@ -6,28 +6,34 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/03/30 14:40:26 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:05:56 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pwd(void)
+char	*pwd(void)
 {
-	char	buf[50];
+	char	*buf;
 
-	if (getcwd(buf, 50))
-		printf("%s\n", buf);
+	buf = ft_calloc(50, sizeof(char));
+	getcwd(buf, 50);
+	buf = ft_strjoinchar(buf, '\n');
+	return (buf);
 }
 
-void	envi(char **env)
+char	*envi(char **env)
 {
-	int	i;
+	int		i;
+	char	*d;
 
 	i = 0;
+	d = ft_strdup("");
 	while (env[i])
 	{
-		printf("%s\n", env[i]);
+		d = ft_strjoin(d, env[i]);
+		d = ft_strjoinchar(d, '\n');
 		i++;
 	}
+	return (d);
 }

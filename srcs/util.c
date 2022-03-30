@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/07 13:20:01 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/30 15:09:29 by nfelsemb         ###   ########.fr       */
+/*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
+/*   Updated: 2022/03/30 15:09:50 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoinchar(char const *s1, char const s2)
 {
-	char	*result;
 	int		i;
-	int		j;
+	int		len1;
+	char	*dest;
 
-	result = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!result)
-		return (NULL);
+	len1 = ft_strlen(s1);
+	dest = malloc(sizeof(char) * (len1 + 2));
+	if (!dest)
+		return (0);
 	i = 0;
-	j = 0;
-	while (s1[j])
+	while (s1[i])
 	{
-		result[i] = s1[j];
+		dest[i] = s1[i];
 		i++;
-		j++;
 	}
-	j = 0;
-	while (s2[j])
-	{
-		result[i] = s2[j];
-		i++;
-		j++;
-	}
-	result[i] = '\0';
+	i = 0;
+	dest[len1] = s2;
+	len1++;
+	dest[len1] = '\0';
 	free((char *)s1);
-	return (result);
+	return (dest);
 }

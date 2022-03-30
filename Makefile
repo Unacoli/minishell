@@ -6,7 +6,7 @@
 #    By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 22:41:32 by nargouse          #+#    #+#              #
-#    Updated: 2022/03/30 14:46:54 by nargouse         ###   ########.fr        #
+#    Updated: 2022/03/30 15:01:25 by nfelsemb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ INCLUDE = ./include/
 LIBFT	= ./libft/libft.a
 CFLAGS	+= -Wall -Werror -Wextra -g3
 
-FILES	= main.c pwd.c
+FILES	= main.c pwd.c util.c
 
 SRCS	= $(addprefix ./srcs/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))

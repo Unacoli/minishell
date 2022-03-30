@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/30 13:56:56 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:27:40 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,27 @@
 
 void	parsing(char *cmd, char **env)
 {
+	char	*print;
+
 	if (cmd == NULL)
 		exit(0);
-	if (ft_strncmp(cmd, "exit", 10) == 0)
+	if (ft_strncmp(cmd, "exit", 4) == 0)
+	{
+		free(cmd);
 		exit(0);
-	if (ft_strncmp(cmd, "pwd", 10) == 0)
-		pwd();
-	if (ft_strncmp(cmd, "env", 10) == 0)
-		envi(env);
+	}
+	if (ft_strncmp(cmd, "pwd", 3) == 0)
+	{
+		print = pwd();
+		printf("%s", print);
+		free(print);
+	}
+	if (ft_strncmp(cmd, "env", 3) == 0)
+	{
+		print = envi(env);
+		printf("%s", print);
+		free(print);
+	}
 }
 
 void	ctrlc(int i)
@@ -46,6 +59,7 @@ int	main(int ac, char **av, char **env)
 		signal(SIGINT, ctrlc);
 		cmd = readline("minishell% ");
 		parsing(cmd, env);
+		free(cmd);
 	}
 	return (0);
 }
