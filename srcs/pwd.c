@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/30 13:59:03 by nfelsemb         ###   ########.fr       */
+/*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
+/*   Updated: 2022/03/30 14:40:26 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/include/libft.h"
-# include <signal.h>
+void	pwd(void)
+{
+	char	buf[50];
 
-void	parsing(char *cmd, char **envi);
-void	ctrlc(int i);
-void	pwd(void);
-void	envi(char **env);
+	if (getcwd(buf, 50))
+		printf("%s\n", buf);
+}
 
-#endif
+void	envi(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+}

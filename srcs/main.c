@@ -6,28 +6,22 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/29 16:20:23 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/03/30 13:56:56 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	postparsing(void)
-{
-	char	*cmd;
-
-	signal(SIGINT, ctrlc);
-	cmd = readline("minishell% ");
-	parsing(cmd);
-}
-
-void	parsing(char *cmd)
+void	parsing(char *cmd, char **env)
 {
 	if (cmd == NULL)
 		exit(0);
 	if (ft_strncmp(cmd, "exit", 10) == 0)
 		exit(0);
-	postparsing();
+	if (ft_strncmp(cmd, "pwd", 10) == 0)
+		pwd();
+	if (ft_strncmp(cmd, "env", 10) == 0)
+		envi(env);
 }
 
 void	ctrlc(int i)
@@ -40,15 +34,18 @@ void	ctrlc(int i)
 	rl_redisplay();
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
 	char	*cmd;
 
 	(void) ac;
 	(void) av;
-	signal(SIGINT, ctrlc);
 	signal(SIGQUIT, SIG_IGN);
-	cmd = readline("minishell% ");
-	parsing(cmd);
+	while (1)
+	{
+		signal(SIGINT, ctrlc);
+		cmd = readline("minishell% ");
+		parsing(cmd, env);
+	}
 	return (0);
 }
