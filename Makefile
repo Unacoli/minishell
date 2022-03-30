@@ -6,14 +6,14 @@
 #    By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 22:41:32 by nargouse          #+#    #+#              #
-#    Updated: 2022/03/30 13:31:55 by nfelsemb         ###   ########.fr        #
+#    Updated: 2022/03/30 14:46:54 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 INCLUDE = ./include/
 LIBFT	= ./libft/libft.a
-CFLAGS	+= -Wall -Werror -Wextra
+CFLAGS	+= -Wall -Werror -Wextra -g3
 
 FILES	= main.c pwd.c
 
