@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 13:20:01 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/30 15:09:29 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:49:06 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	result[i] = '\0';
-	free((char *)s1);
 	return (result);
 }

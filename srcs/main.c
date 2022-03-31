@@ -6,13 +6,13 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/30 15:27:40 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:01:57 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(char *cmd, char **env)
+void	parsing(char *cmd, t_env *enviro)
 {
 	char	*print;
 
@@ -31,10 +31,37 @@ void	parsing(char *cmd, char **env)
 	}
 	if (ft_strncmp(cmd, "env", 3) == 0)
 	{
-		print = envi(env);
+		print = envi(enviro);
 		printf("%s", print);
 		free(print);
 	}
+	if (ft_strncmp(cmd, "export", 6) == 0)
+	{
+		cmd = cmd + 7;
+		print = export(cmd, enviro);
+		if (print)
+			printf("%s", print);
+	}
+	if (ft_strncmp(cmd, "unset", 5) == 0)
+	{
+		cmd = cmd + 6;
+		unset(cmd, enviro);
+	}
+	if (ft_strncmp(cmd, "cd", 2) == 0)
+	{
+		cmd = cmd + 3;
+		print = cd(cmd);
+		if (print)
+			printf("%s", print);
+	}
+	if (ft_strncmp(cmd, "echo", 4) == 0)
+	{
+		cmd = cmd + 5;
+		print = echo(cmd, enviro, 0);
+		if (print)
+			printf("%s", print);
+	}
+	print = NULL;
 }
 
 void	ctrlc(int i)
@@ -50,15 +77,17 @@ void	ctrlc(int i)
 int	main(int ac, char **av, char **env)
 {
 	char	*cmd;
+	t_env	*enviro;
 
 	(void) ac;
 	(void) av;
+	enviro = initenv(env);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		signal(SIGINT, ctrlc);
 		cmd = readline("minishell% ");
-		parsing(cmd, env);
+		parsing(cmd, enviro);
 		free(cmd);
 	}
 	return (0);
