@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/03/31 16:57:39 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:38:59 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_env	*initenv(char **env)
 	un->next = NULL;
 	retsplit = ft_split(env[0], '=');
 	un->name = retsplit[0];
+	un->haveeq = 1;
 	un->value = retsplit[1];
 	i = 1;
 	while (env[i])
@@ -35,6 +36,7 @@ t_env	*initenv(char **env)
 		un->next = NULL;
 		retsplit = ft_split(env[i], '=');
 		un->name = retsplit[0];
+		un->haveeq = 1;
 		un->value = retsplit[1];
 		i++;
 	}

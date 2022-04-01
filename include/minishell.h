@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/03/31 17:11:52 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/01 13:38:25 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*getvale(char *name, t_env *un);
 struct s_env
 {
 	t_env	*deb;
+	int		haveeq;
 	char	*name;
 	char	*value;
 	t_env	*next;
