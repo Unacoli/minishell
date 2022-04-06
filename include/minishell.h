@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/01 13:38:25 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:32:46 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <readline/history.h>
 # include "../libft/include/libft.h"
 # include <signal.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);
@@ -32,7 +35,6 @@ void	unset(char *cmd, t_env *un);
 char	*cd(char	*cmd);
 char	*echo(char	*cmd, t_env *enviro, int tiretn);
 char	*getvale(char *name, t_env *un);
-
 
 struct s_env
 {
