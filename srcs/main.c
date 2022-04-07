@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/05 15:52:27 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/07 15:59:08 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	parsing(char *cmd, t_env *enviro)
 			printf("%s", print);
 	}
 	else
-		
+		lexe(cmd, enviro);
 	print = NULL;
 }
 

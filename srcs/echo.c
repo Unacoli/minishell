@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/06 14:34:40 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:13:21 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ char	*getpath(char *cmd, t_env *enviro)
 	path = getvale("PATH", enviro);
 	pa = ft_split(path, ':');
 	name = ft_strdup("");
-	while (*cmd != ' ')
+	while (*cmd != ' ' && *cmd)
 	{
 		name = ft_strjoinchar(name, *cmd);
 		cmd++;
 	}
+	name = ft_strjoin("/", name);
 	while (pa[i])
 	{
 		path = ft_strjoin(pa[i], name);
-		if (access(path, X_OK))
+		if (access(path, X_OK) == 0)
 		{
 			return (path);
 		}
@@ -79,22 +80,49 @@ char	*getpath(char *cmd, t_env *enviro)
 	return (NULL);
 }
 
+char	**getenvchar(t_env *enviro)
+{
+	int		i;
+	char	**ret;
+
+	i = 0;
+	while (enviro->next)
+	{
+		enviro = enviro->next;
+		i++;
+	}
+	ret = ft_calloc(i + 1, sizeof(char *));
+	enviro = enviro->deb;
+	i = 0;
+	while (enviro->next)
+	{
+		ret[i] = ft_strdup(enviro->name);
+		ret[i] = ft_strjoinchar(ret[i], '=');
+		ret[i] = ft_strjoin(ret[i], enviro->value);
+		i++;
+		enviro = enviro->next;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
 void	lexe(char *cmd, t_env *envi)
 {
 	int		pid;
+	int		status;
 	char	*path;
+	char	**argv;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		path = getpath(cmd, envi);
-		while (*cmd != ' ')
-			cmd++;
-		if (path)
-			execve(path, ft_split(cmd, ' '), getenvchar(envi));
-		else
-			perror("minishell: command not found");
+		argv = ft_split(cmd, ' ');
+		argv[0] = path;
+		printf("%s\n", argv[1]);
+		if (execve(path, argv, getenvchar(envi)) == -1)	
+			printf("minishell: command not found\n");
 	}
 	else
-		waitpid(pid, 0, 0);
+		waitpid(pid, &status, 0);
 }

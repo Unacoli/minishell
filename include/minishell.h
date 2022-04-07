@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/06 14:32:46 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/07 15:58:53 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	unset(char *cmd, t_env *un);
 char	*cd(char	*cmd);
 char	*echo(char	*cmd, t_env *enviro, int tiretn);
 char	*getvale(char *name, t_env *un);
+void	lexe(char *cmd, t_env *envi);
 
 struct s_env
 {
