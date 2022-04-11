@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/07 16:13:21 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/11 18:23:58 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ char	*echo(char	*cmd, t_env *enviro, int tiretn)
 			d = ft_strjoinchar(d, cmd[i]);
 		else
 		{
-			i++;
-			d = ft_strjoin(d, getvale(getname(cmd, i), enviro));
+			d = ft_strjoin_free2(d, getvale(getname(cmd, i), enviro));
 			while (cmd[i] != ' ' && cmd[i])
 				i++;
 		}
@@ -60,23 +59,32 @@ char	*getpath(char *cmd, t_env *enviro)
 	i = 0;
 	path = getvale("PATH", enviro);
 	pa = ft_split(path, ':');
-	name = ft_strdup("");
+	name = ft_strdup("/");
 	while (*cmd != ' ' && *cmd)
 	{
 		name = ft_strjoinchar(name, *cmd);
 		cmd++;
 	}
-	name = ft_strjoin("/", name);
 	while (pa[i])
 	{
 		path = ft_strjoin(pa[i], name);
 		if (access(path, X_OK) == 0)
 		{
+			while (pa[i])
+			{
+				free(pa[i]);
+				i++;
+			}
+			free(name);
+			free(pa);
 			return (path);
 		}
 		free(path);
+		free(pa[i]);
 		i++;
 	}
+	free(pa);
+	free(name);
 	return (NULL);
 }
 
@@ -98,7 +106,7 @@ char	**getenvchar(t_env *enviro)
 	{
 		ret[i] = ft_strdup(enviro->name);
 		ret[i] = ft_strjoinchar(ret[i], '=');
-		ret[i] = ft_strjoin(ret[i], enviro->value);
+		ret[i] = ft_strjoin_free1(ret[i], enviro->value);
 		i++;
 		enviro = enviro->next;
 	}
@@ -112,16 +120,37 @@ void	lexe(char *cmd, t_env *envi)
 	int		status;
 	char	*path;
 	char	**argv;
+	char	**env;
 
+	int (i);
 	pid = fork();
 	if (pid == 0)
 	{
 		path = getpath(cmd, envi);
 		argv = ft_split(cmd, ' ');
+		free(argv[0]);
 		argv[0] = path;
-		printf("%s\n", argv[1]);
-		if (execve(path, argv, getenvchar(envi)) == -1)	
+		env = getenvchar(envi);
+		freeenv(envi);
+		free(cmd);
+		if (execve(path, argv, env) == -1)
 			printf("minishell: command not found\n");
+		i = 0;
+		while (argv[i])
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
+		i = 0;
+		while (env[i])
+		{
+			free(env[i]);
+			i++;
+		}
+		free(env);
+		free(path);
+		exit(6);
 	}
 	else
 		waitpid(pid, &status, 0);

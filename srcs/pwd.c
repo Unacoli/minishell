@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/01 13:50:49 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/11 17:53:16 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*envi(t_env *un)
 	{
 		if (un->haveeq)
 		{
-			d = ft_strjoin(d, un->name);
+			d = ft_strjoin_free1(d, un->name);
 			d = ft_strjoinchar(d, '=');
 			if (un->value)
-				d = ft_strjoin(d, un->value);
+				d = ft_strjoin_free1(d, un->value);
 			d = ft_strjoinchar(d, '\n');
 		}
 		un = un->next;
@@ -58,6 +58,7 @@ char	*export(char *cmd, t_env *un)
 		retsplit = ft_split(cmd, '=');
 		un->name = retsplit[0];
 		un->value = retsplit[1];
+		free(retsplit);
 		if (ft_strchr(cmd, '='))
 			un->haveeq = 1;
 		else
@@ -68,13 +69,13 @@ char	*export(char *cmd, t_env *un)
 		d = ft_strdup("");
 		while (un)
 		{
-			d = ft_strjoin(d, "declare -x ");
-			d = ft_strjoin(d, un->name);
+			d = ft_strjoin_free1(d, "declare -x ");
+			d = ft_strjoin_free1(d, un->name);
 			if (un->haveeq)
 			{
-				d = ft_strjoin(d, "=\"");
+				d = ft_strjoin_free1(d, "=\"");
 				if (un->value)
-					d = ft_strjoin(d, un->value);
+					d = ft_strjoin_free1(d, un->value);
 				d = ft_strjoinchar(d, '\"');
 			}
 			d = ft_strjoinchar(d, '\n');
@@ -101,6 +102,8 @@ void	unset(char *cmd, t_env *un)
 			}
 			else
 				changedeb(un->next);
+			free(un->name);
+			free(un->value);
 			free(un);
 			break ;
 		}

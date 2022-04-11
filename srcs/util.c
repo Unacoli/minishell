@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/01 13:38:59 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/11 17:01:49 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_env	*initenv(char **env)
 	t_env	*deux;
 	char	**retsplit;
 	int		i;
+	int		j;
 
 	un = ft_calloc(1, sizeof(t_env));
 	un->deb = un;
@@ -26,6 +27,7 @@ t_env	*initenv(char **env)
 	un->name = retsplit[0];
 	un->haveeq = 1;
 	un->value = retsplit[1];
+	free(retsplit);
 	i = 1;
 	while (env[i])
 	{
@@ -38,6 +40,17 @@ t_env	*initenv(char **env)
 		un->name = retsplit[0];
 		un->haveeq = 1;
 		un->value = retsplit[1];
+		if (retsplit[2])
+		{
+			j = 2;
+			while (retsplit[j])
+			{
+				un->value = ft_strjoinchar(un->value, '=');
+				un->value = ft_strjoin_free2(un->value, retsplit[j]);
+				j++;
+			}
+		}
+		free(retsplit);
 		i++;
 	}
 	return (un->deb);
