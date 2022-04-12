@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/11 17:09:41 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:47:24 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,44 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define MAX_TOKENS 12
+
+typedef enum e_tok_type
+{
+	TOKEN_NOT_VALID = 0,
+	TOKEN_PASS,
+	TOKEN_PIPE,
+	TOKEN_LESS,
+	TOKEN_GREAT,
+	TOKEN_DGREAT,
+	TOKEN_DLESS,
+	TOKEN_NEWLINE,
+	TOKEN_WORD,
+}				t_tok_type;
+
+typedef struct s_regex
+{
+	const char	*op;
+	size_t		len;
+	t_tok_type	type;
+}				t_regex;
+
+typedef struct s_token
+{
+	char		*str;
+	size_t		len;
+	t_tok_type	type;
+}				t_token;
+
+typedef struct s_lexer
+{
+	size_t	pos;
+	size_t	size;
+	size_t	capacity;
+	char	*input;
+	t_token	**tokens;
+}				t_lexer;
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);
