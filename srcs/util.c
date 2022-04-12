@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/11 17:01:49 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:16:46 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,3 +103,21 @@ void	changedeb(t_env *un)
 		un = un->next;
 	}
 }
+
+int	checkname(char *name)
+{
+	int	i;
+
+	i = 0;
+	if (!(ft_isalpha(name[i]) || name[i] == '_'))
+		return (0);
+	i++;
+	while (name[i])
+	{
+		if (!(ft_isalnum(name[i]) || name[i] == '_'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+

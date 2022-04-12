@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/11 17:53:16 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:28:31 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,29 @@ char	*export(char *cmd, t_env *un)
 	un = un->deb;
 	if (*cmd)
 	{
-		while (un->next)
-			un = un->next;
-		un->next = ft_calloc(1, sizeof(t_env));
-		un = un->next;
 		retsplit = ft_split(cmd, '=');
-		un->name = retsplit[0];
+		if (checkname(retsplit[0]) == 0)
+		{
+			d = retsplit[0];
+			free(retsplit[1]);
+			free(retsplit);
+			d = ft_strjoinchar(d, '\n');
+			return (ft_strjoin_free("export: not an identifier: ", d));
+		}
+		while (un->next
+			&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
+		{
+			un = un->next;
+		}
+		if (!un->next
+			&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
+		{
+			un->next = ft_calloc(1, sizeof(t_env));
+			un = un->next;
+			un->name = retsplit[0];
+		}
+		else
+			free(retsplit[0]);
 		un->value = retsplit[1];
 		free(retsplit);
 		if (ft_strchr(cmd, '='))
