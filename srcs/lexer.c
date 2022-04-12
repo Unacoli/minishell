@@ -6,33 +6,33 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/12 15:49:47 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:40:42 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_regex	g_rlist[] = {
-{">>", 2, TOKEN_DGREAT},
-{"<<", 2, TOKEN_DLESS},
-{"\n", 1, TOKEN_NEWLINE},
-{"|", 1, TOKEN_PIPE},
-{">", 1, TOKEN_GREAT},
-{"<", 1, TOKEN_LESS},
-{" ", 1, TOKEN_PASS},
-{"\v", 1, TOKEN_PASS},
-{"\t", 1, TOKEN_PASS},
-{"\r", 1, TOKEN_PASS},
-{"\f", 1, TOKEN_PASS},
-{NULL, 0, TOKEN_NOT_VALID}
-};
-
-void	get_next_token(t_lexer *lexer)
+void	create_lexer(t_lexer *lexer, size_t cap)
 {
-	lexer->pos += 1;
+	lexer->pos = 0;
+	lexer->size = 0;
+	lexer->capacity = cap;
+	lexer->input = NULL;
+	lexer->tokens = ft_calloc((cap + 1), sizeof(t_token *));
 }
 
-int	pass(t_lexer *lexer, t_tok_type needed)
+t_lexer	*malloc_lexer(size_t cap)
+{
+	t_lexer	*result;
+
+	result = malloc(sizeof(t_lexer));
+	if (!result)
+		return (NULL);
+	create_lexer(result, cap);
+	return (result);
+}
+
+int	pass(t_lexer *lexer, t_ttype needed)
 {
 	if ((lexer->pos < lexer->size)
 		&& (lexer->tokens[lexer->pos]->type == needed))
@@ -41,18 +41,4 @@ int	pass(t_lexer *lexer, t_tok_type needed)
 		return (1);
 	}
 	return (0);
-}
-
-t_regex	get_token(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_TOKENS)
-	{
-		if (!ft_strncmp(g_rlist[i].op, input, g_rlist[i].len))
-			return (g_rlist[i]);
-		i++;
-	}
-	return (g_rlist[TOKEN_NOT_VALID]);
 }
