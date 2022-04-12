@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/12 16:15:16 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:49:26 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,12 @@ void	coredump(int sig)
 	(void) sig;
 }
 
+void	childctrlc(int sig)
+{
+	ft_putstr_fd("\n", 2);
+	(void) sig;
+}
+
 void	lexe(char *cmd, t_env *envi)
 {
 	int		pid;
@@ -129,6 +135,7 @@ void	lexe(char *cmd, t_env *envi)
 	char	**env;
 
 	int (i);
+	signal(SIGINT, childctrlc);
 	signal(SIGQUIT, coredump);
 	pid = fork();
 	if (pid == 0)
