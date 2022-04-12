@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/11 17:46:07 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:17:46 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,13 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	enviro = initenv(env);
-	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		signal(SIGINT, ctrlc);
+		signal(SIGQUIT, SIG_IGN);
 		cmd = readline("minishell% ");
+		if (cmd && ft_strlen(cmd) > 0)
+			add_history(cmd);
 		parsing(cmd, enviro);
 		free(cmd);
 	}

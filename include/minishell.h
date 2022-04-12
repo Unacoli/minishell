@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/11 17:09:41 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 14:37:49 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*getvale(char *name, t_env *un);
 void	lexe(char *cmd, t_env *envi);
 void	exitfree(t_env *un);
 void	freeenv(t_env *un);
+int		checkname(char *name);
 
 struct s_env
 {

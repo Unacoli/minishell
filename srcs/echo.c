@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/11 18:23:58 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:15:16 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,12 @@ char	**getenvchar(t_env *enviro)
 	return (ret);
 }
 
+void	coredump(int sig)
+{
+	ft_putstr_fd("Quit (core dumped)\n", 2);
+	(void) sig;
+}
+
 void	lexe(char *cmd, t_env *envi)
 {
 	int		pid;
@@ -123,6 +129,7 @@ void	lexe(char *cmd, t_env *envi)
 	char	**env;
 
 	int (i);
+	signal(SIGQUIT, coredump);
 	pid = fork();
 	if (pid == 0)
 	{
