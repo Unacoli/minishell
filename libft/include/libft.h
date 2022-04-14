@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 17:38:36 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/12 16:20:22 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:27:25 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_convert_base(const char *nbr, char *b_from, char *b_to);
 char	*ft_newstr(size_t n);
+char	*ft_strdel(char *str, size_t n);
 
 void	ft_quit(char *message);
 void	ft_putnbr(int n);

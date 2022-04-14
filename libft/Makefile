@@ -6,7 +6,7 @@
 #    By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/07 14:54:05 by nargouse          #+#    #+#              #
-#    Updated: 2022/04/12 16:02:59 by nargouse         ###   ########.fr        #
+#    Updated: 2022/04/14 16:30:49 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ FILES	= ft_atoi.c ft_lstsize.c ft_strlcat.c ft_bzero.c ft_memccpy.c\
 		ft_strdup.c ft_lstlast.c ft_strichr.c ft_lstmap.c ft_strjoin.c\
 		ft_lstnew.c ft_strjoin_free.c ft_int_error.c ft_flag_c.c\
         ft_flag_diu.c ft_flag_p.c ft_flag_pourcent.c ft_flag_s.c ft_flag_x.c\
-        ft_printf.c ft_quit.c ft_print_str_tab.c ft_free_tab.c ft_newstr.c
+        ft_printf.c ft_quit.c ft_print_str_tab.c ft_free_tab.c ft_newstr.c\
+		ft_strdel.c
 
 SRCS    = $(addprefix ./srcs/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))
