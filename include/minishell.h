@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 13:32:59 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:58:13 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void	lexe(char *cmd, t_env *envi);
 void	exitfree(t_env *un);
 void	freeenv(t_env *un);
 int		checkname(char *name);
+void	exed(char *cmd, t_env *envi);
+char	**getenvchar(t_env *enviro);
 
 struct s_env
 {
