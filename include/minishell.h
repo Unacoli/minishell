@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 13:20:27 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:32:59 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define MAX_TOKENS 12
 
-typedef enum e_tok_type
+typedef enum e_ttype
 {
 	TOKEN_NOT_VALID = 0,
 	TOKEN_PASS,
@@ -35,20 +35,31 @@ typedef enum e_tok_type
 	TOKEN_DLESS,
 	TOKEN_NEWLINE,
 	TOKEN_WORD,
-}				t_tok_type;
+}				t_ttype;
+
+typedef enum e_node
+{
+	NODE_PROGRAM = 0,
+	NODE_CMD,
+	NODE_CMD_SUFFIX,
+	NODE_IO_FILE,
+	NODE_PIPE_SEQ,
+	NODE_SIMPLE_CMD,
+	NODE_WORD,
+}				t_node;
 
 typedef struct s_regex
 {
 	const char	*op;
 	size_t		len;
-	t_tok_type	type;
+	t_ttype		type;
 }				t_regex;
 
 typedef struct s_token
 {
-	char		*str;
-	size_t		len;
-	t_tok_type	type;
+	char	*str;
+	size_t	len;
+	t_ttype	type;
 }				t_token;
 
 typedef struct s_lexer
@@ -59,6 +70,36 @@ typedef struct s_lexer
 	char	*input;
 	t_token	**tokens;
 }				t_lexer;
+
+typedef struct s_ast
+{
+	t_node			type;
+	struct s_ast	*left;
+	struct s_ast	*right;
+	char			*data;
+}				t_ast;
+
+typedef struct s_simplecmd
+{
+	size_t	ac;
+	char	**av;
+	char	*input_file;
+	char	*output_file;
+}				t_simplecmd;
+
+typedef struct s_cmd
+{
+	size_t		cap;
+	size_t		cmd_count;
+	t_simplecmd	**simple_cmd;
+}				t_cmd;
+
+typedef struct s_ctrl
+{
+	t_lexer	*lexer;
+	t_ast	*ast;
+	t_cmd	*cmd;
+}				t_ctrl;
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);
