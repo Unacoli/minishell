@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 13:58:13 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:36:29 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,25 @@ typedef struct s_ctrl
 	t_ast	*ast;
 	t_cmd	*cmd;
 }				t_ctrl;
+
+/*Functions for lexer*/
+
+void	create_lexer(t_lexer *lexer, size_t cap);
+t_lexer	*malloc_lexer(size_t cap);
+int		lexer_full(t_lexer *lexer);
+int		pass(t_lexer *lexer, t_ttype needed);
+void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
+			t_ttype type);
+void	add_word_to_lexer(t_lexer *lexer, char **token_s);
+
+/*Functions for tokens*/
+
+t_token	create_token(const char *str, size_t len, t_ttype type);
+t_token	*malloc_token(const char *s, size_t len, t_ttype type);
+int		tokenize(t_lexer *lexer);
+t_regex	get_token(char *input);
+void	get_next_token(t_lexer *lexer);
+int		push_char(t_lexer *lexer, char **token_s);
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);

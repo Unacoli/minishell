@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/12 17:40:42 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/14 17:15:39 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ t_lexer	*malloc_lexer(size_t cap)
 		return (NULL);
 	create_lexer(result, cap);
 	return (result);
+}
+
+int	lexer_full(t_lexer *lexer)
+{
+	return (lexer->size == lexer->capacity);
 }
 
 int	pass(t_lexer *lexer, t_ttype needed)
