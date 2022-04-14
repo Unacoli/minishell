@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:08:35 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 16:28:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:36:18 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdel(char *str, size_t n)
 	i = 0;
 	ptr = NULL;
 	ptr[0] = '\0';
-	if ((int)n > ft_strlen(str))
+	if (n > ft_strlen(str))
 		str = ptr;
 	else
 	{

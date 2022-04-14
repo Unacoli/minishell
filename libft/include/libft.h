@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 17:38:36 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 16:27:25 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:34:57 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ struct	s_list
 
 typedef struct s_list	t_list;
 
-int		ft_strlen(char const *str);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isascii(int c);
@@ -86,6 +85,7 @@ void	ft_free_tab(void ***tab);
 
 size_t	ft_strlcat(char *dst, char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(char const *str);
 
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
