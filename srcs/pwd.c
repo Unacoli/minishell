@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/12 14:28:31 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:30:21 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,36 @@ void	unset(char *cmd, t_env *un)
 	}
 }
 
-char	*cd(char	*cmd)
+char	*cd(char	*cmd, t_env	*envi)
 {
+	char	**retsplit;
+	int		i;
+
+
+	if (!*cmd)
+	{
+		cmd = getvale("HOME", envi);
+	}
+	else
+		cmd++;
+	i = 0;
+	retsplit = ft_split(cmd, ' ');
+	if (retsplit[1])
+	{
+		while (retsplit[i])
+		{
+			free(retsplit[i]);
+			i++;
+		}
+		free(retsplit);
+		return (ft_strdup("minishell: cd: too many arguments\n"));
+	}
+	while (retsplit[i])
+	{
+		free(retsplit[i]);
+		i++;
+	}
+	free(retsplit);
 	if (chdir(cmd))
 		return (ft_strjoin(cmd, ": No such file or directory\n"));
 	return (0);

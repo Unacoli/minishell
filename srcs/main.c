@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/12 16:17:46 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:26:08 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	parsing(char *cmd, t_env *enviro)
 	}
 	else if (ft_strncmp(cmd, "cd", 2) == 0)
 	{
-		cmd = cmd + 3;
-		print = cd(cmd);
+		cmd = cmd + 2;
+		print = cd(cmd, enviro);
 		if (print)
 		{
 			printf("%s", print);

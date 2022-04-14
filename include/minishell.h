@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/12 16:46:52 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/14 13:20:27 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_env	*initenv(char **env);
 char	*export(char *cmd, t_env *un);
 void	changedeb(t_env *un);
 void	unset(char *cmd, t_env *un);
-char	*cd(char	*cmd);
+char	*cd(char	*cmd, t_env	*envi);
 char	*echo(char	*cmd, t_env *enviro, int tiretn);
 char	*getvale(char *name, t_env *un);
 void	lexe(char *cmd, t_env *envi);
