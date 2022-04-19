@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 17:36:29 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/19 22:26:51 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		pass(t_lexer *lexer, t_ttype needed);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
 void	add_word_to_lexer(t_lexer *lexer, char **token_s);
+void	double_lexer(t_lexer *lexer);
 
 /*Functions for tokens*/
 

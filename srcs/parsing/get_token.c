@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 17:35:48 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/19 22:07:40 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ static t_regex	g_rlist[] = {
 {"\f", 1, TOKEN_PASS},
 {NULL, 0, TOKEN_NOT_VALID}
 };
+
+int	back_char(t_lexer *lexer, char **token_s)
+{
+	if (lexer->input[lexer->pos + 1])
+	{
+		push_char(lexer, token_s);
+		push_char(lexer, token_s);
+		return (0);
+	}
+	return (1);
+}
 
 int	push_char(t_lexer *lexer, char **token_s)
 {
