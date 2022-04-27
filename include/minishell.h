@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/19 22:26:51 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:01:32 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,12 @@ void	freeenv(t_env *un);
 int		checkname(char *name);
 void	exed(char *cmd, t_env *envi);
 char	**getenvchar(t_env *enviro);
+void	freetr(char	**pa, char *name, int i);
+char	*getna(char *cmd);
+void	child(char *path, char **argv, char**env);
+void	coredump(int sig);
+void	childctrlc(int sig);
+void	freetab(char **tab);
 
 struct s_env
 {

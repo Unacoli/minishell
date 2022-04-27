@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/14 14:35:13 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:23:46 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,4 +160,3 @@ void	exed(char *cmd, t_env *envi)
 	else
 		waitpid(pid, 0, 0);
 }
-

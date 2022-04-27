@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/14 13:30:21 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:02:45 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ char	*cd(char	*cmd, t_env	*envi)
 	char	**retsplit;
 	int		i;
 
-
 	if (!*cmd)
 	{
 		cmd = getvale("HOME", envi);
@@ -145,12 +144,7 @@ char	*cd(char	*cmd, t_env	*envi)
 	retsplit = ft_split(cmd, ' ');
 	if (retsplit[1])
 	{
-		while (retsplit[i])
-		{
-			free(retsplit[i]);
-			i++;
-		}
-		free(retsplit);
+		freetab(retsplit);
 		return (ft_strdup("minishell: cd: too many arguments\n"));
 	}
 	while (retsplit[i])
