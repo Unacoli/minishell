@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:16:13 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/28 14:22:38 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:09:00 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	chldexed(char *cmd, t_env *envi)
 	char	**argv;
 	char	**env;
 	char	*path;
-	int		i;
 
 	argv = ft_split(cmd, ' ');
 	free(cmd - 1);

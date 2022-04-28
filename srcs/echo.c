@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/27 18:00:28 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:17:29 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,13 @@ void	lexe(char *cmd, t_env *envi)
 		path = getpath(cmd, envi);
 		argv = ft_split(cmd, ' ');
 		free(argv[0]);
-		argv[0] = path;
+		if (path)
+			argv[0] = path;
 		env = getenvchar(envi);
 		freeenv(envi);
+		child(path, argv, env, getna(cmd));
 		free(cmd);
-		child(path, argv, env);
+		exit(6);
 	}
 	else
 		waitpid(pid, &status, 0);

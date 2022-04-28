@@ -6,20 +6,20 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 17:57:27 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/28 14:22:27 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:17:49 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	child(char *path, char **argv, char**env)
+void	child(char *path, char **argv, char**env, char *name)
 {
 	if (execve(path, argv, env) == -1)
-		printf("minishell: command not found\n");
+		printf("%s: command not found\n", name + 1);
 	freetab(env);
+	free(name);
 	freetab(argv);
 	free(path);
-	exit(6);
 }
 
 void	addele(t_env *un, char **retsplit)

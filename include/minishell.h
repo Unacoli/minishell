@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/28 14:14:29 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:15:33 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	exed(char *cmd, t_env *envi);
 char	**getenvchar(t_env *enviro);
 void	freetr(char	**pa, char *name, int i);
 char	*getna(char *cmd);
-void	child(char *path, char **argv, char**env);
+void	child(char *path, char **argv, char**env, char *name);
 void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
