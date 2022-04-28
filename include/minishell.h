@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/27 18:01:32 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:14:29 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,9 @@ void	child(char *path, char **argv, char**env);
 void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
+void	addele(t_env *un, char **retsplit);
+char	*exportun(t_env *un);
+char	*exportd(char *cmd, t_env *un);
 
 struct s_env
 {

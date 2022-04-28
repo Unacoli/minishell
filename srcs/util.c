@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/27 17:23:46 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:15:43 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ t_env	*initenv(char **env)
 	t_env	*un;
 	t_env	*deux;
 	char	**retsplit;
-	int		i;
-	int		j;
 
+	int (i) = 1;
 	un = ft_calloc(1, sizeof(t_env));
 	un->deb = un;
 	un->next = NULL;
 	retsplit = ft_split(env[0], '=');
-	un->name = retsplit[0];
-	un->haveeq = 1;
-	un->value = retsplit[1];
+	addele(un, retsplit);
 	free(retsplit);
-	i = 1;
 	while (env[i])
 	{
 		deux = un;
@@ -37,19 +33,7 @@ t_env	*initenv(char **env)
 		deux->next = un;
 		un->next = NULL;
 		retsplit = ft_split(env[i], '=');
-		un->name = retsplit[0];
-		un->haveeq = 1;
-		un->value = retsplit[1];
-		if (retsplit[2])
-		{
-			j = 2;
-			while (retsplit[j])
-			{
-				un->value = ft_strjoinchar(un->value, '=');
-				un->value = ft_strjoin_free2(un->value, retsplit[j]);
-				j++;
-			}
-		}
+		addele(un, retsplit);
 		free(retsplit);
 		i++;
 	}
@@ -119,44 +103,4 @@ int	checkname(char *name)
 		i++;
 	}
 	return (1);
-}
-
-void	exed(char *cmd, t_env *envi)
-{
-	char	**argv;
-	char	**env;
-	char	*path;
-
-	int (i), pid;
-	pid = fork();
-	if (pid == 0)
-	{
-		argv = ft_split(cmd, ' ');
-		free(cmd - 1);
-		cmd = argv[0];
-		env = getenvchar(envi);
-		path = ft_strdup(".");
-		path = ft_strjoin_free1(path, cmd);
-		freeenv(envi);
-		argv[0] = path;
-		if (execve(path, argv, env) == -1)
-			printf("minishell: %s: No such file or directory\n", "p");
-		i = 0;
-		while (argv[i])
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
-		i = 0;
-		while (env[i])
-		{
-			free(env[i]);
-			i++;
-		}
-		free(env);
-		exit(6);
-	}
-	else
-		waitpid(pid, 0, 0);
 }
