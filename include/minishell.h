@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/19 22:26:51 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:38:22 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <unistd.h>
 
 # define MAX_TOKENS 12
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
 
 typedef enum e_ttype
 {
@@ -35,6 +37,8 @@ typedef enum e_ttype
 	TOKEN_DLESS,
 	TOKEN_NEWLINE,
 	TOKEN_WORD,
+	TOKEN_WORD_QUOTED,
+	TOKEN_SUBSTITUTION,
 }				t_ttype;
 
 typedef enum e_node
@@ -117,7 +121,7 @@ void	double_lexer(t_lexer *lexer);
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 int		tokenize(t_lexer *lexer);
-t_regex	get_token(char *input);
+t_regex	get_token(char *input, t_lexer *lexer);
 void	get_next_token(t_lexer *lexer);
 int		push_char(t_lexer *lexer, char **token_s);
 
@@ -141,6 +145,7 @@ int		checkname(char *name);
 void	exed(char *cmd, t_env *envi);
 char	**getenvchar(t_env *enviro);
 
+/* je crois qu'il manque le typedef t_env */
 struct s_env
 {
 	t_env	*deb;
