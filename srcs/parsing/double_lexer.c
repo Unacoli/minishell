@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   double_lexer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 22:18:58 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/19 22:26:57 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:08:37 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static t_token	**lexer_dup(t_token **token, int max, size_t n)
 	{
 		while (token[i] && i < max)
 		{
-			result[i] = malloc_token(token[i]->str, token[i]->len, token[i]->type);
+			result[i] = malloc_token(token[i]->str, token[i]->len, \
+			token[i]->type);
 			i++;
 		}
 	}

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fill_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:03:37 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/19 22:26:23 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:09:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len, t_ttype type)
+void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t l, t_ttype typ)
 {
 	if (lexer_full(lexer))
 		double_lexer(lexer);
-	lexer->tokens[lexer->size] = malloc_token(s, len, type);
+	lexer->tokens[lexer->size] = malloc_token(s, l, typ);
 	lexer->size += 1;
 }
 
