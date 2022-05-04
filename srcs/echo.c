@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/14 14:24:38 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:17:29 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,29 +54,17 @@ char	*getpath(char *cmd, t_env *enviro)
 	char	*path;
 	char	**pa;
 	char	*name;
-	int		i;
 
-	i = 0;
+	int (i) = 0;
 	path = getvale("PATH", enviro);
 	pa = ft_split(path, ':');
-	name = ft_strdup("/");
-	while (*cmd != ' ' && *cmd)
-	{
-		name = ft_strjoinchar(name, *cmd);
-		cmd++;
-	}
+	name = getna(cmd);
 	while (pa[i])
 	{
 		path = ft_strjoin(pa[i], name);
 		if (access(path, X_OK) == 0)
 		{
-			while (pa[i])
-			{
-				free(pa[i]);
-				i++;
-			}
-			free(name);
-			free(pa);
+			freetr(pa, name, i);
 			return (path);
 		}
 		free(path);
@@ -114,18 +102,6 @@ char	**getenvchar(t_env *enviro)
 	return (ret);
 }
 
-void	coredump(int sig)
-{
-	ft_putstr_fd("Quit (core dumped)\n", 2);
-	(void) sig;
-}
-
-void	childctrlc(int sig)
-{
-	ft_putstr_fd("\n", 2);
-	(void) sig;
-}
-
 void	lexe(char *cmd, t_env *envi)
 {
 	int		pid;
@@ -134,7 +110,6 @@ void	lexe(char *cmd, t_env *envi)
 	char	**argv;
 	char	**env;
 
-	int (i);
 	signal(SIGINT, childctrlc);
 	signal(SIGQUIT, coredump);
 	pid = fork();
@@ -143,27 +118,12 @@ void	lexe(char *cmd, t_env *envi)
 		path = getpath(cmd, envi);
 		argv = ft_split(cmd, ' ');
 		free(argv[0]);
-		argv[0] = path;
+		if (path)
+			argv[0] = path;
 		env = getenvchar(envi);
 		freeenv(envi);
+		child(path, argv, env, getna(cmd));
 		free(cmd);
-		if (execve(path, argv, env) == -1)
-			printf("minishell: command not found\n");
-		i = 0;
-		while (argv[i])
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
-		i = 0;
-		while (env[i])
-		{
-			free(env[i]);
-			i++;
-		}
-		free(env);
-		free(path);
 		exit(6);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:27:51 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/14 13:30:21 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:13:58 by nfelsemb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,61 +45,11 @@ char	*envi(t_env *un)
 
 char	*export(char *cmd, t_env *un)
 {
-	char	**retsplit;
-	char	*d;
-
 	un = un->deb;
 	if (*cmd)
-	{
-		retsplit = ft_split(cmd, '=');
-		if (checkname(retsplit[0]) == 0)
-		{
-			d = retsplit[0];
-			free(retsplit[1]);
-			free(retsplit);
-			d = ft_strjoinchar(d, '\n');
-			return (ft_strjoin_free("export: not an identifier: ", d));
-		}
-		while (un->next
-			&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
-		{
-			un = un->next;
-		}
-		if (!un->next
-			&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
-		{
-			un->next = ft_calloc(1, sizeof(t_env));
-			un = un->next;
-			un->name = retsplit[0];
-		}
-		else
-			free(retsplit[0]);
-		un->value = retsplit[1];
-		free(retsplit);
-		if (ft_strchr(cmd, '='))
-			un->haveeq = 1;
-		else
-			un->haveeq = 0;
-	}
+		return (exportd(cmd, un));
 	else
-	{
-		d = ft_strdup("");
-		while (un)
-		{
-			d = ft_strjoin_free1(d, "declare -x ");
-			d = ft_strjoin_free1(d, un->name);
-			if (un->haveeq)
-			{
-				d = ft_strjoin_free1(d, "=\"");
-				if (un->value)
-					d = ft_strjoin_free1(d, un->value);
-				d = ft_strjoinchar(d, '\"');
-			}
-			d = ft_strjoinchar(d, '\n');
-			un = un->next;
-		}
-		return (d);
-	}
+		return (exportun(un));
 	return (NULL);
 }
 
@@ -134,7 +84,6 @@ char	*cd(char	*cmd, t_env	*envi)
 	char	**retsplit;
 	int		i;
 
-
 	if (!*cmd)
 	{
 		cmd = getvale("HOME", envi);
@@ -145,12 +94,7 @@ char	*cd(char	*cmd, t_env	*envi)
 	retsplit = ft_split(cmd, ' ');
 	if (retsplit[1])
 	{
-		while (retsplit[i])
-		{
-			free(retsplit[i]);
-			i++;
-		}
-		free(retsplit);
+		freetab(retsplit);
 		return (ft_strdup("minishell: cd: too many arguments\n"));
 	}
 	while (retsplit[i])

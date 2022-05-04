@@ -6,7 +6,7 @@
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/04 13:38:22 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:26:12 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,15 @@ void	freeenv(t_env *un);
 int		checkname(char *name);
 void	exed(char *cmd, t_env *envi);
 char	**getenvchar(t_env *enviro);
+void	freetr(char	**pa, char *name, int i);
+char	*getna(char *cmd);
+void	child(char *path, char **argv, char**env, char *name);
+void	coredump(int sig);
+void	childctrlc(int sig);
+void	freetab(char **tab);
+void	addele(t_env *un, char **retsplit);
+char	*exportun(t_env *un);
+char	*exportd(char *cmd, t_env *un);
 
 /* je crois qu'il manque le typedef t_env */
 struct s_env
