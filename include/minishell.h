@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/04 16:26:12 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:52:44 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef enum e_ttype
 	TOKEN_DLESS,
 	TOKEN_NEWLINE,
 	TOKEN_WORD,
-	TOKEN_WORD_QUOTED,
-	TOKEN_SUBSTITUTION,
 }				t_ttype;
 
 typedef enum e_node
@@ -124,6 +122,8 @@ int		tokenize(t_lexer *lexer);
 t_regex	get_token(char *input, t_lexer *lexer);
 void	get_next_token(t_lexer *lexer);
 int		push_char(t_lexer *lexer, char **token_s);
+t_regex	handle_quote(char *input, t_lexer *lexer, char c);
+char	*create_str(char *input, int i);
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);

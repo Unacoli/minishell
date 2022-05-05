@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/04 16:16:10 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:21:36 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,54 +27,35 @@ static t_regex	g_rlist[] = {
 {NULL, 0, TOKEN_NOT_VALID}
 };
 
-/* 	Ajoute toute la partie entre guillemet jusu'au $ exclus dans un token
-	Puis parcours l'input jusqu'a la fin de la variable d'enviro et ajoute un token
-	Decale input et i pour correspondre a la nouvelle place */
-
-static void	handle_dollard(int *i, char **input, t_lexer *lexer)
+static int	is_space(char c)
 {
-	char	*str;
-	char	*inp;
-
-	inp = *input;
-	str = (char *) malloc(sizeof(char) * (*i + 2));
-	ft_strlcpy(str, inp, (size_t)(*i + 1));
-	add_token_to_lexer(lexer, str, *i, TOKEN_WORD_QUOTED);
-	*input = *input + *i;
-	inp = *input;
-	*i = 1;
-	while (inp[*i] && ((inp[*i] >= 'A' && inp[*i] <= 'Z') || inp[*i] == '_'))
-		(*i)++;
-	str = (char *) malloc(sizeof(char) * (*i + 3));
-	ft_strlcpy(str, inp, (size_t)(*i + 2));
-	add_token_to_lexer(lexer, str, *i, TOKEN_SUBSTITUTION);
-	*input = *input + *i;
-	*i = 0;
+	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
+		return (1);
+	return (0);
 }
 
-/*	Sauf combinaison $+"", parcoure tout l'input jusqu'a la quote correspondante
-	Et le stocke dans un seul token */
-
-static t_regex	handle_quote(char *input, t_lexer *lexer, char c)
+static t_regex	handle_word(char *inout, t_lexer *lexer)
 {
 	int		i;
 	char	*str;
 
 	i = 1;
-	while (input[i] != c)
-	{
-		if (input[i] == '$' && c == DOUBLE_QUOTE)
-			handle_dollard(&i, &input, lexer);
+	while (input[i] && !is_space(input[i]))
 		i++;
-		if (!input[i] && input[i] != c)
-		{
-			printf("Quote is not closed !");
-			exit (0); //free lexer + tokens
-		}
+	str = create_str(input, i);
+	return ((t_regex){str, i, TOKEN_WORD});
+}
+
+char	*create_str(char *input, int i)
+{
+	char	*str;
+
+	str = (char *) malloc(sizeof(char) * (*i + 2));
+	if (!str)
+	{
+		exit (0); //free lexer + tokens
 	}
-	str = (char *) malloc(sizeof(char) * (i + 3));
-	ft_strlcpy(str, input, i + 2);
-	return ((t_regex){str, i + 1, TOKEN_WORD});
+	ft_strlcpy(str, *input, (size_t)(*i + 1));
 }
 
 t_regex	get_token(char *input, t_lexer *lexer)
@@ -91,5 +72,9 @@ t_regex	get_token(char *input, t_lexer *lexer)
 	i = 0;
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
 		return (handle_quote(input, lexer, *input));
+	if (*input == '$')
+		return (handle_substitution(input, lexer));
+	else
+		return (handle_word(input, lexer));
 	return (g_rlist[TOKEN_NOT_VALID]);
 }
