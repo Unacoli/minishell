@@ -6,7 +6,7 @@
 /*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 14:00:29 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/05/07 17:40:24 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,43 @@ void	ctrlc(int i)
 	rl_redisplay();
 }
 
+void	init_shell(t_ctrl minishell)
+{
+	minishell->lexer = NULL;
+	minishell->ast = NULL;
+	minishell->cmd = NULL;
+}
+
+void	choose_env(char **env)
+{
+	if (!(*env))
+		/*create a function to set a default env*/
+	else
+		/*create a function who load the existing env*/
+	/*handle signals here*/
+}
+
+int	running_shell(t_ctrl minishell)
+{
+	while (1)
+		/*create a function to process input*/
+	/*free all if minishell stop*/
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char	*cmd;
 	t_env	*enviro;
+/*	t_ctrl	minishell;
 
-	(void) ac;
-	(void) av;
+	if (ac != 0)
+	{
+		printf("Usage : %s\n", av[0]);
+		exit(EXIT_SUCCESS);
+	}
+	init_shell(&minishell);
+	choose_env(env);*/
 	enviro = initenv(env);
 	while (1)
 	{
@@ -115,4 +145,5 @@ int	main(int ac, char **av, char **env)
 		free(cmd);
 	}
 	return (0);
+//	return (running_shell(&minishell));
 }
