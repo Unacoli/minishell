@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/05 14:52:44 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/07 20:24:29 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,14 @@ void	get_next_token(t_lexer *lexer);
 int		push_char(t_lexer *lexer, char **token_s);
 t_regex	handle_quote(char *input, t_lexer *lexer, char c);
 char	*create_str(char *input, int i);
+
+/*Functions for main, starting minishell*/
+
+void	init_shell(t_ctrl minishell);
+void	choose_env(char **env);
+int		running_shell(t_ctrl minishell);
+
+/*Old functions, WIP to sort this*/
 
 typedef struct s_env	t_env;
 void	parsing(char *cmd, t_env *enviro);
