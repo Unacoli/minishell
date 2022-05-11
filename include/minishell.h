@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/07 20:24:29 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:51:58 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <errno.h>
 
 # define MAX_TOKENS 12
 # define SINGLE_QUOTE 39
@@ -113,6 +114,7 @@ void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
 void	add_word_to_lexer(t_lexer *lexer, char **token_s);
 void	double_lexer(t_lexer *lexer);
+void	handle_token(t_lexer *lexer, t_regex token);
 
 /*Functions for tokens*/
 
@@ -124,6 +126,8 @@ void	get_next_token(t_lexer *lexer);
 int		push_char(t_lexer *lexer, char **token_s);
 t_regex	handle_quote(char *input, t_lexer *lexer, char c);
 char	*create_str(char *input, int i);
+t_regex	handle_substitution(char *input);
+int		is_space(char c);
 
 /*Functions for main, starting minishell*/
 

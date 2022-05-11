@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/05 15:21:36 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:55:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,7 @@ static t_regex	g_rlist[] = {
 {NULL, 0, TOKEN_NOT_VALID}
 };
 
-static int	is_space(char c)
-{
-	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
-		return (1);
-	return (0);
-}
-
-static t_regex	handle_word(char *inout, t_lexer *lexer)
+static t_regex	handle_word(char *input)
 {
 	int		i;
 	char	*str;
@@ -43,21 +36,33 @@ static t_regex	handle_word(char *inout, t_lexer *lexer)
 	while (input[i] && !is_space(input[i]))
 		i++;
 	str = create_str(input, i);
+	if (str == NULL)
+		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
 	return ((t_regex){str, i, TOKEN_WORD});
+}
+
+int	is_space(char c)
+{
+	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
+		return (1);
+	return (0);
 }
 
 char	*create_str(char *input, int i)
 {
 	char	*str;
 
-	str = (char *) malloc(sizeof(char) * (*i + 2));
+	str = (char *) malloc(sizeof(char) * (i + 2));
 	if (!str)
-	{
-		exit (0); //free lexer + tokens
-	}
-	ft_strlcpy(str, *input, (size_t)(*i + 1));
+		return (NULL);
+	ft_strlcpy(str, input, (size_t)(i + 1));
+	return (str);
 }
 
+/*	Affilie les tokens operator, puis les quotes, puis les substitutions
+	et si ce n'est aucun des trois, considere que c'est un mot 
+	En cas d'erreur cette fonction et toute les dependantes renvoie 
+	TOKEN_NOT_VALID */
 t_regex	get_token(char *input, t_lexer *lexer)
 {
 	int	i;
@@ -73,8 +78,7 @@ t_regex	get_token(char *input, t_lexer *lexer)
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
 		return (handle_quote(input, lexer, *input));
 	if (*input == '$')
-		return (handle_substitution(input, lexer));
+		return (handle_substitution(input));
 	else
-		return (handle_word(input, lexer));
-	return (g_rlist[TOKEN_NOT_VALID]);
+		return (handle_word(input));
 }
