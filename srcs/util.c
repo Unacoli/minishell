@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/28 14:15:43 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:54:23 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,69 +38,4 @@ t_env	*initenv(char **env)
 		i++;
 	}
 	return (un->deb);
-}
-
-char	*ft_strjoinchar(char const *s1, char const s2)
-{
-	int		i;
-	int		len1;
-	char	*dest;
-
-	len1 = ft_strlen(s1);
-	dest = malloc(sizeof(char) * (len1 + 2));
-	if (!dest)
-		return (0);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	i = 0;
-	dest[len1] = s2;
-	len1++;
-	dest[len1] = '\0';
-	free((char *)s1);
-	return (dest);
-}
-
-char	*getvale(char *name, t_env *un)
-{
-	un = un->deb;
-	while (un)
-	{
-		if (ft_strncmp(un->name, name, ft_strlen(name) + 1) == 0)
-			return (un->value);
-		un = un->next;
-	}
-	return (0);
-}
-
-void	changedeb(t_env *un)
-{
-	t_env	*deb;
-
-	deb = un;
-	while (un)
-	{
-		un->deb = deb;
-		un = un->next;
-	}
-}
-
-int	checkname(char *name)
-{
-	int	i;
-
-	i = 0;
-	if (!(ft_isalpha(name[i]) || name[i] == '_'))
-		return (0);
-	i++;
-	while (name[i])
-	{
-		if (!(ft_isalnum(name[i]) || name[i] == '_'))
-			return (0);
-		i++;
-	}
-	return (1);
 }

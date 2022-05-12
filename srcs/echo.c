@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/04/28 15:17:29 by nfelsemb         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:54:48 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,6 @@ char	*getname(char *cmd, int i)
 		i++;
 	}
 	return (name);
-}
-
-char	*echo(char	*cmd, t_env *enviro, int tiretn)
-{
-	char	*d;
-	int		i;
-
-	i = 0;
-	d = ft_strdup("");
-	while (cmd[i])
-	{
-		if (cmd[i] != '$')
-			d = ft_strjoinchar(d, cmd[i]);
-		else
-		{
-			d = ft_strjoin_free2(d, getvale(getname(cmd, i), enviro));
-			while (cmd[i] != ' ' && cmd[i])
-				i++;
-		}
-		i++;
-	}
-	if (tiretn)
-		return (d);
-	return (ft_strjoinchar(d, '\n'));
 }
 
 char	*getpath(char *cmd, t_env *enviro)

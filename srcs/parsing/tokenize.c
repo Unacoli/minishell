@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:28:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/12 13:47:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:21:32 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,6 @@ static int	check_error(t_lexer *lexer)
 		i++;
 	}
 	return (0);
-}
-
-t_token	create_token(const char *str, size_t len, t_ttype type)
-{
-	t_token	result;
-
-	result.len = len;
-	result.type = type;
-	result.str = ft_newstr(len);
-	if (result.str == NULL)
-		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
-	ft_strlcpy(result.str, str, (len + 1));
-	return (result);
-}
-
-t_token	*malloc_token(const char *s, size_t len, t_ttype type)
-{
-	t_token	*result;
-
-	result = malloc(sizeof(t_token));
-	if (!result)
-		return (NULL);
-	*result = create_token(s, len, type);
-	if (result->str == NULL)
-		return (NULL);
-	return (result);
 }
 
 /* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et

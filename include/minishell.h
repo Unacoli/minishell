@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/11 16:51:58 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:10:18 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ typedef struct s_ctrl
 
 void	create_lexer(t_lexer *lexer, size_t cap);
 t_lexer	*malloc_lexer(size_t cap);
-int		lexer_full(t_lexer *lexer);
-int		pass(t_lexer *lexer, t_ttype needed);
+void	handle_token(t_lexer *lexer, t_regex token);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
-void	add_word_to_lexer(t_lexer *lexer, char **token_s);
+int		lexer_full(t_lexer *lexer);
 void	double_lexer(t_lexer *lexer);
-void	handle_token(t_lexer *lexer, t_regex token);
+// int		pass(t_lexer *lexer, t_ttype needed);
+// void	add_word_to_lexer(t_lexer *lexer, char **token_s);
 
 /*Functions for tokens*/
 
@@ -122,12 +122,14 @@ t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 int		tokenize(t_lexer *lexer);
 t_regex	get_token(char *input, t_lexer *lexer);
-void	get_next_token(t_lexer *lexer);
-int		push_char(t_lexer *lexer, char **token_s);
 t_regex	handle_quote(char *input, t_lexer *lexer, char c);
-char	*create_str(char *input, int i);
 t_regex	handle_substitution(char *input);
+// void	get_next_token(t_lexer *lexer);
+// int		push_char(t_lexer *lexer, char **token_s);
+
+/* Utils parsing */
 int		is_space(char c);
+char	*create_str(char *input, int i);
 
 /*Functions for main, starting minishell*/
 
@@ -135,25 +137,29 @@ void	init_shell(t_ctrl minishell);
 void	choose_env(char **env);
 int		running_shell(t_ctrl minishell);
 
-/*Old functions, WIP to sort this*/
-
-typedef struct s_env	t_env;
-void	parsing(char *cmd, t_env *enviro);
-void	ctrlc(int i);
+/* Function for Built-In */
 char	*pwd(void);
 char	*envi( t_env *enviro);
 char	*ft_strjoinchar(char const *s1, char const s2);
-t_env	*initenv(char **env);
 char	*export(char *cmd, t_env *un);
 void	changedeb(t_env *un);
 void	unset(char *cmd, t_env *un);
 char	*cd(char	*cmd, t_env	*envi);
 char	*echo(char	*cmd, t_env *enviro, int tiretn);
 char	*getvale(char *name, t_env *un);
-void	lexe(char *cmd, t_env *envi);
-void	exitfree(t_env *un);
-void	freeenv(t_env *un);
 int		checkname(char *name);
+char	*exportun(t_env *un);
+char	*exportd(char *cmd, t_env *un);
+void	exitfree(t_env *un);
+
+/*Old functions, WIP to sort this*/
+
+typedef struct s_env	t_env;
+void	parsing(char *cmd, t_env *enviro);
+void	ctrlc(int i);
+t_env	*initenv(char **env);
+void	lexe(char *cmd, t_env *envi);
+void	freeenv(t_env *un);
 void	exed(char *cmd, t_env *envi);
 char	**getenvchar(t_env *enviro);
 void	freetr(char	**pa, char *name, int i);
@@ -163,8 +169,6 @@ void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
 void	addele(t_env *un, char **retsplit);
-char	*exportun(t_env *un);
-char	*exportd(char *cmd, t_env *un);
 
 /* je crois qu'il manque le typedef t_env */
 struct s_env
