@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/11 16:55:26 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:46:35 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,6 @@ static t_regex	handle_word(char *input)
 	if (str == NULL)
 		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
 	return ((t_regex){str, i, TOKEN_WORD});
-}
-
-int	is_space(char c)
-{
-	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
-		return (1);
-	return (0);
-}
-
-char	*create_str(char *input, int i)
-{
-	char	*str;
-
-	str = (char *) malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, input, (size_t)(i + 1));
-	return (str);
 }
 
 /*	Affilie les tokens operator, puis les quotes, puis les substitutions

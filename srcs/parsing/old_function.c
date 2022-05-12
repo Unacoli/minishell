@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   old_function.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/11 11:04:53 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/05/04 13:34:25 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/05/12 13:44:46 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	create_lexer(t_lexer *lexer, size_t cap)
+/* Back char, pour supprimer un backslash et get_next_token */
+/*Je les ais mis la pour liberer de la place dans get_token */
+
+int	back_char(t_lexer *lexer, char **token_s)
 {
-	lexer->pos = 0;
-	lexer->size = 0;
-	lexer->capacity = cap;
-	lexer->input = NULL;
-	lexer->tokens = ft_calloc((cap + 1), sizeof(t_token *));
+	if (lexer->input[lexer->pos + 1])
+	{
+		push_char(lexer, token_s);
+		push_char(lexer, token_s);
+		return (0);
+	}
+	return (1);
 }
 
-t_lexer	*malloc_lexer(size_t cap)
+int	push_char(t_lexer *lexer, char **token_s)
 {
-	t_lexer	*result;
-
-	result = malloc(sizeof(t_lexer));
-	if (!result)
-		return (NULL);
-	create_lexer(result, cap);
-	return (result);
+	ft_strlcat(*token_s, lexer->input + lexer->pos, 1);
+	if (!(*token_s))
+		return (-1);
+	lexer->pos++;
+	return (0);
 }
 
-int	lexer_full(t_lexer *lexer)
+void	get_next_token(t_lexer *lexer)
 {
-	return (lexer->size == lexer->capacity);
+	lexer->pos += 1;
 }
 
 int	pass(t_lexer *lexer, t_ttype needed)

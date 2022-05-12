@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/11 16:51:16 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:51:21 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	handle_substi_quote(int *i, char **input, t_lexer *lexer)
 	*i = 0;
 }
 
-/*	Parcour tout l'input jusqu'a la quote correspondante 
+/*	Parcours tout l'input jusqu'a la quote correspondante 
 	Et le stocke dans un seul token
 	Si on a la combinaison $ et "", on fragmente en plusieurs token */
 

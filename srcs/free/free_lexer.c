@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 13:45:49 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/05/12 13:55:08 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/05/12 13:56:25 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_space(char c)
+void	free_lexer(t_lexer *lexer)
 {
-	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
-		return (1);
-	return (0);
-}
+	size_t	i;
 
-char	*create_str(char *input, int i)
-{
-	char	*str;
-
-	str = (char *) malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, input, (size_t)(i + 1));
-	return (str);
+	i = 0;
+	if (lexer)
+	{
+		if (lexer->tokens)
+		{
+			while (i < lexer->size)
+			{
+				if (lexer->tokens[i])
+				{
+					if (lexer->tokens[i]->str)
+						free(lexer->tokens[i]->str);
+					free(lexer->tokens[i]);
+				}
+				i++;
+			}
+			free(lexer->tokens);
+		}	
+		free(lexer);
+	}
 }

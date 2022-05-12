@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 13:45:49 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
+/*   Updated: 2022/05/12 13:48:41 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_space(char c)
+void	create_lexer(t_lexer *lexer, size_t cap)
 {
-	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')
-		return (1);
-	return (0);
+	lexer->pos = 0;
+	lexer->size = 0;
+	lexer->capacity = cap;
+	lexer->input = NULL;
+	lexer->tokens = ft_calloc((cap + 1), sizeof(t_token *));
 }
 
-char	*create_str(char *input, int i)
+t_lexer	*malloc_lexer(size_t cap)
 {
-	char	*str;
+	t_lexer	*result;
 
-	str = (char *) malloc(sizeof(char) * (i + 2));
-	if (!str)
+	result = malloc(sizeof(t_lexer));
+	if (!result)
 		return (NULL);
-	ft_strlcpy(str, input, (size_t)(i + 1));
-	return (str);
+	create_lexer(result, cap);
+	return (result);
 }
