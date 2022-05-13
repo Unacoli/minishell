@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nfelsemb <nfelsemb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 01:13:50 by nargouse         ###   ########.fr       */
+/*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
+/*   Updated: 2022/05/13 02:14:09 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+void	input(t_ctrl *minishell)
 {
-	t_ctrl	minishell;
+	int	cmd;
 
-	if (ac != 0)
-	{
-		printf("Usage : %s\n", av[0]);
-		exit(EXIT_SUCCESS);
-	}
-	init_shell(&minishell);
-	choose_env(env);
-	return (running_shell(&minishell));
+	cmd = /*Create function to get the command and link to parsing*/;
+	if (cmd != -1)
+		/*Create function to follow the ast*/;
+	/*Create function to destroy shell*/;
 }

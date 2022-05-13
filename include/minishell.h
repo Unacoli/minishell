@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/12 16:10:18 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 02:15:38 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define MAX_TOKENS 12
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
+
+/*Environnement global*/
+
+extern char	**g_env;
+
+/*Enum definition for token and ast*/
 
 typedef enum e_ttype
 {
@@ -50,6 +56,8 @@ typedef enum e_node
 	NODE_SIMPLE_CMD,
 	NODE_WORD,
 }				t_node;
+
+/*Structs for parsing and ast*/
 
 typedef struct s_regex
 {
@@ -82,6 +90,8 @@ typedef struct s_ast
 	char			*data;
 }				t_ast;
 
+/*Structs for execution*/
+
 typedef struct s_simplecmd
 {
 	size_t	ac;
@@ -96,6 +106,8 @@ typedef struct s_cmd
 	size_t		cmd_count;
 	t_simplecmd	**simple_cmd;
 }				t_cmd;
+
+/*Struct for controller*/
 
 typedef struct s_ctrl
 {
@@ -135,7 +147,16 @@ char	*create_str(char *input, int i);
 
 void	init_shell(t_ctrl minishell);
 void	choose_env(char **env);
-int		running_shell(t_ctrl minishell);
+int		running_shell(t_ctrl *minishell);
+
+/*Functions for input processing*/
+
+void	input(t_ctrl *minishell);
+
+/*Signal handler*/
+
+void	signal_handler(void);
+void	error(int signal);
 
 /* Function for Built-In */
 char	*pwd(void);
@@ -154,10 +175,6 @@ void	exitfree(t_env *un);
 
 /*Old functions, WIP to sort this*/
 
-typedef struct s_env	t_env;
-void	parsing(char *cmd, t_env *enviro);
-void	ctrlc(int i);
-t_env	*initenv(char **env);
 void	lexe(char *cmd, t_env *envi);
 void	freeenv(t_env *un);
 void	exed(char *cmd, t_env *envi);
@@ -169,8 +186,8 @@ void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
 void	addele(t_env *un, char **retsplit);
+typedef struct s_env	t_env;
 
-/* je crois qu'il manque le typedef t_env */
 struct s_env
 {
 	t_env	*deb;
