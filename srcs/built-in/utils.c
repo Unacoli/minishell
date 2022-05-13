@@ -6,32 +6,66 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:51:59 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 15:40:15 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:27:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strjoinchar(char const *s1, char const s2)
+char	*find_key(char *arg)
 {
+	char	*key;
 	int		i;
-	int		len1;
-	char	*dest;
 
-	len1 = ft_strlen(s1);
-	dest = malloc(sizeof(char) * (len1 + 2));
-	if (!dest)
-		return (0);
 	i = 0;
-	while (s1[i])
+	while (arg[i] && arg[i] != '=')
+		i++;
+	key = (char *) malloc(sizeof(char) * (i + 1));
+	if (!key)
+		return (NULL);
+	i = 0;
+	while (arg[i] && arg[i] != '=')
 	{
-		dest[i] = s1[i];
+		key[i] = arg[i];
 		i++;
 	}
-	i = 0;
-	dest[len1] = s2;
-	len1++;
-	dest[len1] = '\0';
-	free((char *)s1);
-	return (dest);
+	key[i] = '\0';
+	return (key);
+}
+
+char	*first_lower(t_env env)
+{
+	char	*lower;
+	t_env	*temp;
+
+	temp = &env;
+	lower = temp->line;
+	temp = temp->next;
+	while (temp)
+	{
+		if (ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0)
+			lower = temp->line;
+		temp = temp->next;
+	}
+	return (lower);
+}
+
+char	*next_lower(t_env env, char *previous)
+{
+	char	*lower;
+	t_env	*temp;
+
+	temp = &env;
+	lower = previous;
+	temp = temp->next;
+	while (temp)
+	{
+		if (ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0
+			&& ft_strncmp(previous, temp->line, ft_strlen(previous) + 1) > 0)
+			lower = temp->line;
+		temp = temp->next;
+	}
+	if (lower == previous)
+		return (NULL);
+	return (lower);
 }

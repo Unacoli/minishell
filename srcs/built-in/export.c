@@ -6,83 +6,76 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 14:53:28 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:28:52 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*export(char *cmd, t_env *un)
+int	export(t_env *env, char **args)
 {
-	un = un->deb;
-	if (*cmd)
-		return (exportd(cmd, un));
-	else
-		return (exportun(un));
-	return (NULL);
-}
+	int	i;
+	int	retour;
 
-char	*exportd(char *cmd, t_env *un)
-{
-	char	**retsplit;
-
-	retsplit = ft_split(cmd, '=');
-	if (checkname(retsplit[0]) == 0)
-		return (rname(retsplit));
-	while (un->next
-		&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
-		un = un->next;
-	if (!un->next
-		&& ft_strncmp(un->name, retsplit[0], ft_strlen(un->name) + 2) != 0)
+	i = 0;
+	retour = 0;
+	if (args != NULL)
 	{
-		un->next = ft_calloc(1, sizeof(t_env));
-		un = un->next;
-		un->name = retsplit[0];
+		affiche_env_alpha(env);
 	}
 	else
-		free(retsplit[0]);
-	un->value = retsplit[1];
-	free(retsplit);
-	if (ft_strchr(cmd, '='))
-		un->haveeq = 1;
-	else
-		un->haveeq = 0;
-	return (NULL);
-}
-
-char	*exportun(t_env *un)
-{
-	char	*d;
-
-	d = ft_strdup("");
-	while (un)
 	{
-		d = ft_strjoin_free1(d, "declare -x ");
-		d = ft_strjoin_free1(d, un->name);
-		if (un->haveeq)
+		while (args[i])
 		{
-			d = ft_strjoin_free1(d, "=\"");
-			if (un->value)
-				d = ft_strjoin_free1(d, un->value);
-			d = ft_strjoinchar(d, '\"');
+			if (export_value(env, args[i]))
+				retour = 1;
+			i++;
 		}
-		d = ft_strjoinchar(d, '\n');
-		un = un->next;
 	}
-	return (d);
+	return (retour);
 }
 
-char	*rname(char **retsplit)
+int	export_value(t_env *env, char *arg)
 {
-	char	*d;
+	char	*key;
+	t_env	*temp;
 
-	d = ft_strjoinchar(retsplit[0], '\n');
-	free(retsplit[1]);
-	free(retsplit);
-	return (ft_strjoin_free("export: not an identifier: ", d));
+	temp = env;
+	if (is_identifier_valid(arg) == 0)
+		return (non_valid_identifier(arg));
+	key = find_key(arg);
+	while (env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
+		env = env->next;
+	if (!env->next && ft_strncmp(env->line, key, ft_strlen(env->line)) != 0)
+	{
+		env->next = ft_calloc(1, sizeof(t_env));
+		env = env->next;
+	}
+	env->line = arg;
+	return (NULL);
 }
 
-int	checkname(char *name)
+void	affiche_env_alpha(t_env *env)
+{
+	t_env	*temp;
+	char	*lower;
+
+	temp = env;
+	lower = first_lower(&env);
+	while (lower != NULL)
+	{
+		printf("declare -x %s\n", lower);
+		lower = next_lower(&env, lower);
+	}
+}
+
+char	*non_valid_identifier(char *arg)
+{
+	printf("export: %s : not a valid identifier:", arg);
+	return (1);
+}
+
+int	is_identifier_valid(char *name)
 {
 	int	i;
 
@@ -90,7 +83,7 @@ int	checkname(char *name)
 	if (!(ft_isalpha(name[i]) || name[i] == '_'))
 		return (0);
 	i++;
-	while (name[i])
+	while (name[i] && name[i] != '=')
 	{
 		if (!(ft_isalnum(name[i]) || name[i] == '_'))
 			return (0);

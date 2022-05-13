@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/13 12:52:32 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/05/13 11:57:13 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/05/13 12:01:22 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd(t_env env, char **args)
+void	free_env(t_env *env)
 {
-	char	*path;
+	t_env	*temp;
 
-	if (args == NULL)
-		path = search_env(env, "HOME");
-	else
-		path = args[0];
-	if (args[1] != NULL)
+	if (env)
 	{
-		//retour erreur "minishell: cd: too many arguments\n"
-		return (1);
+		while (env)
+		{
+			if (env->line)
+				free(env->line);
+			temp = env;
+			env = env->next;
+			if (temp)
+				free(temp);
+		}
 	}
-	if (chdir(path))
-	{
-		//retour erreur "path, ": No such file or directory\n"
-		return (1);
-	}
-	return (0);
 }

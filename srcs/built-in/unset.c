@@ -6,46 +6,47 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:39:27 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 14:40:13 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:54:19 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset(char *cmd, t_env *un)
+static void	free_env_elem(t_env *env)
 {
-	t_env	*prev;
-
-	un = un->deb;
-	prev = NULL;
-	while (un)
+	if (env)
 	{
-		if (ft_strncmp(un->name, cmd, ft_strlen(un->name) + 1) == 0)
-		{
-			if (prev)
-			{
-				prev->next = un->next;
-			}
-			else
-				changedeb(un->next);
-			free(un->name);
-			free(un->value);
-			free(un);
-			break ;
-		}
-		prev = un;
-		un = un->next;
+		if (env->line)
+			free(env->line);
+		free(env);
 	}
 }
 
-void	changedeb(t_env *un)
+void	unset(t_env *env, char **args)
 {
-	t_env	*deb;
+	t_env	*prev;
+	t_env	*first;
+	int		i;
 
-	deb = un;
-	while (un)
+	i = 0;
+	prev = env;
+	first = env;
+	while (args[i])
 	{
-		un->deb = deb;
-		un = un->next;
+		env = first;
+		while (env->next
+			&& ft_strncmp(env->line, args[i], ft_strlen(args[i])) != 0)
+		{
+			prev = env;
+			env = env->next;
+		}
+		if (ft_strncmp(env->line, args[i], ft_strlen(args[i++])) == 0)
+		{
+			if (env == first)
+				first = env->next;
+			prev->next = env->next;
+			free_env_elem(env);
+		}
 	}
+	return (0);
 }

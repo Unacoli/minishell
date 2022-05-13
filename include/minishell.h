@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 10:44:31 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:59:50 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,14 @@ typedef struct s_ast
 	char			*data;
 }				t_ast;
 
+/* Structure for environnement */
+
+typedef struct s_env
+{
+	char			*line;
+	struct s_env	*next;
+}	t_env;
+
 /*Structs for execution*/
 
 typedef struct s_simplecmd
@@ -114,6 +122,7 @@ typedef struct s_ctrl
 	t_lexer	*lexer;
 	t_ast	*ast;
 	t_cmd	*cmd;
+	t_env	*env;
 }				t_ctrl;
 
 /*Functions for lexer*/
@@ -147,10 +156,11 @@ int		delimite_word(char *input, int i);
 /* Free function */
 
 void	free_lexer(t_lexer *lexer);
+void	free_env(t_env *env);
 
 /*Functions for main, starting minishell*/
 
-void	init_shell(t_ctrl minishell);
+void	init_shell(t_ctrl *minishell);
 void	choose_env(char **env);
 int		running_shell(t_ctrl *minishell);
 
@@ -163,29 +173,23 @@ void	input(t_ctrl *minishell);
 void	signal_handler(void);
 void	error(int signal);
 
-typedef struct s_env
-{
-	struct s_env	*deb;
-	int				haveeq;
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
 /* Function for Built-In */
 char	*pwd(void);
-char	*envi( t_env *enviro);
+int		cd(t_env env, char **args);
+void	echo(char **args);
+char	*envi(t_env env);
+void	exit_free(t_ctrl *minishell);
+int		export(t_env *env, char **args);
+char	*non_valid_identifier(char *arg);
+int		is_identifier_valid(char *name);
+char	*find_key(char *arg);
+int		export_value(t_env *env, char *arg);
+
 char	*ft_strjoinchar(char const *s1, char const s2);
-char	*export(char *cmd, t_env *un);
 void	changedeb(t_env *un);
 void	unset(char *cmd, t_env *un);
-char	*cd(char	*cmd, t_env	*envi);
-char	*echo(char	*cmd, t_env *enviro, int tiretn);
 char	*getvale(char *name, t_env *un);
-int		checkname(char *name);
 char	*exportun(t_env *un);
-char	*exportd(char *cmd, t_env *un);
-void	exitfree(t_env *un);
 
 /*Old functions, WIP to sort this*/
 

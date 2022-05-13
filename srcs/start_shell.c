@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   start_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:06:26 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 02:15:42 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/13 12:04:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	default_env(void)
+static t_env	*default_env(void)
 {
 	g_env = ft_calloc(4, sizeof(char *));
 	if (!g_env)
@@ -24,7 +24,7 @@ static void	default_env(void)
 	/*Function for putting environnement with shell level and shell path*/
 }
 
-void	init_shell(t_ctrl minishell)
+void	init_shell(t_ctrl *minishell)
 {
 	minishell->lexer = NULL;
 	minishell->ast = NULL;
@@ -33,10 +33,12 @@ void	init_shell(t_ctrl minishell)
 
 void	choose_env(char **env)
 {
+	t_env	*struc_env;
+
 	if (!(*env))
-		default_env();
+		struc_env = default_env();
 	else
-		/*create a function who load the existing env*/
+		struc_env = init_env(env);
 	signal_handler();
 }
 
