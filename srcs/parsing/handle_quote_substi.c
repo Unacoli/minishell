@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/12 13:51:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:24:25 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ static void	create_str_add_token_word(int *i, char **input, t_lexer *lexer)
 	*input = *input + *i;
 }
 
-/* 	On ne doit pas faire les substitution de commande et arithmetique 
-	mais je choisis	d'accepter les () et {} -> si on les prends pas on
-	peut avoir '$' tout seul ou alors on met un message d'erreur a ce 
-	moment la ? + cas ou les parentheses sont pas fermes */
-
-static int	delimite_substitution(char *inp)
-{
-	int	i;
-
-	i = 1;
-	while (inp[i] && is_space(inp[i]))
-		(i)++;
-	return (i);
-}
-
 /* 	Delimite le token precedant le '$' et l'ajoute au lexer
 	Delimite la subistitution et l'ajoute au lexer
 	Input et i sont ajuste pour correspondre a la nouvelle position */
@@ -51,7 +36,7 @@ static void	handle_substi_quote(int *i, char **input, t_lexer *lexer)
 	inp = *input;
 	create_str_add_token_word(i, input, lexer);
 	inp = *input;
-	*i = delimite_substitution(inp);
+	*i = delimite_word(inp, 1);
 	create_str_add_token_word(i, input, lexer);
 	*i = 0;
 }
@@ -89,7 +74,7 @@ t_regex	handle_substitution(char *input)
 	int		i;
 	char	*str;
 
-	i = delimite_substitution(input);
+	i = delimite_word(input, 1);
 	str = create_str(input, i);
 	if (str == NULL)
 		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});

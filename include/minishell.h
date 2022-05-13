@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 02:15:38 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:44:31 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ t_lexer	*malloc_lexer(size_t cap);
 void	handle_token(t_lexer *lexer, t_regex token);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
-int		lexer_full(t_lexer *lexer);
 void	double_lexer(t_lexer *lexer);
 // int		pass(t_lexer *lexer, t_ttype needed);
 // void	add_word_to_lexer(t_lexer *lexer, char **token_s);
@@ -142,6 +141,12 @@ t_regex	handle_substitution(char *input);
 /* Utils parsing */
 int		is_space(char c);
 char	*create_str(char *input, int i);
+int		is_operator(char *input);
+int		delimite_word(char *input, int i);
+
+/* Free function */
+
+void	free_lexer(t_lexer *lexer);
 
 /*Functions for main, starting minishell*/
 
@@ -157,6 +162,15 @@ void	input(t_ctrl *minishell);
 
 void	signal_handler(void);
 void	error(int signal);
+
+typedef struct s_env
+{
+	struct s_env	*deb;
+	int				haveeq;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
 
 /* Function for Built-In */
 char	*pwd(void);
@@ -185,16 +199,6 @@ void	child(char *path, char **argv, char**env, char *name);
 void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
-void	addele(t_env *un, char **retsplit);
-typedef struct s_env	t_env;
-
-struct s_env
-{
-	t_env	*deb;
-	int		haveeq;
-	char	*name;
-	char	*value;
-	t_env	*next;
-};
+void	addele(t_env *un, char **retsplit);	
 
 #endif

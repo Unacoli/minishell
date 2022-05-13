@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:11:08 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/12 13:56:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:45:21 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_lexer	*parse(char *input)
 // 	t_lexer	*lexer;
 
 // 	lexer = NULL;
-// 	lexer = parse("cat | 'Bonjour $PATH' << $USER \n Sam-sam\"mot\"");
+// 	lexer = parse("cat | 'Bonjour $PATH' $PAT<H cat< scho 
+// 	<< $USER \n Sam-sam\"mot\"");
 // 	i = 0;
 // 	printf("size = %zu\n", lexer->size);
 // 	while (i < lexer->size)

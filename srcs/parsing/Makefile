@@ -7,7 +7,7 @@ FSAN =		-g -fsanitize=address
 
 IFLAGS = 	-I ../../include -I ../../libft/include
 
-NAME = 		parsing
+NAME = 		parse
 
 RM =		rm -rf
 
@@ -26,41 +26,43 @@ _WHITE=	$'\033[37m
 _END= 	$'\033[37m
 
 SRC =	double_lexer.c \
-		fill_lexer.c \
 		get_token.c \
 		handle_quote_substi.c \
-		lexer.c \
+		malloc_lexer.c \
 		parsing.c \
-		token.c \
-		utils.c
-OBJ = $(addprefix $(OBJS_PATH), $(SRC:.c=.o))
+		malloc_token.c \
+		handle_token.c \
+		tokenize.c \
+		utils.c \
+		../free/free_lexer.c
+OBJS = $(addprefix $(OBJS_PATH), $(SRC:.c=.o))
 
 $(OBJS_PATH)%.o: %.c $(HEADER)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS)  $(IFLAGS) -c $< -o $@
 	@printf "%-15s ${_YELLOW}${_BOLD}$<${_END}...\n" "Compiling"	
 
-$(NAME): 	$(OBJ) $(HEADER) libft
+$(NAME): 	$(OBJS) $(HEADER) libft
 	@printf "%-15s ${_PURPLE}${_BOLD}${NAME}${_END}...\n" "Compiling"
-	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJ) libft.a -o ${NAME}
+	@$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) libft.a -o ${NAME}
 	@printf "\n${_GREEN}${_BOLD}[Parsing OK]${_END}\n"
 	
 all: $(NAME)
 
-test:		$(OBJ) $(HEADER) libft
+test:		$(OBJS) $(HEADER) libft
 	@printf "%-15s ${_PURPLE}${_BOLD}${NAME}${_END}...\n" "Compiling"
-	@$(CC) $(CFLAGS) $(FSAN) $(IFLAGS) $(OBJ) -o ${NAME}
+	@$(CC) $(CFLAGS) $(FSAN) $(IFLAGS) $(OBJS) -o ${NAME}
 	@printf "\n${_GREEN}${_BOLD}[Parsing fsanitize OK]${_END}\n"
 
 libft:
-	@make -C ../../libft/
-	@mv ../../libft/libft.a ./
+	make -C ../../libft/
+	mv ../../libft/libft.a ./
 
 clean:
-	@$(RM) $(OBJS_PATH) 
+	$(RM) $(OBJS_PATH) 
 
 fclean:		clean
-	@$(RM) $(NAME)  libft.a pipex_bonus
+	$(RM) $(NAME)  libft.a pipex_bonus
 
 re: fclean all
 

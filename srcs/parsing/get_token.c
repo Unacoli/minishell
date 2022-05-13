@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/12 13:46:35 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:21:57 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static t_regex	handle_word(char *input)
 	int		i;
 	char	*str;
 
-	i = 1;
-	while (input[i] && !is_space(input[i]))
-		i++;
+	i = 0;
+	i = delimite_word(input, i);
 	str = create_str(input, i);
 	if (str == NULL)
 		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
@@ -56,7 +55,6 @@ t_regex	get_token(char *input, t_lexer *lexer)
 			return (g_rlist[i]);
 		i++;
 	}
-	i = 0;
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
 		return (handle_quote(input, lexer, *input));
 	if (*input == '$')
