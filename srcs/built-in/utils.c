@@ -43,7 +43,7 @@ char	*first_lower(t_env env)
 	temp = temp->next;
 	while (temp)
 	{
-		if (ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0)
+		if (ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) > 0)
 			lower = temp->line;
 		temp = temp->next;
 	}
@@ -57,15 +57,21 @@ char	*next_lower(t_env env, char *previous)
 
 	temp = &env;
 	lower = previous;
-	temp = temp->next;
 	while (temp)
 	{
-		if (ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0
-			&& ft_strncmp(previous, temp->line, ft_strlen(previous) + 1) > 0)
-			lower = temp->line;
+		if (ft_strncmp(previous, temp->line, ft_strlen(previous) + 1) < 0)
+			if ((lower == previous && ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0) 
+				|| (lower != previous && ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) > 0))
+				lower = temp->line;
 		temp = temp->next;
 	}
 	if (lower == previous)
 		return (NULL);
 	return (lower);
+}
+
+int	non_valid_identifier(char *arg, char *function)
+{
+	printf("%s: '%s' : not a valid identifier\n", function, arg);
+	return (1);
 }

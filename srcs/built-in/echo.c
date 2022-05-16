@@ -27,6 +27,7 @@ void	echo(char **args)
 		printf("%s", args[n]);
 		if (args[n + 1] != NULL)
 			printf(" ");
+		n++;
 	}
 	if (ft_strncmp("-n", args[0], 3))
 		printf("\n");

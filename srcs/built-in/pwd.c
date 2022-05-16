@@ -14,7 +14,7 @@
 
 /* Si buff n'est pas assez grand, on augmente size*/
 
-char	*pwd(void)
+void	pwd(void)
 {
 	char	*buf;
 	int		size;
@@ -26,6 +26,5 @@ char	*pwd(void)
 		size += 50;
 		buf = ft_calloc(size, sizeof(char));
 	}
-	buf = ft_strjoinchar(buf, '\n');
-	return (buf);
+	printf("%s\n", buf);
 }

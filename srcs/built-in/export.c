@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+static int	is_identifier_valid(char *name)
+{
+	int	i;
+
+	i = 0;
+	if (!(ft_isalpha(name[i]) || name[i] == '_'))
+		return (0);
+	i++;
+	while (name[i] && name[i] != '=')
+	{
+		if (!(ft_isalnum(name[i]) || name[i] == '_'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	export(t_env *env, char **args)
 {
 	int	i;
@@ -19,12 +36,14 @@ int	export(t_env *env, char **args)
 
 	i = 0;
 	retour = 0;
-	if (args != NULL)
+	if (args == NULL)
 	{
+		// printf("affiche env alpha\n");
 		affiche_env_alpha(env);
 	}
 	else
 	{
+		// printf("enter good if\n");
 		while (args[i])
 		{
 			if (export_value(env, args[i]))
@@ -42,7 +61,7 @@ int	export_value(t_env *env, char *arg)
 
 	temp = env;
 	if (is_identifier_valid(arg) == 0)
-		return (non_valid_identifier(arg));
+		return (non_valid_identifier(arg, "export"));
 	key = find_key(arg);
 	while (env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
 		env = env->next;
@@ -52,7 +71,8 @@ int	export_value(t_env *env, char *arg)
 		env = env->next;
 	}
 	env->line = arg;
-	return (NULL);
+	env = temp;
+	return (0);
 }
 
 void	affiche_env_alpha(t_env *env)
@@ -61,33 +81,32 @@ void	affiche_env_alpha(t_env *env)
 	char	*lower;
 
 	temp = env;
-	lower = first_lower(&env);
+	lower = first_lower(*env);
+	affiche(lower);
 	while (lower != NULL)
 	{
-		printf("declare -x %s\n", lower);
-		lower = next_lower(&env, lower);
+		env = temp;
+		lower = next_lower(*env, lower);
+		if (lower != NULL)
+			affiche(lower);
 	}
 }
 
-char	*non_valid_identifier(char *arg)
+void	affiche(char *lower)
 {
-	printf("export: %s : not a valid identifier:", arg);
-	return (1);
-}
-
-int	is_identifier_valid(char *name)
-{
-	int	i;
-
-	i = 0;
-	if (!(ft_isalpha(name[i]) || name[i] == '_'))
-		return (0);
-	i++;
-	while (name[i] && name[i] != '=')
+	write(1, "declare -x ", 11);
+	while(*lower && *lower != '=')
 	{
-		if (!(ft_isalnum(name[i]) || name[i] == '_'))
-			return (0);
-		i++;
+		write(1, lower, 1);
+		lower++;
 	}
-	return (1);
+	if (*lower)
+		lower++;
+	write(1, "=\"", 2);
+	while(*lower)
+	{
+		write(1, lower, 1);
+		lower++;
+	}
+	write(1, "\"\n", 2);
 }

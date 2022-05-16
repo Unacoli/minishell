@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 # include "../libft/include/libft.h"
 # include <signal.h>
 # include <sys/types.h>
@@ -174,22 +174,31 @@ void	signal_handler(void);
 void	error(int signal);
 
 /* Function for Built-In */
-char	*pwd(void);
+void	pwd(void);
 int		cd(t_env env, char **args);
 void	echo(char **args);
 char	*envi(t_env env);
 void	exit_free(t_ctrl *minishell);
 int		export(t_env *env, char **args);
-char	*non_valid_identifier(char *arg);
-int		is_identifier_valid(char *name);
+int		non_valid_identifier(char *arg, char *function);
 char	*find_key(char *arg);
 int		export_value(t_env *env, char *arg);
+void	affiche_env_alpha(t_env *env);
+char	*next_lower(t_env env, char *previous);
+char	*first_lower(t_env env);
+char	*find_key(char *arg);
+int		unset(t_env *env, char **args);
+void	affiche(char *lower);
 
 char	*ft_strjoinchar(char const *s1, char const s2);
 void	changedeb(t_env *un);
-void	unset(char *cmd, t_env *un);
 char	*getvale(char *name, t_env *un);
 char	*exportun(t_env *un);
+
+/* Function for environnement */
+t_env	*init_env(char **env);
+char	*search_env(t_env env, char *to_search);
+
 
 /*Old functions, WIP to sort this*/
 
