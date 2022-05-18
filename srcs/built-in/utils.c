@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:51:59 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/13 16:27:17 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:13:57 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ char	*next_lower(t_env env, char *previous)
 	while (temp)
 	{
 		if (ft_strncmp(previous, temp->line, ft_strlen(previous) + 1) < 0)
-			if ((lower == previous && ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) < 0) 
-				|| (lower != previous && ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) > 0))
+			if ((lower == previous && ft_strncmp(lower, temp->line, \
+			ft_strlen(lower) + 1) < 0) || (lower != previous && \
+			ft_strncmp(lower, temp->line, ft_strlen(lower) + 1) > 0))
 				lower = temp->line;
 		temp = temp->next;
 	}

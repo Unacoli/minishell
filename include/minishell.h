@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 15:59:50 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:04:58 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-//# include <readline/readline.h>
-//# include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../libft/include/libft.h"
 # include <signal.h>
 # include <sys/types.h>
@@ -133,8 +133,6 @@ void	handle_token(t_lexer *lexer, t_regex token);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
 void	double_lexer(t_lexer *lexer);
-// int		pass(t_lexer *lexer, t_ttype needed);
-// void	add_word_to_lexer(t_lexer *lexer, char **token_s);
 
 /*Functions for tokens*/
 
@@ -144,8 +142,6 @@ int		tokenize(t_lexer *lexer);
 t_regex	get_token(char *input, t_lexer *lexer);
 t_regex	handle_quote(char *input, t_lexer *lexer, char c);
 t_regex	handle_substitution(char *input);
-// void	get_next_token(t_lexer *lexer);
-// int		push_char(t_lexer *lexer, char **token_s);
 
 /* Utils parsing */
 int		is_space(char c);
@@ -173,32 +169,23 @@ void	input(t_ctrl *minishell);
 void	signal_handler(void);
 void	error(int signal);
 
-/* Function for Built-In */
-void	pwd(void);
+/* BUILT-IN functions */
 int		cd(t_env env, char **args);
 void	echo(char **args);
 char	*envi(t_env env);
 void	exit_free(t_ctrl *minishell);
 int		export(t_env *env, char **args);
-int		non_valid_identifier(char *arg, char *function);
+void	pwd(void);
+int		unset(t_env *env, char **args);
+	//utils
 char	*find_key(char *arg);
-int		export_value(t_env *env, char *arg);
-void	affiche_env_alpha(t_env *env);
 char	*next_lower(t_env env, char *previous);
 char	*first_lower(t_env env);
-char	*find_key(char *arg);
-int		unset(t_env *env, char **args);
-void	affiche(char *lower);
-
-char	*ft_strjoinchar(char const *s1, char const s2);
-void	changedeb(t_env *un);
-char	*getvale(char *name, t_env *un);
-char	*exportun(t_env *un);
+int		non_valid_identifier(char *arg, char *function);
 
 /* Function for environnement */
 t_env	*init_env(char **env);
 char	*search_env(t_env env, char *to_search);
-
 
 /*Old functions, WIP to sort this*/
 

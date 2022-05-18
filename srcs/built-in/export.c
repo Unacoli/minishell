@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/13 16:28:52 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:12:52 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,7 @@ static int	is_identifier_valid(char *name)
 	return (1);
 }
 
-int	export(t_env *env, char **args)
-{
-	int	i;
-	int	retour;
-
-	i = 0;
-	retour = 0;
-	if (args == NULL)
-	{
-		// printf("affiche env alpha\n");
-		affiche_env_alpha(env);
-	}
-	else
-	{
-		// printf("enter good if\n");
-		while (args[i])
-		{
-			if (export_value(env, args[i]))
-				retour = 1;
-			i++;
-		}
-	}
-	return (retour);
-}
-
-int	export_value(t_env *env, char *arg)
+static int	export_value(t_env *env, char *arg)
 {
 	char	*key;
 	t_env	*temp;
@@ -75,7 +50,26 @@ int	export_value(t_env *env, char *arg)
 	return (0);
 }
 
-void	affiche_env_alpha(t_env *env)
+static void	affiche(char *lower)
+{
+	write(1, "declare -x ", 11);
+	while (*lower && *lower != '=')
+	{
+		write(1, lower, 1);
+		lower++;
+	}
+	if (*lower)
+		lower++;
+	write(1, "=\"", 2);
+	while (*lower)
+	{
+		write(1, lower, 1);
+		lower++;
+	}
+	write(1, "\"\n", 2);
+}
+
+static void	affiche_env_alpha(t_env *env)
 {
 	t_env	*temp;
 	char	*lower;
@@ -92,21 +86,25 @@ void	affiche_env_alpha(t_env *env)
 	}
 }
 
-void	affiche(char *lower)
+int	export(t_env *env, char **args)
 {
-	write(1, "declare -x ", 11);
-	while(*lower && *lower != '=')
+	int	i;
+	int	retour;
+
+	i = 0;
+	retour = 0;
+	if (args == NULL)
 	{
-		write(1, lower, 1);
-		lower++;
+		affiche_env_alpha(env);
 	}
-	if (*lower)
-		lower++;
-	write(1, "=\"", 2);
-	while(*lower)
+	else
 	{
-		write(1, lower, 1);
-		lower++;
+		while (args[i])
+		{
+			if (export_value(env, args[i]))
+				retour = 1;
+			i++;
+		}
 	}
-	write(1, "\"\n", 2);
+	return (retour);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:39:27 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/13 16:54:19 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:43:20 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,34 @@ static int	is_identifier_valid(char *name)
 	return (1);
 }
 
-int	unset(t_env *env, char **args)
+static void	suppr_elem(t_env *first, t_env *env, char **args, int i)
 {
 	t_env	*prev;
+
+	prev = env;
+	while (env->next
+		&& ft_strncmp(env->line, args[i], ft_strlen(args[i])) != 0)
+	{
+		prev = env;
+		env = env->next;
+	}
+	if (ft_strncmp(env->line, args[i], ft_strlen(args[i])) == 0)
+	{
+		if (env == first)
+			first = env->next;
+		prev->next = env->next;
+		free_env_elem(env);
+	}
+}
+
+int	unset(t_env *env, char **args)
+{
 	t_env	*first;
 	int		i;
 	int		ret;
 
-	i = 0;
 	ret = 0;
-	prev = env;
+	i = 0;
 	first = env;
 	while (args[i])
 	{
@@ -57,19 +75,7 @@ int	unset(t_env *env, char **args)
 		else
 		{
 			env = first;
-			while (env->next
-				&& ft_strncmp(env->line, args[i], ft_strlen(args[i])) != 0)
-			{
-				prev = env;
-				env = env->next;
-			}
-			if (ft_strncmp(env->line, args[i], ft_strlen(args[i])) == 0)
-			{
-				if (env == first)
-					first = env->next;
-				prev->next = env->next;
-				free_env_elem(env);
-			}
+			suppr_elem(first, env, args, i);
 		}
 		i++;
 	}
