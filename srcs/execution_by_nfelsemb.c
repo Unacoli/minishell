@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   execution_by_nfelsemb.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 17:22:10 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/05/12 14:54:48 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/05/18 12:10:34 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/05/18 12:13:38 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,6 @@ char	*getpath(char *cmd, t_env *enviro)
 	return (NULL);
 }
 
-char	**getenvchar(t_env *enviro)
-{
-	int		i;
-	char	**ret;
-
-	i = 0;
-	while (enviro->next)
-	{
-		enviro = enviro->next;
-		i++;
-	}
-	ret = ft_calloc(i + 1, sizeof(char *));
-	enviro = enviro->deb;
-	i = 0;
-	while (enviro->next)
-	{
-		ret[i] = ft_strdup(enviro->name);
-		ret[i] = ft_strjoinchar(ret[i], '=');
-		ret[i] = ft_strjoin_free1(ret[i], enviro->value);
-		i++;
-		enviro = enviro->next;
-	}
-	ret[i] = NULL;
-	return (ret);
-}
-
 void	lexe(char *cmd, t_env *envi)
 {
 	int		pid;
@@ -104,4 +78,46 @@ void	lexe(char *cmd, t_env *envi)
 	}
 	else
 		waitpid(pid, &status, 0);
+}
+
+void	child(char *path, char **argv, char**env, char *name)
+{
+	if (execve(path, argv, env) == -1)
+		printf("%s: command not found\n", name + 1);
+	freetab(env);
+	free(name);
+	freetab(argv);
+	free(path);
+}
+
+void	chldexed(char *cmd, t_env *envi)
+{
+	char	**argv;
+	char	**env;
+	char	*path;
+
+	argv = ft_split(cmd, ' ');
+	free(cmd - 1);
+	cmd = argv[0];
+	env = getenvchar(envi);
+	path = ft_strdup(".");
+	path = ft_strjoin_free1(path, cmd);
+	freeenv(envi);
+	argv[0] = path;
+	if (execve(path, argv, env) == -1)
+		printf("minishell: %s: No such file or directory\n", "p");
+	freetab(argv);
+	freetab(env);
+	exit(6);
+}
+
+void	exed(char *cmd, t_env *envi)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == 0)
+		chldexed(cmd, envi);
+	else
+		waitpid(pid, 0, 0);
 }

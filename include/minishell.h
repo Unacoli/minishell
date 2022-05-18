@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/18 11:04:58 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 12:31:06 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,13 +192,11 @@ char	*search_env(t_env env, char *to_search);
 void	lexe(char *cmd, t_env *envi);
 void	freeenv(t_env *un);
 void	exed(char *cmd, t_env *envi);
-char	**getenvchar(t_env *enviro);
 void	freetr(char	**pa, char *name, int i);
 char	*getna(char *cmd);
 void	child(char *path, char **argv, char**env, char *name);
 void	coredump(int sig);
 void	childctrlc(int sig);
 void	freetab(char **tab);
-void	addele(t_env *un, char **retsplit);	
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:06:26 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 12:04:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:27:07 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_shell(t_ctrl *minishell)
 	minishell->lexer = NULL;
 	minishell->ast = NULL;
 	minishell->cmd = NULL;
+	minishell->env = NULL;
 }
 
 void	choose_env(char **env)
