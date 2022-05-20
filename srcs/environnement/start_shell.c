@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:06:26 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/18 11:27:07 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/20 13:23:30 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_env	*default_env(void)
 		printf("Malloc error\n");
 		exit(EXIT_FAILURE);
 	}
+	
 	/*Create a function for setting the working directory*/
 	/*Function for putting environnement with shell level and shell path*/
 }
