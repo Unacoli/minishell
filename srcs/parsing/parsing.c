@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:11:08 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 10:45:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/22 21:57:39 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,19 @@
 	je ne sais pas quel code d'erreur mettre dans exit + printf msg ? 
 	je sais pas vraiment si input doit etre free dans cette fonction
 	*/
-t_lexer	*parse(char *input)
-{
-	t_lexer	*lexer;
 
-	lexer = malloc_lexer(12);
-	lexer->input = input;
-	if (lexer == NULL)
-		return (NULL);
-	if (tokenize(lexer) == EXIT_FAILURE)
-	{
-		free_lexer(lexer);
-		printf("Sadly, there was a mistake : %s", strerror(errno));
-		exit(0);
-	}
-	return (lexer);
+int	*parse(t_ast **root, t_lexer *lexer)
+{
+	int	parsed;
+
+	parsed = 1;
+	lexer->pos = 0;
+	/*Function for creating ast root*/
+	while ((lexer->pos < lexer->size) && parsed != 0)
+		parsed = /*Function for parsing command with ast*/
+	if (lexer->pos < lexer->size)
+		return (printf("Syntax Error"));
+	return (0);
 }
 
 // int	main(void)

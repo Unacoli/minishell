@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:06:26 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/20 13:23:30 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/22 21:26:43 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	choose_env(char **env)
 int	running_shell(t_ctrl *minishell)
 {
 	while (1)
-		input(minishell);
+		ft_input(minishell);
 	/*free all if minishell stop*/
 	return (0);
 }

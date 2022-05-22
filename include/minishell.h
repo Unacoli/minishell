@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/18 12:31:06 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/22 22:43:23 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,11 @@ int		is_space(char c);
 char	*create_str(char *input, int i);
 int		is_operator(char *input);
 int		delimite_word(char *input, int i);
+int		parse(t_ast **root, t_lexer *lexer);
+
+/*Function for AST*/
+
+int	parsed_command(t_ast **ast, t_lexer *lexer);
 
 /* Free function */
 
@@ -162,7 +167,8 @@ int		running_shell(t_ctrl *minishell);
 
 /*Functions for input processing*/
 
-void	input(t_ctrl *minishell);
+void	ft_input(t_ctrl *minishell);
+int		ft_command(t_ctrl *minishell);
 
 /*Signal handler*/
 
@@ -186,6 +192,13 @@ int		non_valid_identifier(char *arg, char *function);
 /* Function for environnement */
 t_env	*init_env(char **env);
 char	*search_env(t_env env, char *to_search);
+
+
+/*Exit functions*/
+
+void	exit_shell(t_ctrl *minishell);
+void	destroy_shell(t_ctrl *minishell);
+void	free_lexer(t_lexer *lexer);
 
 /*Old functions, WIP to sort this*/
 

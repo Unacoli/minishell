@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   exit_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/13 02:14:09 by nargouse         ###   ########.fr       */
+/*   Created: 2022/05/22 22:23:23 by nargouse          #+#    #+#             */
+/*   Updated: 2022/05/22 22:28:20 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	input(t_ctrl *minishell)
+void	destroy_shell(t_ctrl *minishell)
 {
-	int	cmd;
+	if (minishell->lexer)
+		free_lexer(&(minishell->lexer);
+	if (minishell->ast)
+		/*Function to free ast*/
+	if (minishell->cmd)
+		/*Function to free cmd*/
+}
 
-	cmd = /*Create function to get the command and link to parsing*/;
-	if (cmd != -1)
-		/*Create function to follow the ast*/;
-	/*Create function to destroy shell*/;
+void	exit_shell(t_ctrl *minishell)
+{
+	destroy_shell(minishell);
+	exit(0);
 }
