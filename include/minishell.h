@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/22 22:43:23 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/26 13:59:00 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	free_env(t_env *env);
 /*Functions for main, starting minishell*/
 
 void	init_shell(t_ctrl *minishell);
-void	choose_env(char **env);
+t_env	*choose_env(char **env);
 int		running_shell(t_ctrl *minishell);
 
 /*Functions for input processing*/
@@ -192,6 +192,7 @@ int		non_valid_identifier(char *arg, char *function);
 /* Function for environnement */
 t_env	*init_env(char **env);
 char	*search_env(t_env env, char *to_search);
+t_env	*default_env(void);
 
 
 /*Exit functions*/

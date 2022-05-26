@@ -6,7 +6,7 @@
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/05/24 11:50:04 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/26 14:00:15 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*search_env(t_env env, char *to_search)
 	return (NULL);
 }
 
-void	choose_env(char **env)
+t_env	*choose_env(char **env)
 {
 	t_env	*struc_env;
 
@@ -63,4 +63,5 @@ void	choose_env(char **env)
 	else
 		struc_env = init_env(env);
 	signal_handler();
+	return (struc_env);
 }
