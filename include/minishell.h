@@ -6,7 +6,7 @@
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/26 13:59:00 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/29 22:35:07 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,11 +153,15 @@ int		parse(t_ast **root, t_lexer *lexer);
 /*Function for AST*/
 
 int	parsed_command(t_ast **ast, t_lexer *lexer);
+void	create_tree(t_ast **root);
+t_ast	create_ast(t_node p_type, char *p_data);
+t_ast	*malloc_ast(t_node p_type, char *p_data);
 
 /* Free function */
 
 void	free_lexer(t_lexer *lexer);
 void	free_env(t_env *env);
+void	free_ast(t_ast **to_free);
 
 /*Functions for main, starting minishell*/
 
