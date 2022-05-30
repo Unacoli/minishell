@@ -6,7 +6,7 @@
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:24:46 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/24 23:43:29 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/05/30 18:08:14 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,21 @@
 /*	Dans le cas ou on a un token DLESS, on envoie le mot qui suit a here_doc
 	Here_doc renvoit le fd du pipe dans lequel il a envoye les informations */
 
-static  void	heredoc_ctrld(int sig)
-{
-	(void) sig;
-	printf("here-document delimited by end-of-file\n");
-	/* fermer le here_doc mais continuer l'execution*/
-}
+
  /* Test + norminette + clean + substitution*/
 
-char	*get_line()
+char	*get_line(char *line, int *pip)
 {
-	ft_putstr_fd("heredoc>", STDOUT_FILENO);
-	line = get_next_line(STDOUT_FILENO);
+	ft_putstr_fd(line, pip[1]);
+	ft_putstr_fd("\n", pip[1]);
+	free(line);
+	line = readline("heredoc> ");
 	if (line == NULL)
-	{
-		if (pip)
-			free(pip);
-	}
-	
+		printf("here-document delimited by end-of-file\n");
+	return(line);
 }
 
-int	here_doc(char *delimiter)
+int	here_doc(char *delimiter, t_env *env)
 {
 	char	*line;
 	int		*pip;
@@ -49,20 +43,17 @@ int	here_doc(char *delimiter)
 	}
 	fd = pip[0];
 	line = NULL;
-	ft_putstr_fd("heredoc>", STDOUT_FILENO);
-	line = get_next_line(STDOUT_FILENO);
+	line = readline("heredoc> ");
 	if (line == NULL)
+		printf("here-document delimited by end-of-file\n");
+	while (line && ft_strncmp(line, delimiter, ft_strlen(line)) != 0)
 	{
-		if (pip)
-			free(pip);
-	}
-	while (ft_strncmp(line, delimiter, ft_strlen(line)) != 0)
-	{
-		ft_putstr_fd(line, pip[1]);
-		free(line);
-		
+		line = search_substi(env, line);
+		line = get_line(line, pip);
 	}
 	close(pip[1]);
 	free(pip);
+	if (line)
+		free(line);	
 	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/29 22:35:07 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/05/30 18:10:22 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,11 @@ t_env	*init_env(char **env);
 char	*search_env(t_env env, char *to_search);
 t_env	*default_env(void);
 
+/* Substitution functions */
+char	*search_substi(t_env *env, char *str);
+char	*substitution(char *str, int position, t_env *env);
+char	*make_3_str(char *str, int position, int j, char *value);
+char	*join_3_str(char *before, char *substi, char *after);
 
 /*Exit functions*/
 
