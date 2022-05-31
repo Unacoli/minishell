@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   output_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/31 16:22:00 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/05/31 14:18:01 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/05/31 14:25:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	Une fonction qui recoit une structure ou deux ? (simplecmd) et qui doit pipe
-	l'output de la premiere commande dans la deuxieme */
+int	great(char *output_file)
+{
+	int	fd;
+
+	fd = open(output_file, O_CREAT | O_RDWR | O_TRUNC, 0000644);
+	if (fd == -1)
+		printf("error");
+	return (fd);
+}
+
+int	d_great(char *output_file)
+{
+	int	fd;
+
+	fd = open(output_file, O_WRONLY | O_CREAT | O_APPEND, 0000644);
+	if (fd == -1)
+		printf("error");
+	return (fd);
+}
