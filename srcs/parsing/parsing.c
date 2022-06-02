@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:11:08 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:13:12 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:27:12 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	*parse(t_ast **root, t_lexer *lexer)
 	lexer->pos = 0;
 	/*Function for creating ast root*/
 	while ((lexer->pos < lexer->size) && parsed != 0)
-		parsed = /*Function for parsing command with ast*/
+		parsed = ;/*Function for parsing command with ast*/
 	if (lexer->pos < lexer->size)
 		return (printf("Syntax Error"));
 	return (0);

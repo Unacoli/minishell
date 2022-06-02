@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:33:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:20:39 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:20:03 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int		parsed_command(t_ast **ast, t_lexer *lexer);
 void	create_tree(t_ast **root);
 t_ast	create_ast(t_node p_type, char *p_data);
 t_ast	*malloc_ast(t_node p_type, char *p_data);
+int		parse(t_ast **root, t_lexer *lexer);
 
 #endif

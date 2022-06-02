@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 12:07:18 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:37:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ static int	ft_change_pwd(t_env env)
 	return (0);
 }
 
-int	cd(t_ctrl *minishell, char **args)
+int	cd(t_env *env, char **args)
 {
 	char	*path;
-	t_env	*env;
 
-	env = minishell->env;
 	if (args == NULL || args[0] == NULL)
 		path = search_env(*env, "HOME");
 	else
@@ -77,5 +75,7 @@ int	cd(t_ctrl *minishell, char **args)
 	{
 		if (ft_change_pwd(*env))
 			return (error_message(NULL, 1));
+		else
+			return (0);
 	}
 }

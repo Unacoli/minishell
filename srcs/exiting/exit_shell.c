@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:23:23 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:11:55 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:56:57 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	destroy_shell(t_ctrl *minishell)
 {
 	if (minishell->lexer)
-		free_lexer(&(minishell->lexer);
+		free_lexer(&(minishell->lexer));
 	if (minishell->ast)
 		/*Function to free ast*/
 	if (minishell->cmd)

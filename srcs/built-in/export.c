@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:05:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:30:03 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ static int	export_value(t_env *env, char *arg)
 	if (is_identifier_valid(arg) == 0)
 		return (non_valid_identifier(arg, "export"));
 	key = find_key(arg);
+	if (!key)
+		return (error_message(NULL, 1));
 	while (env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
 		env = env->next;
 	if (!env->next && ft_strncmp(env->line, key, ft_strlen(env->line)) != 0)
 	{
 		env->next = ft_calloc(1, sizeof(t_env));
+		if (!env->next)
+			return (error_message(NULL, 1));
 		env = env->next;
 	}
 	env->line = arg;

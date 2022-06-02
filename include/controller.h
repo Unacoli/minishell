@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   controller.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 14:30:04 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/06/02 14:25:12 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/06/02 14:27:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef CONTROLLER_H
+# define CONTROLLER_H
 
-int	main(int ac, char **av, char **env)
+/*Struct for controller*/
+
+typedef struct s_ctrl
 {
-	t_ctrl	minishell;
+	t_lexer	*lexer;
+	t_ast	*ast;
+	t_cmd	*cmd;
+	t_env	*env;
+}				t_ctrl;
 
-	if (ac != 0)
-	{
-		printf("Usage : %s\n", av[0]);
-		exit(EXIT_SUCCESS);
-	}
-	init_shell(&minishell);
-	minishell.env = choose_env(env);
-	if (!(minishell.env == NULL))
-		exit_free(&minishell);
-	return (running_shell(&minishell));
-}
+#endif

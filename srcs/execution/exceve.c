@@ -6,13 +6,13 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:09:32 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:49:28 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*__cmd(t_env env, char *cmd)
+static char	*cmd(t_env env, char *cmd)
 {
 	char	*tmp;
 	char	*command;
@@ -20,13 +20,13 @@ static char	*__cmd(t_env env, char *cmd)
 	int		i;
 
 	i = 0;
-	paths = ft_split(search_env(env, "PATH"), ":");
+	paths = ft_split(search_env(env, "PATH"), ':');
 	while (paths[i])
 	{
-		tmp = __strjoin(paths[i], "/");
+		tmp = ft_strjoin_free1(paths[i], "/");
 		if (tmp == NULL)
 			printf("Strjoin fail\n");
-		command = __strjoin(tmp, cmd);
+		command = ft_strjoin(tmp, cmd);
 		if (tmp == NULL)
 		{
 			free(tmp);
@@ -63,7 +63,7 @@ char	**transform_env(t_env env)
 	int		i;
 
 	len = env_len(env);
-	envp = (char *) malloc(sizeof(char) * len);
+	envp = (char **) malloc(sizeof(char *) * len);
 	temp = &env;
 	i = 0;
 	while (temp)
@@ -78,7 +78,7 @@ char	**transform_env(t_env env)
 int	call_exceve(char **cmd_arg, t_env env)
 {
 	int		id;
-	char	**cmd_path;
+	char	*cmd_path;
 	char	**envp;
 
 	id = fork();
@@ -89,10 +89,11 @@ int	call_exceve(char **cmd_arg, t_env env)
 			execve(cmd_arg[0], cmd_arg, envp);
 	}
 	cmd_path = cmd(env, cmd_arg[0]);
-	if (!cmd)
+	if (!cmd_path)
 	{
 		printf("command not found");
 		exit(1);
 	}
-	execve(cmd, cmd_arg, envp);
+	execve((const char *)cmd, cmd_arg, envp);
+	return (1);
 }

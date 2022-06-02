@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:28:44 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 14:27:08 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,14 @@
 # include <unistd.h>
 # include <errno.h>
 
+# include "parsing.h"
 # include "ast.h"
-# include "built_in.h"
 # include "environnement.h"
 # include "execution.h"
+# include "controller.h"
 # include "exiting.h"
 # include "handle_input.h"
-# include "parsing.h"
-
-/*Struct for controller*/
-
-typedef struct s_ctrl
-{
-	t_lexer	*lexer;
-	t_ast	*ast;
-	t_cmd	*cmd;
-	t_env	*env;
-}				t_ctrl;
+# include "built_in.h"
 
 /*Functions for main, starting minishell*/
 

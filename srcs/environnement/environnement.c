@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/06/02 10:05:42 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:45:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ t_env	*init_env(char **env)
 	{
 		elem->next = (t_env *) ft_calloc(1, sizeof(t_env));
 		if (elem->next == NULL)
-		{
-			free_env(first);
 			return (NULL);
-		}
 		elem = elem->next;
 		elem->next = NULL;
 		elem->line = env[i++];
@@ -62,6 +59,11 @@ t_env	*choose_env(char **env)
 		struc_env = default_env();
 	else
 		struc_env = init_env(env);
+	if (struc_env == NULL)
+	{
+		error_message("minishell: error with memory allocation", 1);
+		return (NULL);
+	}
 	signal_handler();
 	return (struc_env);
 }
