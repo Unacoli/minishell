@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:12:28 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 15:27:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	prompt(t_ctrl *shell)
 	shell->lexer->input = readline("minishell% ");
 	if (!shell->lexer->input)
 		handle_eof(shell);
-	return (read_input(shell->lexer);
+	return (read_input(shell->lexer));
 }
 
 int	ft_command(t_ctrl *shell)
