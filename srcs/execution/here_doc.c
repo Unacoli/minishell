@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:24:46 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/30 18:08:14 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:10:01 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 /*	Dans le cas ou on a un token DLESS, on envoie le mot qui suit a here_doc
 	Here_doc renvoit le fd du pipe dans lequel il a envoye les informations */
-
-
- /* Test + norminette + clean + substitution*/
 
 char	*get_line(char *line, int *pip)
 {
@@ -26,7 +23,7 @@ char	*get_line(char *line, int *pip)
 	line = readline("heredoc> ");
 	if (line == NULL)
 		printf("here-document delimited by end-of-file\n");
-	return(line);
+	return (line);
 }
 
 int	here_doc(char *delimiter, t_env *env)
@@ -54,6 +51,6 @@ int	here_doc(char *delimiter, t_env *env)
 	close(pip[1]);
 	free(pip);
 	if (line)
-		free(line);	
+		free(line);
 	return (fd);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 11:57:13 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:12:01 by ldubuche         ###   ########.fr       */
+/*   Created: 2022/06/02 10:57:22 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/06/02 11:44:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_env(t_env *env)
+int	error_message(char *msg, int ret)
 {
-	t_env	*temp;
-
-	if (env)
+	if (msg == NULL)
 	{
-		while (env)
-		{
-			if (env->line)
-				free(env->line);
-			temp = env;
-			env = env->next;
-			if (temp)
-				free(temp);
-		}
+		perror(strerror(errno));
+		return (errno);
+	}
+	else
+	{
+		printf("minishell: %s\n");
+		return (ret);
 	}
 }

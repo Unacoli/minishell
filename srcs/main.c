@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/26 14:34:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 09:59:57 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int ac, char **av, char **env)
 		exit(EXIT_SUCCESS);
 	}
 	init_shell(&minishell);
-	minishell->env = choose_env(env);
+	minishell.env = choose_env(env);
 	return (running_shell(&minishell));
 }

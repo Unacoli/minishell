@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:28:54 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/26 15:31:40 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:42:10 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,29 @@ char	*get_pwd(void)
 	int		size;
 
 	size = 50;
+	buf = NULL;
 	buf = ft_calloc(size, sizeof(char));
+	if (!buf)
+		return (NULL);
 	while (getcwd(buf, size) == NULL)
 	{
 		free(buf);
 		size += 50;
 		buf = ft_calloc(size, sizeof(char));
+		if (!buf)
+			return (NULL);
 	}
 	return (buf);
 }
 
-void	pwd(void)
+int	pwd(void)
 {
 	char	*path;
 
 	path = get_pwd();
+	if (!path)
+		return (1);
 	printf("%s\n", path);
 	free(path);
+	return (0);
 }

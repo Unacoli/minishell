@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   default_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:31 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/26 15:34:23 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 09:53:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static t_env	*add_old_pwd(char *pwd, t_env *next_elem)
 	diff = ft_strrchr(pwd, '/') - pwd;
 	temp = (char *) malloc(sizeof(char) * (diff + 1));
 	ft_strlcpy(temp, pwd, diff + 1);
-	buf->line = ft_strjoin_free("OLD_PWD=", temp+4);
+	buf->line = ft_strjoin_free("OLD_PWD=", temp + 4);
 	buf->next = next_elem;
-	return(buf);
+	return (buf);
 }
 
 t_env	*default_env(void)

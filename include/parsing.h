@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/01 18:50:05 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:29:13 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ char	*create_str(char *input, int i);
 int		is_operator(char *input);
 int		delimite_word(char *input, int i);
 int		parse(t_ast **root, t_lexer *lexer);
-
 
 #endif

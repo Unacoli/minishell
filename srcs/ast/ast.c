@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:35:15 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/29 22:45:48 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:02:09 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ t_ast	create_ast(t_node p_type, char *p_data)
 
 t_ast	*malloc_ast(t_node p_type, char *p_data)
 {
-	t_ast	*result = NULL;
+	t_ast	*result;
 
+	result = NULL;
 	result = malloc(sizeof(t_ast));
 	if (!result)
 	{

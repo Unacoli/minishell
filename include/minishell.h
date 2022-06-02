@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/01 19:15:05 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:28:44 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,18 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <errno.h>
+
+# include "ast.h"
+# include "built_in.h"
+# include "environnement.h"
+# include "execution.h"
+# include "exiting.h"
+# include "handle_input.h"
+# include "parsing.h"
 
 /*Struct for controller*/
 

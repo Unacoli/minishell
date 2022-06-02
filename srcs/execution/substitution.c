@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/26 13:58:27 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:11:48 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*substitution(char *str, int position, t_env *env)
 	int		j;
 	char	*variable;
 	char	*value;
-	
+
 	j = position;
 	while (str[j] && !is_space(str[j]))
 		j++;

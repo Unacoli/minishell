@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:33:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/01 18:36:44 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:20:39 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_ast
 	char			*data;
 }				t_ast;
 
-int	parsed_command(t_ast **ast, t_lexer *lexer);
+int		parsed_command(t_ast **ast, t_lexer *lexer);
 void	create_tree(t_ast **root);
 t_ast	create_ast(t_node p_type, char *p_data);
 t_ast	*malloc_ast(t_node p_type, char *p_data);

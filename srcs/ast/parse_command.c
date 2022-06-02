@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/05/22 22:43:20 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:02:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ return 1 if the node creation succeeded
 
 static int	pipe_seq(t_ast **node, t_lexer *lexer)
 {
-	t_ast *node;
+	t_ast	*node;
 
-	node = /*Function to malloc an AST node*/
+	node = ;/*Function to malloc an AST node*/
 	if (/*Function to parse pipe seq*/)
 	{
 		/*Function to take right node*/

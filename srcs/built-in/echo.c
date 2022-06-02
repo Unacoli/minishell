@@ -6,16 +6,15 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:43:08 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/13 14:32:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:19:52 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	Fonction echo option -n pour supprimer le retour a la ligne
-	Potentiel risque que printf ne flush pas sans retour a la ligne */
+/*	Fonction echo option -n pour supprimer le retour a la ligne */
 
-void	echo(char **args)
+int	echo(char **args)
 {
 	int	n;
 
@@ -24,11 +23,12 @@ void	echo(char **args)
 		n = 1;
 	while (args[n])
 	{
-		printf("%s", args[n]);
+		ft_putstr(args[n]);
 		if (args[n + 1] != NULL)
-			printf(" ");
+			ft_putstr(" ");
 		n++;
 	}
 	if (ft_strncmp("-n", args[0], 3))
-		printf("\n");
+		ft_putstr("\n");
+	return (0);
 }

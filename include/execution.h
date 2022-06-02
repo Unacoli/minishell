@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/01 19:14:43 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:30:03 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
+
+# include <string.h>
+# include "environnement.h"
 
 /*Structs for execution*/
 

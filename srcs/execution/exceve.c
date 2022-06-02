@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exceve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/31 15:49:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:09:32 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static char	*__cmd(t_env env, char *cmd)
 	int		i;
 
 	i = 0;
-	paths = ft_split(search_env("PATH"));
+	paths = ft_split(search_env(env, "PATH"), ":");
 	while (paths[i])
 	{
 		tmp = __strjoin(paths[i], "/");
 		if (tmp == NULL)
-			__error("Strjoin fail", pipex);
+			printf("Strjoin fail\n");
 		command = __strjoin(tmp, cmd);
 		if (tmp == NULL)
 		{
 			free(tmp);
-			__error("Strjoin fail", pipex);
+			printf("Strjoin fail\n");
 		}
 		free(tmp);
 		if (access(command, X_OK) == 0)
@@ -60,7 +60,7 @@ char	**transform_env(t_env env)
 	char	**envp;
 	int		len;
 	t_env	*temp;
-	int 	i;
+	int		i;
 
 	len = env_len(env);
 	envp = (char *) malloc(sizeof(char) * len);
@@ -79,7 +79,7 @@ int	call_exceve(char **cmd_arg, t_env env)
 {
 	int		id;
 	char	**cmd_path;
-	char 	**envp;
+	char	**envp;
 
 	id = fork();
 	envp = transform_env(env);
@@ -96,5 +96,3 @@ int	call_exceve(char **cmd_arg, t_env env)
 	}
 	execve(cmd, cmd_arg, envp);
 }
-
-

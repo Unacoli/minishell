@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built-in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldubuche <laura.dubuche@gmail.com>         +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/05/31 16:21:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/02 10:24:51 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	built_in(char **cmd_arg, t_ctrl *minishell)
 	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
 		return (envi(minishell->env));
 	if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-		return (exit_free(minishell));
+		exit_free(minishell);
 	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
 		return (export(minishell->env, cmd_arg + 1));
 	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
@@ -32,5 +32,5 @@ int	built_in(char **cmd_arg, t_ctrl *minishell)
 	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
 		return (unset(minishell->env, cmd_arg + 1));
 	else
-		return (call_exceve(env, cmd_arg));
+		return (call_exceve(minishell->env, cmd_arg));
 }
