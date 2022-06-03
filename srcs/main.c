@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 14:30:04 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:41:38 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	main(int ac, char **av, char **env)
 {
 	t_ctrl	minishell;
 
-	if (ac != 0)
+	if (ac != 1)
 	{
 		printf("Usage : %s\n", av[0]);
 		exit(EXIT_SUCCESS);
 	}
 	init_shell(&minishell);
 	minishell.env = choose_env(env);
-	if (!(minishell.env == NULL))
+	if (minishell.env == NULL)
 		exit_free(&minishell);
 	return (running_shell(&minishell));
 }

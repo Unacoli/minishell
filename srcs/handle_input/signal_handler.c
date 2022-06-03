@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:25:32 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:12:35 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:11:36 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	error(int signal)
 {
-	if (signal == SIGINT)
-	{
-		close(STDIN_FILENO);
-		dup(STDOUT_FILENO);
-	}
+	(void) signal;
+	printf("\n");
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 static void	sig_err(void)

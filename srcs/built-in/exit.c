@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:44:34 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 13:20:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:34:02 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	exit_free(t_ctrl *minishell)
 {
 	if (minishell)
 	{
-		free_lexer(minishell->lexer);
-		free_env(minishell->env);
-		free(minishell);
+		if (minishell->lexer)
+			free_lexer(minishell->lexer);
+		if (minishell->env)
+			free_env(minishell->env);
 	}
 	exit(0);
 }

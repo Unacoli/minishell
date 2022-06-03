@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:28:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:13:27 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:56:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	check_error(t_lexer *lexer)
 }
 
 /* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et
-	il faut alors lexer */
+	il faut alors free lexer */
 
 int	tokenize(t_lexer *lexer)
 {
@@ -42,8 +42,10 @@ int	tokenize(t_lexer *lexer)
 	lexer->pos = 0;
 	while (lexer->input[lexer->pos])
 	{
-		token = get_token(lexer->input + lexer->pos, lexer);
+		token = get_token(lexer->input + lexer->pos);
 		handle_token(lexer, token);
+		if (token.str)
+			free((char *)token.str);
 	}
 	if (check_error(lexer))
 		return (EXIT_FAILURE);

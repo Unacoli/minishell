@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:12:31 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:58:04 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	ft_input(t_ctrl *minishell)
 
 	cmd = ft_command(minishell);
 	if (cmd != -1)
-		/*Create function to follow the ast*/;
-	destroy_shell(minishell);
+		printf("If this success until here i'm really happy\n");
+	exit_free(minishell);
 }

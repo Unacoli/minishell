@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:13:32 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:30:52 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	is_operator(char *input)
 	i = 0;
 	while (i < (MAX_TOKENS - 1))
 	{
-		if (!ft_strncmp(g_rlist[i].op, input, g_rlist[i].len))
+		if (!ft_strncmp(g_rlist[i].str, input, g_rlist[i].len))
 			return (1);
 		i++;
 	}

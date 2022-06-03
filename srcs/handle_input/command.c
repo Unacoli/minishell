@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 15:27:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 16:09:22 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	handle_eof(t_ctrl *shell)
 {
-	ft_putchar('\n');
+	ft_putstr("\n");
 	exit_shell(shell);
 }
 
@@ -27,7 +27,8 @@ static int	read_input(t_lexer *lexer)
 	if (lexer->input)
 	{
 		ret = tokenize(lexer);
-		ft_strdel(&(lexer->input), ft_strlen(lexer->input) + 1);
+		free(lexer->input);
+		lexer->input = NULL;
 	}
 	return (ret);
 }
@@ -42,17 +43,21 @@ static int	prompt(t_ctrl *shell)
 
 int	ft_command(t_ctrl *shell)
 {
-	int	lines;
+	int		lines;
+	size_t	i;
 
+	i = 0;
 	lines = 0;
-	shell->lexer = malloc_lexer(42);
+	shell->lexer = malloc_lexer(10);
 	if (!shell->lexer)
 		exit_shell(shell);
-	do
-	{
+	lines = prompt(shell);
+	while (lines == 1)
 		lines = prompt(shell);
-	} while (lines == 1);
 	if (lines == 0)
-		return (parse(&(shell->ast), shell->lexer));
+	{
+		//return (parse(&(shell->ast), shell->lexer));
+		return (0);
+	}
 	return (lines);
 }

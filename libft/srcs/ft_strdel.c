@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:08:35 by nargouse          #+#    #+#             */
-/*   Updated: 2022/04/14 16:36:18 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:32:14 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/* Attention segfault TwT sans doute a cause de la ligne 23 et 24 */
 
 char	*ft_strdel(char *str, size_t n)
 {

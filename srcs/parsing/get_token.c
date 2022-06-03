@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:12:50 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:56:30 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ static t_regex	handle_word(char *input)
 	et si ce n'est aucun des trois, considere que c'est un mot 
 	En cas d'erreur cette fonction et toute les dependantes renvoie 
 	TOKEN_NOT_VALID */
-t_regex	get_token(char *input, t_lexer *lexer)
+t_regex	get_token(char *input)
 {
 	int	i;
 
 	i = 0;
 	while (i < (MAX_TOKENS - 1))
 	{
-		if (!ft_strncmp(g_rlist[i].op, input, g_rlist[i].len))
+		if (!ft_strncmp(g_rlist[i].str, input, g_rlist[i].len))
 			return (g_rlist[i]);
 		i++;
 	}
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
-		return (handle_quote(input, lexer, *input));
+		return (handle_quote(input, *input));
 	if (*input == '$')
 		return (handle_substitution(input));
 	else

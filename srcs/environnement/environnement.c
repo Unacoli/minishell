@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/06/02 13:45:17 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:39:54 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_env	*init_env(char **env)
 		return (NULL);
 	elem = first;
 	elem->next = NULL;
-	elem->line = env[0];
+	elem->line = ft_strdup((const char *) env[0]);
 	i = 1;
 	while (env[i])
 	{
@@ -32,7 +32,7 @@ t_env	*init_env(char **env)
 			return (NULL);
 		elem = elem->next;
 		elem->next = NULL;
-		elem->line = env[i++];
+		elem->line = ft_strdup((const char *) env[i++]);
 	}
 	return (first);
 }

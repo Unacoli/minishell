@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 14:19:58 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/03 15:56:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef enum e_ttype
 
 typedef struct s_regex
 {
-	const char	*op;
+	const char	*str;
 	size_t		len;
 	t_ttype		type;
 }				t_regex;
@@ -67,8 +67,8 @@ void	double_lexer(t_lexer *lexer);
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 int		tokenize(t_lexer *lexer);
-t_regex	get_token(char *input, t_lexer *lexer);
-t_regex	handle_quote(char *input, t_lexer *lexer, char c);
+t_regex	get_token(char *input);
+t_regex	handle_quote(char *input, char c);
 t_regex	handle_substitution(char *input);
 
 /* Utils parsing */
