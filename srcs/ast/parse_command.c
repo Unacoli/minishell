@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:02:26 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:05:45 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	pipe_seq(t_ast **node, t_lexer *lexer)
 {
 	t_ast	*node;
 
-	node = ;/*Function to malloc an AST node*/
+	node = malloc_ast(node->type, node->data);
 	if (/*Function to parse pipe seq*/)
 	{
 		/*Function to take right node*/
 		return (1);
 	}
-	/*Function to free AST*/
+	free_ast(node);
 	return (0);
 }
 
