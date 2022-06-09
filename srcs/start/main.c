@@ -6,11 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-<<<<<<< HEAD:srcs/main.c
-/*   Updated: 2022/06/03 11:41:38 by ldubuche         ###   ########.fr       */
-=======
-/*   Updated: 2022/06/09 04:28:13 by nargouse         ###   ########.fr       */
->>>>>>> 68a751c33ccdd5fd4ee39cbcb8865f66a9181880:srcs/start/main.c
+/*   Updated: 2022/06/09 14:04:50 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

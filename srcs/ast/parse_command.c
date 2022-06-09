@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 10:22:12 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 13:56:16 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	parse_pipe_seq(t_ast **ast, t_lexer *lexer)
 
 	token = lexer->tokens[lexer->pos++];
 	while (token->type == TOKEN_PASS)
-		token = lexer->tokens[lexer->pos++];
-	if (token->type == TOKEN_NOT_VALID)
+		token = lexer->tokens[lexer->pos++]; //Je me suis pas servi de token_pass dans le parsing, on en a pas besoin
+	if (token->type == TOKEN_NOT_VALID) //Pareil pour token not valid
 		return (0);
 	else if (token->type == TOKEN_PIPE)
 	{
@@ -43,7 +43,7 @@ static int	pipe_seq(t_ast **ast, t_lexer *lexer)
 	t_ast	*node;
 
 	node = NULL;
-	node = malloc_ast(node->type, node->data);
+	node = malloc_ast(node->type, node->data); //essayer d'acceder a un truc NULL == segfault
 	if (parse_pipe_seq(ast, lexer))
 	{
 		simple_command(ast, lexer);

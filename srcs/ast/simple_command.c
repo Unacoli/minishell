@@ -17,11 +17,11 @@ static int	parse_simple_command(t_ast **ast, t_lexer *lexer)
 	t_token	*token;
 
 	token = lexer->tokens[lexer->pos++];
-	while (token->type == TOKEN_PASS)
+	while (token->type == TOKEN_PASS) //pas de token pass
 	{
 		token = lexer->tokens[lexer->pos++];
 	}
-	if (token->type == TOKEN_NOT_VALID)
+	if (token->type == TOKEN_NOT_VALID)// pas de token not valid
 	{
 		return (0);
 	}
@@ -40,7 +40,7 @@ int	simple_command(t_ast **ast, t_lexer *lexer)
 	t_ast	*node;
 
 	node = NULL;
-	node = malloc_ast(node->type, node->data); // Inutile ? A toi de voir
+	node = malloc_ast(node->type, node->data); // Inutile ? A toi de voir oui inutile + segfault
 	if (parse_simple_command(ast, lexer))
 	{
 		io_file(ast, lexer); // Simplification de ouf pour tester
