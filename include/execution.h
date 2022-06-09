@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 14:43:30 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:53:39 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef struct s_simplecmd
 {
 	size_t	ac;
 	char	**av;
-	char	*input_file;
-	char	*output_file;
+	int		input_file;
+	int		output_file;
 }				t_simplecmd;
 
 typedef struct s_cmd
