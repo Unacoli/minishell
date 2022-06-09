@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:02:26 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 10:22:12 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,37 @@ return 1 if the node creation succeeded
 0 otherwise
 */
 
-static int	pipe_seq(t_ast **node, t_lexer *lexer)
+static int	parse_pipe_seq(t_ast **ast, t_lexer *lexer)
+{
+	t_token	*token;
+
+	token = lexer->tokens[lexer->pos++];
+	while (token->type == TOKEN_PASS)
+		token = lexer->tokens[lexer->pos++];
+	if (token->type == TOKEN_NOT_VALID)
+		return (0);
+	else if (token->type == TOKEN_PIPE)
+	{
+		(*ast)->left = malloc_ast(NODE_PIPE_SEQ, \
+		lexer->tokens[lexer->pos]->str);
+		(*ast)->right = malloc_ast(NODE_SIMPLE_CMD, \
+		lexer->tokens[lexer->pos]->str);
+	}
+	return (1);
+}
+
+static int	pipe_seq(t_ast **ast, t_lexer *lexer)
 {
 	t_ast	*node;
 
-	node = ;/*Function to malloc an AST node*/
-	if (/*Function to parse pipe seq*/)
+	node = NULL;
+	node = malloc_ast(node->type, node->data);
+	if (parse_pipe_seq(ast, lexer))
 	{
-		/*Function to take right node*/
+		simple_command(ast, lexer);
 		return (1);
 	}
-	/*Function to free AST*/
+	free_ast(ast);
 	return (0);
 }
 
