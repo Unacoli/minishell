@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 01:05:45 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/09 02:20:49 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ return 1 if the node creation succeeded
 0 otherwise
 */
 
-static int	pipe_seq(t_ast **node, t_lexer *lexer)
+static int	pipe_seq(t_ast **ast, t_lexer *lexer)
 {
 	t_ast	*node;
 
+	lexer = NULL;
 	node = malloc_ast(node->type, node->data);
 	if (/*Function to parse pipe seq*/)
 	{

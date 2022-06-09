@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 15:27:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 01:24:38 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ int	ft_command(t_ctrl *shell)
 	shell->lexer = malloc_lexer(42);
 	if (!shell->lexer)
 		exit_shell(shell);
-	do
-	{
+	while (lines == 1)
 		lines = prompt(shell);
-	} while (lines == 1);
 	if (lines == 0)
 		return (parse(&(shell->ast), shell->lexer));
 	return (lines);
