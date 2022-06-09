@@ -1,49 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple_command.c                                   :+:      :+:    :+:   */
+/*   io_file.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/09 01:48:45 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 04:14:04 by nargouse         ###   ########.fr       */
+/*   Created: 2022/06/09 04:06:24 by nargouse          #+#    #+#             */
+/*   Updated: 2022/06/09 04:22:18 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int  parse_simple_command(t_ast **ast, t_lexer *lexer)
+static int  parse_io_file(t_ast **ast, t_lexer *lexer)
 {
     t_token *token;
 
 	token = lexer->tokens[lexer->pos++];
-	while (token->type == TOKEN_PASS)
-    {
+    while (token->type == TOKEN_PASS)
         token = lexer->tokens[lexer->pos++];
-    }
-
     if (token->type == TOKEN_NOT_VALID)
-    {
         return (0);
-    }
-    else if (token->type == TOKEN_WORD)
-    {
-        (*ast)->left = malloc_ast(NODE_IO_FILE, lexer->tokens[lexer->pos]->str); // Remplir les data
-        (*ast)->right = malloc_ast(NODE_WORD, lexer->tokens[lexer->pos]->str);
-    }
-
+    else if (token->type == TOKEN_GREAT)
+        (*ast)->right = malloc_ast(NODE_WORD, lexer->tokens[lexer->pos]->str); // Remplir les data
     return (1);
 }
 
-int  simple_command(t_ast **ast, t_lexer *lexer)
+int  io_file(t_ast **ast, t_lexer *lexer)
 {
     t_ast	*node;
 
 	node = NULL;
     node = malloc_ast(node->type, node->data); // Inutile ? A toi de voir
-    if (parse_simple_command(ast, lexer))
+    if (parse_io_file(ast, lexer))
     {
-        io_file(ast, lexer); // Simplification de ouf pour tester
         *ast = node->right;
         return (1);
     }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 03:34:33 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/09 04:04:57 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static int	parse_pipe_seq(t_ast **ast, t_lexer *lexer)
 {
 	t_token	*token;
 
-	token = lexer->token[lexer->pos++];
+	token = lexer->tokens[lexer->pos++];
 	while (token->type == TOKEN_PASS)
 		token = lexer->tokens[lexer->pos++];
 	if (token->type == TOKEN_NOT_VALID)
 		return (0);
 	else if (token->type == TOKEN_PIPE)
 	{
-		node->left = malloc_ast(NODE_PIPE_SEQ, );
-		node->right = malloc_ast(NODE_SIMPLE_CMD, );
+		(*ast)->left = malloc_ast(NODE_PIPE_SEQ, lexer->tokens[lexer->pos]->str);
+		(*ast)->right = malloc_ast(NODE_SIMPLE_CMD, lexer->tokens[lexer->pos]->str);
 	}
 	return (1);
 }
@@ -40,13 +40,14 @@ static int	pipe_seq(t_ast **ast, t_lexer *lexer)
 {
 	t_ast	*node;
 
+	node = NULL;
 	node = malloc_ast(node->type, node->data);
 	if (parse_pipe_seq(ast, lexer))
 	{
-		simple_command(node->right, lexer);
+		simple_command(ast, lexer);
 		return (1);
 	}
-	free_ast(node);
+	free_ast(ast);
 	return (0);
 }
 

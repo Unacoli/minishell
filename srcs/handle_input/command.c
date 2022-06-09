@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 01:24:38 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/09 04:24:36 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	handle_eof(t_ctrl *shell)
 {
-	ft_putchar('\n');
+	ft_putchar_fd('\n', 0);
 	exit_shell(shell);
 }
 
@@ -27,7 +27,7 @@ static int	read_input(t_lexer *lexer)
 	if (lexer->input)
 	{
 		ret = tokenize(lexer);
-		ft_strdel(&(lexer->input), ft_strlen(lexer->input) + 1);
+		ft_strdel(lexer->input, ft_strlen(lexer->input) + 1);
 	}
 	return (ret);
 }

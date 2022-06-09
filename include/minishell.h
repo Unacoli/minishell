@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 14:27:08 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/09 04:20:54 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		running_shell(t_ctrl *minishell);
 
 /*Old functions, WIP to sort this*/
 
+int		push_char(t_lexer *lexer, char **token_s);
 void	lexe(char *cmd, t_env *envi);
 void	freeenv(t_env *un);
 void	exed(char *cmd, t_env *envi);

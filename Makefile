@@ -6,7 +6,7 @@
 #    By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:14:59 by nargouse          #+#    #+#              #
-#    Updated: 2022/06/09 02:20:29 by nargouse         ###   ########.fr        #
+#    Updated: 2022/06/09 04:10:22 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ FILES	= main.c start_shell.c ast.c parse_command.c simple_command.c\
 			exit_shell.c free_env.c free_lexer.c command.c input.c\
 			signal_handler.c double_lexer.c handle_quote_substi.c\
 			malloc_token.c parsing.c utils2.c get_token.c handle_token.c\
-			malloc_lexer.c old_function.c tokenize.c
+			malloc_lexer.c old_function.c tokenize.c io_file.c
 
 SRCS	= $(addprefix ./srcs/*/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))

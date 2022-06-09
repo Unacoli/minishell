@@ -6,13 +6,13 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:11:08 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 01:16:55 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/09 04:19:14 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	*parse(t_ast **root, t_lexer *lexer)
+int	parse(t_ast **root, t_lexer *lexer)
 {
 	int	parsed;
 
