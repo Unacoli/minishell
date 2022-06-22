@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 15:02:25 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:54:44 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,10 @@ static int	prompt(t_ctrl *shell)
 	return (read_input(shell->lexer));
 }
 
-/*si tu supprimes un do while il faut faire une fois l'action avant le while*/
 int	ft_command(t_ctrl *shell)
 {
 	int		lines;
-	size_t	i;
 
-	i = 0;
 	lines = 0;
 	shell->lexer = malloc_lexer(10);
 	if (!shell->lexer)
