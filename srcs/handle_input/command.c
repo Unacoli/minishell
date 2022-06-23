@@ -1,3 +1,4 @@
+                     
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/20 14:54:44 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/23 23:58:21 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +54,6 @@ int	ft_command(t_ctrl *shell)
 	while (lines == 1)
 		lines = prompt(shell);
 	if (lines == 0)
-	{
-		//return (parse(&(shell->ast), shell->lexer));
-		return (0);
-	}
+		return (parse(&(shell->ast), shell->lexer));
 	return (lines);
 }

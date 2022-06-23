@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 22:35:15 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 14:38:35 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/24 00:33:39 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	create_root(t_ast **root)
 {
-	*root = malloc_ast(NODE_PROGRAM, "Program"); //pas convaincu qu'on doit gerer pls ligne vu qu'on gere pas le ";"
+	*root = malloc_ast(NODE_PROGRAM, "Program");
 }
 
 t_ast	create_ast(t_node p_type, char *p_data)

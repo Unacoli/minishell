@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:34:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 13:56:16 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/24 00:51:54 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,28 @@ static int	parse_pipe_seq(t_ast **ast, t_lexer *lexer)
 {
 	t_token	*token;
 
-	token = lexer->tokens[lexer->pos++];
-	while (token->type == TOKEN_PASS)
-		token = lexer->tokens[lexer->pos++]; //Je me suis pas servi de token_pass dans le parsing, on en a pas besoin
-	if (token->type == TOKEN_NOT_VALID) //Pareil pour token not valid
-		return (0);
-	else if (token->type == TOKEN_PIPE)
+	token = lexer->tokens[lexer->pos];
+	if (token->type == TOKEN_PIPE)
 	{
+		
 		(*ast)->left = malloc_ast(NODE_PIPE_SEQ, \
-		lexer->tokens[lexer->pos]->str);
+		lexer->tokens[lexer->pos++]->str);
 		(*ast)->right = malloc_ast(NODE_SIMPLE_CMD, \
-		lexer->tokens[lexer->pos]->str);
+		lexer->tokens[lexer->pos++]->str);
+		return (1);
 	}
-	return (1);
+	(*ast)->right = malloc_ast(NODE_SIMPLE_CMD, token->str);
+	return (0);
 }
 
 static int	pipe_seq(t_ast **ast, t_lexer *lexer)
 {
-	t_ast	*node;
-
-	node = NULL;
-	node = malloc_ast(node->type, node->data); //essayer d'acceder a un truc NULL == segfault
 	if (parse_pipe_seq(ast, lexer))
 	{
-		simple_command(ast, lexer);
+		simple_command((*ast)->right, lexer);
 		return (1);
 	}
-	free_ast(ast);
+	simple_command((*ast)->right, lexer);
 	return (0);
 }
 
