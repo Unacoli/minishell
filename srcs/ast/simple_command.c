@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 01:48:45 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/24 00:50:46 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:45:33 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ static int	parse_simple_command(t_ast *ast, t_lexer *lexer)
 {
 	t_token	*token;
 
-	(void)ast;
 	token = lexer->tokens[lexer->pos];
 	if (token->type == TOKEN_WORD)
 	{
 		ast->right = malloc_ast(NODE_WORD, token->str);
-		lexer->pos++;
 		return (1);
 	}
 	return (0);
@@ -29,9 +27,10 @@ static int	parse_simple_command(t_ast *ast, t_lexer *lexer)
 
 int	simple_command(t_ast *ast, t_lexer *lexer)
 {
+	printf("before parse simple cmd\n");
 	if (parse_simple_command(ast, lexer))
 	{
-//		io_file(ast, lexer);
+		cmd_suffix(ast, lexer);
 		return (1);
 	}
 	return (0);

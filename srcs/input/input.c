@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/24 00:38:15 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/26 18:28:52 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_input(t_ctrl *minishell)
 	if (cmd != -1)
 	{
 		print_ast(minishell->ast);
-		exit(0);
 	}
-	exit_free(minishell);
+	//exit_free(minishell);
 }
