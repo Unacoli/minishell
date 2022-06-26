@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:51:46 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/26 19:51:06 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:23:50 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	parse_cmd_suffix(t_ast *ast, t_lexer *lexer)
 
 int	cmd_suffix(t_ast *ast, t_lexer *lexer)
 {
-	printf("before parse cmd suffix\n");
 	if (parse_cmd_suffix(ast, lexer))
 	{
 		io_file(ast, lexer);
