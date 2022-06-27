@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+         #
+#    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/06/26 19:23:54 by nargouse         ###   ########.fr        #
+#    Updated: 2022/06/27 10:01:53 by ldubuche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= minishell
+NAME	= mini
 INCLUDE = ./include/
 LIBFT	= ./libft/libft.a
 CFLAGS	+= -Wall -Werror -Wextra -g3
@@ -32,7 +32,7 @@ OBJS	= $(addprefix ./objs/, $(MAIN:.c=.o) $(FILES:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $@ -lreadline
+	$(CC) $(OBJS) $(LIBFT) $(CFLAGS) -o $@ -lreadline -ltinfo
 
 objs/%.o: srcs/*/%.c $(DEPS)
 	mkdir -p ./objs/

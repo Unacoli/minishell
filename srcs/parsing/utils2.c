@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/03 15:30:52 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:33:11 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	is_operator(char *input)
 
 int	delimite_word(char *input, int i)
 {
-	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i])))
+	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i])) \
+	&& input[i] != '\n')
 		i++;
 	return (i);
 }

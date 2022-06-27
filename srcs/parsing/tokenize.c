@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:28:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/03 15:56:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:02:15 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	tokenize(t_lexer *lexer)
 	while (lexer->input[lexer->pos])
 	{
 		token = get_token(lexer->input + lexer->pos);
+		// lexer->pos += token.len;
 		handle_token(lexer, token);
 		if (token.str)
 			free((char *)token.str);
@@ -51,3 +52,22 @@ int	tokenize(t_lexer *lexer)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
+
+// int	main(void)
+// {
+// 	size_t	i;
+// 	t_lexer	*lexer;
+
+// 	lexer = NULL;
+// 	lexer = malloc_lexer(10);
+// 	lexer->input = "ls > cat";
+// 	tokenize(lexer);
+// 	i = 0;
+// 	printf("size = %zu\n", lexer->size);
+// 	while (i < lexer->size)
+// 	{
+// 		printf("%s, %li, %d\n", lexer->tokens[i]->str, 
+// 		lexer->tokens[i]->len, lexer->tokens[i]->type);
+// 		i++;
+// 	}
+// }

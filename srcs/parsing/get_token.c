@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/03 15:56:30 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:06:18 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_regex	g_rlist[] = {
 {"\f", 1, TOKEN_PASS},
 {NULL, 0, TOKEN_NOT_VALID}
 };
-
 static t_regex	handle_word(char *input)
 {
 	int		i;
@@ -40,6 +39,13 @@ static t_regex	handle_word(char *input)
 	return ((t_regex){str, i, TOKEN_WORD});
 }
 
+static t_regex	handle_operator(int i)
+{
+	char *str;
+
+	str = create_str((char *) g_rlist[i].str, g_rlist[i].len);
+	return ((t_regex){str, g_rlist[i].len, g_rlist[i].type});
+}
 /*	Affilie les tokens operator, puis les quotes, puis les substitutions
 	et si ce n'est aucun des trois, considere que c'est un mot 
 	En cas d'erreur cette fonction et toute les dependantes renvoie 
@@ -52,7 +58,7 @@ t_regex	get_token(char *input)
 	while (i < (MAX_TOKENS - 1))
 	{
 		if (!ft_strncmp(g_rlist[i].str, input, g_rlist[i].len))
-			return (g_rlist[i]);
+			return (handle_operator(i));
 		i++;
 	}
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
