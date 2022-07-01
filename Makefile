@@ -6,11 +6,11 @@
 #    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/06/27 10:01:53 by ldubuche         ###   ########.fr        #
+#    Updated: 2022/06/27 13:20:23 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= mini
+NAME	= minishell
 INCLUDE = ./include/
 LIBFT	= ./libft/libft.a
 CFLAGS	+= -Wall -Werror -Wextra -g3

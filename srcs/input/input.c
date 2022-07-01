@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/27 12:14:56 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/02 00:27:16 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void print_ast(t_ast *ast)
     if (ast->left && ast->right)
     {
         printf("left: %d, node: %d, right: %d\n",
-            (int)ast->type, (int)ast->left->type, (int)ast->right->type);
+            (int)ast->left->type, (int)ast->type, (int)ast->right->type);
         print_ast(ast->left);
         print_ast(ast->right);
     }
     else if (ast->left)
     {
         printf("left: %d, node: %d, right: NULL\n",
-            (int)ast->type, (int)ast->left->type);
+            (int)ast->left->type, (int)ast->type);
         print_ast(ast->left);
     }
-    else if (ast->right)
+   else if (ast->right)
     {
         printf("left: NULL, node: %d, right: %d\n",
             (int)ast->type, (int)ast->right->type);
@@ -45,8 +45,6 @@ void	ft_input(t_ctrl *minishell)
 
 	cmd = ft_command(minishell);
 	if (cmd != -1)
-	{
 		print_ast(minishell->ast);
-	}
-	//exit_free(minishell);
+	exit_free(minishell);
 }

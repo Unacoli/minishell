@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:33:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/26 18:20:41 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/02 00:14:27 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ typedef enum e_node
 {
 	NODE_PROGRAM = 0,
 	NODE_CMD,
-	NODE_CMD_SUFFIX,
-	NODE_IO_FILE,
 	NODE_PIPE_SEQ,
 	NODE_SIMPLE_CMD,
+	NODE_CMD_SUFFIX,
+	NODE_IO_FILE,
 	NODE_WORD,
 }				t_node;
 

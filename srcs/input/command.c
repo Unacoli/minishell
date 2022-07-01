@@ -47,7 +47,7 @@ int	ft_command(t_ctrl *shell)
 	int		lines;
 
 	lines = 0;
-	shell->lexer = malloc_lexer(10);
+	shell->lexer = malloc_lexer(42);
 	if (!shell->lexer)
 		exit_shell(shell);
 	lines = prompt(shell);
