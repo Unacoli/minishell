@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 04:06:24 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/02 01:19:28 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/02 02:35:26 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	parse_io_file(t_ast *ast, t_lexer *lexer)
 	t_token	*token;
 
 	token = lexer->tokens[lexer->pos];
-	if ((token->type == TOKEN_GREAT || token->type == TOKEN_LESS 
-		|| token->type == TOKEN_DGREAT || token->type == TOKEN_DLESS) 
+	if ((token->type == TOKEN_LESS || token->type == TOKEN_GREAT
+		|| token->type == TOKEN_DGREAT || token->type == TOKEN_DLESS)
 		&& lexer->size >= 2)
 	{
 		if (lexer->tokens[lexer->pos + 1]->type == TOKEN_WORD)
