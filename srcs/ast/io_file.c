@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 04:06:24 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/02 02:35:26 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/03 15:33:49 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ static int	parse_io_file(t_ast *ast, t_lexer *lexer)
 	{
 		if (lexer->tokens[lexer->pos + 1]->type == TOKEN_WORD)
 		{
-			ast->right = malloc_ast(NODE_WORD, token->str);
-			lexer->pos += 2;
+			lexer->pos++;
+			ast->right = malloc_ast(NODE_WORD, lexer->tokens[lexer->pos]->str);
+			lexer->pos++;
 			return (1);
 		}
 	}

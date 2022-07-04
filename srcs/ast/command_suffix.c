@@ -6,7 +6,7 @@
 /*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:51:46 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/02 02:30:59 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/03 15:37:44 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	parse_cmd_suffix(t_ast *ast, t_lexer *lexer)
 		return (1);
 	}
 	ast->left = malloc_ast(NODE_CMD_SUFFIX, token->str);
-	lexer->pos++;
 	return (0);
 }
 
