@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/02 00:27:16 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/05 05:32:42 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,35 @@ void print_ast(t_ast *ast)
     }
 }
 
+int		ft_execution(t_lexer *lexer)
+{
+	t_token	token;
+
+	while (lexer->pos < lexer->size)
+	{
+		token = lexer->tokens[lexer->pos];
+		if (token == TOKEN_WORD)
+			lexer->pos = exec_cmd();
+		else if (token == TOKEN_LESS)
+			lexer->pos = ;
+		else if (token == TOKEN_GREAT)
+			lexer->pos = ;
+		else if (token == TOKEN_DGREAT)
+			lexer->pos = ;
+		else if (token == TOKEN_DLESS)
+			lexer->pos = ;
+		else if (token == TOKEN_PIPE && lexer->pos == 0)
+			return (printf("Parse error near '|'\n");
+		lexer->pos++;
+	}
+}
+
 void	ft_input(t_ctrl *minishell)
 {
 	int	cmd;
 
 	cmd = ft_command(minishell);
-	if (cmd != -1)
-		print_ast(minishell->ast);
+	while (cmd != -1)
+		ft_execution(minishell->lexer);
 	exit_free(minishell);
 }

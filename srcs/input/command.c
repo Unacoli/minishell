@@ -54,6 +54,6 @@ int	ft_command(t_ctrl *shell)
 	while (lines == 1)
 		lines = prompt(shell);
 	if (lines == 0)
-		return (parse(&(shell->ast), shell->lexer));
+		return (EXIT_SUCCESS);
 	return (lines);
 }
