@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/05 15:15:30 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/06 15:33:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ typedef struct s_simplecmd
 	int		output_file;
 }				t_simplecmd;
 
-typedef struct s_cmd
+typedef struct cmd
 {
-	size_t		cap;
-	size_t		cmd_count;
-	t_simplecmd	**simple_cmd;
-}				t_cmd;
+	int		input;
+	int		output;
+	char	**cmds;
+}	t_cmd;
 
-typedef struct	s_pipe
+typedef struct s_pipe
 {
 	int		fd1;
 	int		fd2;	

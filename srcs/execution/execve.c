@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exceve.c                                           :+:      :+:    :+:   */
+/*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 14:49:28 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/06 15:36:09 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	env_len(t_env env)
 	int		len;
 	t_env	*temp;
 
+	len = 0;
 	temp = &env;
 	while (temp)
 	{
@@ -91,9 +92,11 @@ int	call_exceve(char **cmd_arg, t_env env)
 	cmd_path = cmd(env, cmd_arg[0]);
 	if (!cmd_path)
 	{
-		printf("command not found");
+		fprintf(stderr, "command not found %s\n", cmd_path);
 		exit(1);
 	}
-	execve((const char *)cmd, cmd_arg, envp);
+	perror("Before execve");
+	execve((const char *)cmd_path, cmd_arg, envp);
+	perror("After execve");
 	return (1);
 }
