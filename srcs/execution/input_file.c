@@ -6,18 +6,32 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:12:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:11:26 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:11:26 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	less(char *input_file)
-{
-	int	fd;
+/* Besoin du token word just apres + deplace la position de deux */
+/* Doit etre suivi d'un token WORD */
 
-	fd = open(input_file, O_RDONLY);
-	if (fd == -1)
-		printf("error");
-	return (fd);
+int less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
+{
+	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
+	{
+		cmd->input = open(tokens[pos + 1]->str, O_RDONLY);
+		if (cmd->input >= 0)
+			return (0);
+		else
+		{
+			perror("Open");
+			return (1);
+		}
+	}
+	else
+	{
+		printf("Syntax error near token LESS\n");
+		return  (1);
+	}
+	return (1);
 }

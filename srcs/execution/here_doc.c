@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:24:46 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/06 15:18:30 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:10:59 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	here_doc(char *delimiter, t_env *env)
 	pip = (int *) malloc(sizeof(int) * 2);
 	if (pipe(pip) < 0)
 	{
-		printf("Pipe error\n");
+		perror("Pipe");
 		return (-1);
 	}
 	fd = pip[0];
 	line = NULL;
 	line = readline("heredoc> ");
 	if (line == NULL)
-		printf("here-document delimited by end-of-file\n");
+		printf("warning: here-document delimited by end-of-file\n");
 	while (line && ft_strncmp(line, delimiter, ft_strlen(line)) != 0)
 	{
 		line = search_substi(env, line);
@@ -53,4 +53,22 @@ int	here_doc(char *delimiter, t_env *env)
 	if (line)
 		free(line);
 	return (fd);
+}
+
+int d_less(t_cmd *cmd, t_ctrl *minishell, int pos, int lexer_size)
+{
+	if (pos + 1 < lexer_size && minishell->lexer->tokens[pos + 1]->type == TOKEN_WORD)
+	{
+		cmd->input = here_doc(minishell->lexer->tokens[pos + 1]->str, minishell->env);
+		if (cmd->input >= 0)
+			return (0);
+		else
+			return (1);
+	}
+	else
+	{
+		printf("Syntax error near token DLESS\n");
+		return  (1);
+	}
+	return (1);
 }

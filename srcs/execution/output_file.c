@@ -6,28 +6,50 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:18:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:11:20 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:12:38 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	great(char *output_file)
+int	great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 {
-	int	fd;
-
-	fd = open(output_file, O_CREAT | O_RDWR | O_TRUNC, 0000644);
-	if (fd == -1)
-		printf("error");
-	return (fd);
+	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
+	{
+		cmd->output = open(tokens[pos + 1]->str, O_CREAT | O_RDWR | O_TRUNC, 0000644);
+		if (cmd->input >= 0)
+			return (0);
+		else
+		{
+			perror("Open");
+			return (1);
+		}
+	}
+	else
+	{
+		printf("Syntax error near token GREAT\n");
+		return  (1);
+	}
+	return (1);
 }
 
-int	d_great(char *output_file)
+int	d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 {
-	int	fd;
-
-	fd = open(output_file, O_WRONLY | O_CREAT | O_APPEND, 0000644);
-	if (fd == -1)
-		printf("error");
-	return (fd);
+	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
+	{
+		cmd->output = open(tokens[pos + 1]->str, O_WRONLY | O_CREAT | O_APPEND, 0000644);
+		if (cmd->input >= 0)
+			return (0);
+		else
+		{
+			perror("Open");
+			return (1);
+		}
+	}
+	else
+	{
+		printf("Syntax error near token DGREAT\n");
+		return  (1);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:33:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/02 00:14:27 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/07 18:22:15 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_ast
 	char			*data;
 }				t_ast;
 
-int		cmd_suffix(t_ast *ast, t_lexer *lexer);
+// int		cmd_suffix(t_ast *ast, t_lexer *lexer);
 int		simple_command(t_ast *ast, t_lexer *lexer);
 int		io_file(t_ast *ast, t_lexer *lexer);
 int		parsed_command(t_ast **ast, t_lexer *lexer);

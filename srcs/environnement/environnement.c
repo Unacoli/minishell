@@ -6,11 +6,11 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/07/06 23:48:01 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/07 12:14:23 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 t_env	*init_env(char **env)
 {
