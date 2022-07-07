@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 01:25:31 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/07 04:15:41 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	exporti(t_env *env, char **args)
 	int	i;
 	int	retour;
 
-	i = 0;
+	i = 1;
 	retour = 0;
 	if (args == NULL)
 	{

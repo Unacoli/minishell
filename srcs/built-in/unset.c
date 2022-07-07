@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:39:27 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:05:32 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 04:16:15 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	unset(t_env *env, char **args)
 	int		ret;
 
 	ret = 0;
-	i = 0;
+	i = 1;
 	first = env;
 	while (args[i])
 	{

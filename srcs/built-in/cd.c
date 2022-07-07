@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 14:37:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 04:12:59 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	cd(t_env *env, char **args)
 		path = search_env(*env, "HOME");
 	else
 	{
-		path = args[0];
-		if (args[1] != NULL)
+		path = args[1];
+		if (args[2] != NULL)
 			return (error_message("cd: too many arguments", 1));
 	}
 	if (path == NULL)
