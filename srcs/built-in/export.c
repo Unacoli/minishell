@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 13:30:03 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 01:25:31 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	affiche_env_alpha(t_env *env)
 	}
 }
 
-int	export(t_env *env, char **args)
+int	exporti(t_env *env, char **args)
 {
 	int	i;
 	int	retour;

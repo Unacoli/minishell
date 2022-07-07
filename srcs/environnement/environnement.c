@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nfelsemb          #+#    #+#             */
-/*   Updated: 2022/07/06 12:55:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/06 23:48:01 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ char	*search_env(t_env env, char *to_search)
 	return (NULL);
 }
 
-// t_env	*choose_env(char **env)
-// {
-// 	t_env	*struc_env;
+t_env	*choose_env(char **env)
+{
+	t_env	*struc_env;
 
-// 	if (!(*env))
-// 		struc_env = default_env();
-// 	else
-// 		struc_env = init_env(env);
-// 	if (struc_env == NULL)
-// 	{
-// 		error_message("minishell: error with memory allocation", 1);
-// 		return (NULL);
-// 	}
-// 	signal_handler();
-// 	return (struc_env);
-// }
+	if (!(*env))
+ 		struc_env = default_env();
+ 	else
+ 		struc_env = init_env(env);
+ 	if (struc_env == NULL)
+ 	{
+ 		error_message("minishell: error with memory allocation", 1);
+ 		return (NULL);
+	}
+ 	signal_handler();
+ 	return (struc_env);
+}

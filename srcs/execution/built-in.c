@@ -6,32 +6,29 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 14:48:11 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 03:43:35 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	built_in(char **cmd_arg, t_ctrl *minishell)
+int	built_in(char **arg, t_env *env, t_ctrl *minishell)
 {
-	char	*cmd;
-
-	cmd = cmd_arg[0];
-	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		return (cd(minishell->env, cmd_arg + 1));
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-		return (echo(cmd_arg + 1));
-	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		return (envi(*(minishell->env)));
-	if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(arg[0], "cd", ft_strlen(arg[0]) == 0))
+		cd(env, arg);
+	else if (ft_strncmp(arg[0], "echo", ft_strlen(arg[0]) == 0))
+		echo(arg);
+	else if (ft_strncmp(arg[0], "env", ft_strlen(arg[0]) == 0))
+		envi(env);
+	else if (ft_strncmp(arg[0], "exit", ft_strlen(arg[0]) == 0))
 		exit_free(minishell);
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		return (export(minishell->env, cmd_arg + 1));
-	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
-		return (pwd());
-	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
-		return (unset(minishell->env, cmd_arg + 1));
+	else if (ft_strncmp(arg[0], "export", ft_strlen(arg[0]) == 0))
+		exporti(env, arg);
+	else if (ft_strncmp(arg[0], "pwd", ft_strlen(arg[0]) == 0))
+		pwd();
+	else if (ft_strncmp(arg[0], "unset", ft_strlen(arg[0]) == 0))
+		unset(env, arg);
 	else
-		return (call_exceve(cmd_arg, *(minishell->env)));
-	return (1);
+		call_execve(arg, *env);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/09 04:20:54 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/07 01:22:04 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,8 @@ void	init_shell(t_ctrl *minishell);
 t_env	*choose_env(char **env);
 int		running_shell(t_ctrl *minishell);
 
-/*Old functions, WIP to sort this*/
+/*Built-in functions*/
 
-int		push_char(t_lexer *lexer, char **token_s);
-void	lexe(char *cmd, t_env *envi);
-void	freeenv(t_env *un);
-void	exed(char *cmd, t_env *envi);
-void	freetr(char	**pa, char *name, int i);
-char	*getna(char *cmd);
-void	child(char *path, char **argv, char**env, char *name);
-void	coredump(int sig);
-void	childctrlc(int sig);
-void	freetab(char **tab);
+int	built_in(char **arg, t_env *emv, t_ctrl *minishell);
 
 #endif

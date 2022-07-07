@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/06 15:36:09 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 03:24:13 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**transform_env(t_env env)
 	return (envp);
 }
 
-int	call_exceve(char **cmd_arg, t_env env)
+int	call_execve(char **cmd_arg, t_env env)
 {
 	int		id;
 	char	*cmd_path;
@@ -95,8 +95,6 @@ int	call_exceve(char **cmd_arg, t_env env)
 		fprintf(stderr, "command not found %s\n", cmd_path);
 		exit(1);
 	}
-	perror("Before execve");
 	execve((const char *)cmd_path, cmd_arg, envp);
-	perror("After execve");
 	return (1);
 }

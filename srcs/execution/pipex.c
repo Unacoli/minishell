@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/06 15:43:44 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/07 02:09:34 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	child_bonus(t_pipe pipex, int i, t_env *env)
 		i ++;
 		if (args == NULL)
 			printf("ft_Split fail");
-		call_exceve(args, *env);
+		call_execve(args, *env);
 	}
 }
 
@@ -108,16 +108,16 @@ int	pipex(t_cmd *cmd, t_env *env)
 	return (0);
 }
 
-int main(int argc, char **argv, char **envp)
-{
-	t_env	*env;
-	t_cmd	cmd;
-
-	(void) argc;
-	env = init_env(envp);
-	cmd.input = open("built-in.c", O_RDONLY);
-	cmd.output = open("output_file", O_CREAT | O_RDWR | O_TRUNC, 0000644);
-	cmd.cmds = argv + 1;
-	pipex(&cmd, env);
-	return (0);
-}
+//int main(int argc, char **argv, char **envp)
+//{
+//	t_env	*env;
+//	t_cmd	cmd;
+//
+//	(void) argc;
+//	env = init_env(envp);
+//	cmd.input = open("built-in.c", O_RDONLY);
+//	cmd.output = open("output_file", O_CREAT | O_RDWR | O_TRUNC, 0000644);
+//	cmd.cmds = argv + 1;
+//	pipex(&cmd, env);
+//	return (0);
+//}

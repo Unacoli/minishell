@@ -6,7 +6,7 @@
 #    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/06/27 13:20:23 by nargouse         ###   ########.fr        #
+#    Updated: 2022/07/06 23:46:12 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ FILES	= main.c start_shell.c ast.c parse_command.c simple_command.c\
 			input_file.c output_file.c pipex.c substitution.c error.c\
 			exit_shell.c free_env.c free_lexer.c command.c input.c\
 			signal_handler.c double_lexer.c handle_quote_substi.c\
-			malloc_token.c parsing.c utils2.c get_token.c handle_token.c\
-			malloc_lexer.c old_function.c tokenize.c io_file.c command_suffix.c
+			malloc_token.c parsing.c utils_parsing.c get_token.c handle_token.c\
+			malloc_lexer.c tokenize.c io_file.c command_suffix.c
 
 SRCS	= $(addprefix ./srcs/*/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(MAIN:.c=.o) $(FILES:.c=.o))
