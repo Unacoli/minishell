@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/27 11:29:15 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 03:11:35 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_regex	handle_quote(char *input, char c);
 t_regex	handle_substitution(char *input);
 
 /* Utils parsing */
+
 int		is_space(char c);
 char	*create_str(char *input, int i);
 int		is_operator(char *input);

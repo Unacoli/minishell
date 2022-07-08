@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 18:15:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 04:48:13 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 	int output;
 	char	**cmds;
 } t_cmd;*/
+
 void	redirection(int fd_0, int fd_1)
 {
 	dup2(fd_0, 0);
@@ -68,20 +69,20 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	pipex.id = fork();
 	if (pipex.id == 0)
 	{
-		envp = transform_env(*env);
+		envp = transform_env(env);
 		if (i == 0)
 			redirection(pipex.fd1, pipex.pipe[1]);
 		else if (i == 1)
 			redirection(pipex.pipe[0], pipex.fd2);
 		close_pipes(&pipex);
-		args = pipex.cmds[i];
+		args = pipex.cmd;
 		if (args == NULL)
 			printf("Split fail");
 		if (built_in(args, env, minishell) == 0)
 			return (1);
 		if (access(args[0], X_OK) == 0)
 			execve(args[0], args, envp);
-		cmd_path = cmd(envp, args[0]);
+		cmd_path = p_cmd(envp, args[0]);
 		if (!cmd_path)
 		{
 			fprintf(stderr, "command not found %s\n", cmd_path);
@@ -92,17 +93,17 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	return (1);	
 }
 
-int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
+int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell, size_t nbr_cmd)
 {
 	t_pipe	s_pipe;
 	int		i;
 
 	i = 0;
-	s_pipe.fd1 = cmd->input;
-	s_pipe.fd2 = cmd->output;
-	s_pipe.cmds = cmd->cmds;
-	s_pipe.nbr_cmd = cmd->nbr_cmd;
-	s_pipe.pipe_nbr = 2 * (cmd->nbr_cmd - 1);
+	s_pipe.fd1 = cmd->input_file;
+	s_pipe.fd2 = cmd->output_file;
+	s_pipe.cmd = cmd->av;
+	s_pipe.nbr_cmd = (int)nbr_cmd;
+	s_pipe.pipe_nbr = 2 * (nbr_cmd - 1);
 	s_pipe.env_path = search_env(*env, "PATH");
 	if (s_pipe.env_path != NULL)
 	{

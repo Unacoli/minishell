@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:24:46 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 18:10:59 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 04:39:33 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int d_less(t_cmd *cmd, t_ctrl *minishell, int pos, int lexer_size)
 {
 	if (pos + 1 < lexer_size && minishell->lexer->tokens[pos + 1]->type == TOKEN_WORD)
 	{
-		cmd->input = here_doc(minishell->lexer->tokens[pos + 1]->str, minishell->env);
-		if (cmd->input >= 0)
+		cmd->input_file = here_doc(minishell->lexer->tokens[pos + 1]->str, minishell->env);
+		if (cmd->input_file >= 0)
 			return (0);
 		else
 			return (1);

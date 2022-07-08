@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 18:08:42 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 04:35:35 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*path(char **envp)
 	return (NULL);
 }
 
-char	*cmd(char **envp, char *cmd)
+char	*p_cmd(char **envp, char *cmd)
 {
 	char	*tmp;
 	char	*command;
@@ -55,13 +55,13 @@ char	*cmd(char **envp, char *cmd)
 	return (NULL);
 }
 
-int	env_len(t_env env)
+static int	env_len(t_env *env)
 {
 	int		len;
 	t_env	*temp;
 
 	len = 0;
-	temp = &env;
+	temp = env;
 	while (temp)
 	{
 		temp = temp->next;
@@ -70,7 +70,7 @@ int	env_len(t_env env)
 	return (len);
 }
 
-char	**transform_env(t_env env)
+char	**transform_env(t_env *env)
 {
 	char	**envp;
 	int		len;
@@ -79,7 +79,7 @@ char	**transform_env(t_env env)
 
 	len = env_len(env);
 	envp = (char **) malloc(sizeof(char *) * len);
-	temp = &env;
+	temp = env;
 	i = 0;
 	while (temp)
 	{
@@ -90,7 +90,7 @@ char	**transform_env(t_env env)
 	return (envp);
 }
 
-int	simple_execve(t_cmd *s_cmd, t_env env, t_ctrl *minishell)
+int	simple_execve(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 {
 	int		id;
 	char	*cmd_path;
@@ -100,18 +100,18 @@ int	simple_execve(t_cmd *s_cmd, t_env env, t_ctrl *minishell)
 	envp = transform_env(env);
 	if (id == 0)
 	{
-		redirection(s_cmd->input, s_cmd->output);
-		if (built_in(s_cmd->cmds[0], &env, minishell) == 0)
+		redirection(cmd->input_file, cmd->output_file);
+		if (built_in(cmd->av, env, minishell) == 0)
 			return (1);
-		if (access(s_cmd->cmds[0][0], X_OK) == 0)
-			execve(s_cmd->cmds[0][0], s_cmd->cmds[0], envp);
-		cmd_path = cmd(envp, s_cmd->cmds[0][0]);
+		else if (access(cmd->av[0], X_OK) == 0)
+			execve(cmd->av[0], cmd->av, envp);
+		cmd_path = p_cmd(envp, cmd->av[0]);
 		if (!cmd_path)
 		{
 			fprintf(stderr, "command not found %s\n", cmd_path);
 			exit(1);
 		}
-		execve((const char *)cmd_path, s_cmd->cmds[0], envp);
+		execve((const char *)cmd_path, cmd->av, envp);
 	}
 	waitpid(-1, NULL, 0);
 	return (1);

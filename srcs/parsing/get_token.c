@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/27 12:06:18 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 03:16:22 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_regex	g_rlist[] = {
 {"\f", 1, TOKEN_PASS},
 {NULL, 0, TOKEN_NOT_VALID}
 };
+
 static t_regex	handle_word(char *input)
 {
 	int		i;
@@ -46,10 +47,12 @@ static t_regex	handle_operator(int i)
 	str = create_str((char *) g_rlist[i].str, g_rlist[i].len);
 	return ((t_regex){str, g_rlist[i].len, g_rlist[i].type});
 }
+
 /*	Affilie les tokens operator, puis les quotes, puis les substitutions
 	et si ce n'est aucun des trois, considere que c'est un mot 
 	En cas d'erreur cette fonction et toute les dependantes renvoie 
 	TOKEN_NOT_VALID */
+
 t_regex	get_token(char *input)
 {
 	int	i;

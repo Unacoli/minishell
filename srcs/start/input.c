@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/07 18:24:04 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 05:02:51 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@
 // 	return (pos);
 // }
 
-int	compte_pipe(t_token **tokens, int lexer_size)
+size_t	count_pipe(t_token **tokens, size_t lexer_size)
 {
-	int	i;
-	int	pipe_nbr;
+	size_t	i;
+	size_t	pipe_nbr;
 
 	i = 0;
 	pipe_nbr = 0;
 	while (i < lexer_size)
 	{
 		if (tokens[i]->type == TOKEN_PIPE)
-			pipe_nbr ++;
+			pipe_nbr++;
 		i++;
 	}
 	return (pipe_nbr + 1);
@@ -48,48 +48,42 @@ int	compte_pipe(t_token **tokens, int lexer_size)
 
 static int	ft_execution(t_ctrl *minishell)
 {
+	size_t	nbr_cmd;
 	t_token	*token;
-	t_cmd	cmd;
-	int j;
-	
-	cmd.input = 1;
-	cmd.output = 0;
-	cmd.nbr_cmd = compte_pipe(minishell->lexer->tokens, minishell->lexer->size);
-	cmd.cmds = (char ***) malloc(sizeof(char **) * cmd.nbr_cmd); //verif retour malloc
-	j = 0;
+
+	nbr_cmd = count_pipe(minishell->lexer->tokens, minishell->lexer->size);
+	minishell->cmd = malloc_cmd(minishell->cmd, nbr_cmd);
 	minishell->lexer->pos = 0;
+	token = NULL;
 	while (minishell->lexer->pos < minishell->lexer->size)
 	{
 		token = minishell->lexer->tokens[minishell->lexer->pos];
 		if (token->type == TOKEN_WORD)
-		{
-			cmd.cmds[j] = cmd_suffix(minishell->lexer->pos, minishell);
-			j++;
-		}
+			minishell->cmd = simple_cmd(minishell->lexer->pos, minishell, minishell->cmd);
 		else if (token->type == TOKEN_LESS)
 		{
-			if (!less(&cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
+			if (!less(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
 				minishell->lexer->pos += 2;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_GREAT)
 		{
-			if (!great(&cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
+			if (!great(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
 				minishell->lexer->pos += 2;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_DGREAT)
 		{
-			if (!less(&cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
+			if (!less(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
 				minishell->lexer->pos += 2;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_DLESS)
 		{
-			if (!d_less(&cmd, minishell, minishell->lexer->pos, minishell->lexer->size))
+			if (!d_less(minishell->cmd, minishell, minishell->lexer->pos, minishell->lexer->size))
 				minishell->lexer->pos += 2;
 			else
 				return (1);
@@ -101,10 +95,10 @@ static int	ft_execution(t_ctrl *minishell)
 		}
 		minishell->lexer->pos++;
 	}
-	if(cmd.nbr_cmd == 1)
-		simple_execve(&cmd, *(minishell->env), minishell);
+	if (nbr_cmd == 1)
+		simple_execve(minishell->cmd, minishell->env, minishell);
 	else
-		pipex(&cmd, minishell->env, minishell);
+		pipex(minishell->cmd, minishell->env, minishell, nbr_cmd);
 	return (0);
 }
 

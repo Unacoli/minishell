@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 15:11:08 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/02 01:10:26 by nargouse         ###   ########.fr       */
+/*   Created: 2022/06/01 18:45:15 by ldubuche          #+#    #+#             */
+/*   Updated: 2022/07/08 03:14:37 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef INPUT_H
+# define INPUT_H
 
-int	parse(t_ast **root, t_lexer *lexer)
-{
-	int	parsed;
+/*Functions for input processing*/
 
-	parsed = 1;
-	lexer->pos = 0;
-	create_root(root);
-	while ((lexer->pos < lexer->size) && parsed != 0)
-		parsed = parsed_command(root, lexer);
-	if (lexer->pos < lexer->size)
-		return (printf("Syntax Error"));
-	return (0);
-}
+void	ft_input(t_ctrl *minishell);
+int		ft_command(t_ctrl *minishell);
+size_t	count_pipe(t_token **tokens, size_t lexer_size);
+
+/*Signal handler*/
+
+void	signal_handler(void);
+void	error(int signal);
+
+#endif
