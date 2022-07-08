@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 17:29:36 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:58:09 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	built_in(char **arg, t_env *env, t_ctrl *minishell)
 	else if (ft_strncmp(arg[0], "unset", ft_strlen(arg[0])) == 0)
 		unset(env, arg);
 	else
+	{
 		return (1);
+	}
 	return (0);
 }

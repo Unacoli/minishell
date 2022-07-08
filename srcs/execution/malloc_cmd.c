@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nargouse <nargouse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:02:37 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/08 05:00:10 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:09:58 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd)
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->input_file = 1;
-	cmd->output_file = 0;
-	cmd->av = malloc(sizeof(char **));
+	cmd->input_file = -1;
+	cmd->output_file = -1;
+	cmd->av = malloc(sizeof(char ***) * (nbr_cmd + 1));
 	if (!cmd->av)
 		return (NULL);
-	cmd->ac = 0;
-	(void)nbr_cmd;
+	cmd->ac = nbr_cmd;
 	return (cmd);
 }

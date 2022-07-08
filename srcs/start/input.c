@@ -6,29 +6,11 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/08 05:02:51 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:32:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static int	exec_cmd(size_t pos, t_ctrl *minishell)
-// {
-// 	char	**arg;
-// 	int		i;
-
-// 	i = 0;
-// 	arg = malloc(sizeof(char **));
-// 	while (pos < minishell->lexer->size
-// 			&& minishell->lexer->tokens[pos]->type == TOKEN_WORD)
-// 	{
-// 		arg[i] = ft_strdup(minishell->lexer->tokens[pos]->str);
-// 		i++;
-// 		pos++;
-// 	}
-// 	built_in(arg, minishell->env, minishell);
-// 	return (pos);
-// }
 
 size_t	count_pipe(t_token **tokens, size_t lexer_size)
 {
@@ -48,43 +30,48 @@ size_t	count_pipe(t_token **tokens, size_t lexer_size)
 
 static int	ft_execution(t_ctrl *minishell)
 {
-	size_t	nbr_cmd;
+	int		nbr_cmd;
 	t_token	*token;
+	int		j;
 
 	nbr_cmd = count_pipe(minishell->lexer->tokens, minishell->lexer->size);
 	minishell->cmd = malloc_cmd(minishell->cmd, nbr_cmd);
 	minishell->lexer->pos = 0;
 	token = NULL;
+	j = 0;
 	while (minishell->lexer->pos < minishell->lexer->size)
 	{
 		token = minishell->lexer->tokens[minishell->lexer->pos];
 		if (token->type == TOKEN_WORD)
-			minishell->cmd = simple_cmd(minishell->lexer->pos, minishell, minishell->cmd);
+		{
+			minishell->cmd->av[j] = cmd_suffix(minishell->lexer->pos, minishell);
+			j++;
+		}
 		else if (token->type == TOKEN_LESS)
 		{
 			if (!less(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 2;
+				minishell->lexer->pos += 1;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_GREAT)
 		{
 			if (!great(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 2;
+				minishell->lexer->pos += 1;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_DGREAT)
 		{
-			if (!less(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 2;
+			if (!d_great(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
+				minishell->lexer->pos += 1;
 			else
 				return (1);
 		}
 		else if (token->type == TOKEN_DLESS)
 		{
 			if (!d_less(minishell->cmd, minishell, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 2;
+				minishell->lexer->pos += 1;
 			else
 				return (1);
 		}
@@ -95,10 +82,15 @@ static int	ft_execution(t_ctrl *minishell)
 		}
 		minishell->lexer->pos++;
 	}
+	minishell->cmd->av[j] = NULL;
+	if (minishell->cmd->input_file == -1)
+		minishell->cmd->input_file = open("/dev/stdin", O_RDONLY);
+	if (minishell->cmd->output_file == -1)
+		minishell->cmd->output_file = open("/dev/stdout", O_CREAT | O_RDWR | O_TRUNC, 0000644);
 	if (nbr_cmd == 1)
-		simple_execve(minishell->cmd, minishell->env, minishell);
+		simple_execve(minishell->cmd, *(minishell->env), minishell);
 	else
-		pipex(minishell->cmd, minishell->env, minishell, nbr_cmd);
+		pipex(minishell->cmd, minishell->env, minishell);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 04:48:13 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:33:00 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 void	redirection(int fd_0, int fd_1)
 {
+	// fprintf(stderr, "redirige %d dans 0 et %d dans 1\n", fd_0, fd_1);
 	dup2(fd_0, 0);
 	dup2(fd_1, 1);
 }
@@ -69,15 +70,16 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	pipex.id = fork();
 	if (pipex.id == 0)
 	{
-		envp = transform_env(env);
+		envp = transform_env(*env);
 		if (i == 0)
 			redirection(pipex.fd1, pipex.pipe[1]);
-		else if (i == 1)
-			redirection(pipex.pipe[0], pipex.fd2);
+		else if (i == pipex.nbr_cmd - 1)
+			redirection(pipex.pipe[2 * i - 2], pipex.fd2);
+		else
+			redirection(pipex.pipe[2 * i - 2], \
+			pipex.pipe[2 * i + 1]);
 		close_pipes(&pipex);
-		args = pipex.cmd;
-		if (args == NULL)
-			printf("Split fail");
+		args = pipex.cmd[i];
 		if (built_in(args, env, minishell) == 0)
 			return (1);
 		if (access(args[0], X_OK) == 0)
@@ -89,11 +91,12 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 			exit(1);
 		}
 		execve((const char *)cmd_path, args, envp);
+		perror("Pipex :");
 	}
 	return (1);	
 }
 
-int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell, size_t nbr_cmd)
+int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 {
 	t_pipe	s_pipe;
 	int		i;
@@ -102,8 +105,8 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell, size_t nbr_cmd)
 	s_pipe.fd1 = cmd->input_file;
 	s_pipe.fd2 = cmd->output_file;
 	s_pipe.cmd = cmd->av;
-	s_pipe.nbr_cmd = (int)nbr_cmd;
-	s_pipe.pipe_nbr = 2 * (nbr_cmd - 1);
+	s_pipe.nbr_cmd = cmd->ac;
+	s_pipe.pipe_nbr = 2 * (cmd->ac - 1);
 	s_pipe.env_path = search_env(*env, "PATH");
 	if (s_pipe.env_path != NULL)
 	{
@@ -123,17 +126,3 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell, size_t nbr_cmd)
 	//free_pipex(&s_pipe);
 	return (0);
 }
-
-// int main(int argc, char **argv, char **envp)
-// {
-// 	t_env	*env;
-// 	t_cmd	cmd;
-
-// 	(void) argc;
-// 	env = init_env(envp);
-// 	cmd.input = open("input_file", O_RDONLY);
-// 	cmd.output = stderr;
-// 	cmd.cmds = argv + 1;
-// 	pipex(&cmd, env);
-// 	return (0);
-// }
