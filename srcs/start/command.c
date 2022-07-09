@@ -15,8 +15,15 @@
 
 static void	handle_eof(t_ctrl *shell)
 {
-	ft_putchar_fd('\n', 0);
+	ft_putchar_fd('\n', 1);
 	exit_shell(shell);
+}
+
+static int	new_line(t_ctrl *shell)
+{	
+	free(shell->lexer->input);
+	free_lexer(shell->lexer);
+	return (-1);
 }
 
 static int	read_input(t_lexer *lexer)
@@ -36,9 +43,14 @@ static int	read_input(t_lexer *lexer)
 
 static int	prompt(t_ctrl *shell)
 {
+	shell->lexer->input = NULL;
 	shell->lexer->input = readline("minishell% ");
 	if (!shell->lexer->input)
 		handle_eof(shell);
+	else if (shell->lexer->input[0] == '\0')
+		return(new_line(shell));
+	else
+		add_history(shell->lexer->input);
 	return (read_input(shell->lexer));
 }
 
@@ -51,6 +63,7 @@ int	ft_command(t_ctrl *shell)
 	if (!shell->lexer)
 		exit_shell(shell);
 	lines = prompt(shell);
+
 	while (lines == 1)
 		lines = prompt(shell);
 	if (lines == 0)

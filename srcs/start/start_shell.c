@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:06:26 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/07 01:53:04 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:20:48 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	running_shell(t_ctrl *minishell)
 	while (1)
 	{
 		ft_input(minishell);
-		rl_clear_history();
 	}
+	rl_clear_history();
 	exit_free(minishell);
 	return (0);
 }

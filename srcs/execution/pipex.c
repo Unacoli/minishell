@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 19:33:00 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:53:14 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	char	**envp;
 	char	*cmd_path;
 
+	if (ft_strncmp(pipex.cmd[i][0], "exit", ft_strlen(pipex.cmd[i][0])) == 0)
+		exit_shell(minishell);
 	pipex.id = fork();
 	if (pipex.id == 0)
 	{
@@ -74,11 +76,24 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 		if (i == 0)
 			redirection(pipex.fd1, pipex.pipe[1]);
 		else if (i == pipex.nbr_cmd - 1)
+		{
+			// fprintf(stderr, "i = %d", 2 * i - 2);
 			redirection(pipex.pipe[2 * i - 2], pipex.fd2);
+		}
 		else
+		{
+			// fprintf(stderr, "i = %d, i = %d", 2 * i - 2, 2 * i + 1);
 			redirection(pipex.pipe[2 * i - 2], \
 			pipex.pipe[2 * i + 1]);
+		}
 		close_pipes(&pipex);
+		// if (i != 0)
+		// {
+		// 	char *buff=malloc(sizeof(char *) * 201);
+		// 	int i= read(0, buff, 200);
+		// 	buff[i] = '\0';
+		// 	fprintf(stdout, "OUTPUT of the pipe .%s.\n", buff);
+		// }
 		args = pipex.cmd[i];
 		if (built_in(args, env, minishell) == 0)
 			return (1);
@@ -87,7 +102,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 		cmd_path = p_cmd(envp, args[0]);
 		if (!cmd_path)
 		{
-			fprintf(stderr, "command not found %s\n", cmd_path);
+			fprintf(stderr, "command not found %s\n", args[0]);
 			exit(1);
 		}
 		execve((const char *)cmd_path, args, envp);

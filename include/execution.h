@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 05:04:06 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:41:36 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ char	**cmd_suffix(size_t pos, t_ctrl *minishell);
 /*Malloc functions*/
 
 t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd);
+int less_great(t_token *token, t_ctrl *minishell);
 
 #endif

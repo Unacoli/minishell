@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 05:28:16 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/09 15:52:57 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 	// char	*buff;
 	// int i;
 
+	if (ft_strncmp(cmd->av[0][0], "exit", ft_strlen(cmd->av[0][0])) == 0)
+		exit_shell(minishell);
 	id = fork();
 	envp = transform_env(env);
 	if (id == 0)
@@ -125,7 +127,7 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 		// fprintf(stdout, "output 2\n");
 		if (!cmd_path)
 		{
-			// fprintf(stderr, "command not found %s\n", cmd_path);
+			fprintf(stderr, "command not found %s\n", cmd->av[0][0]);
 			exit(1);
 		}
 		// fprintf(stdout, "output 1\n");

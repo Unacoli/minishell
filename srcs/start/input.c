@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/09 07:11:19 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/09 17:47:03 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ size_t	count_pipe(t_token **tokens, size_t lexer_size)
 	return (pipe_nbr + 1);
 }
 
+int choose_execve(int nbr_cmd, t_ctrl *minishell)
+{
+	if (nbr_cmd == 1)
+		return (simple_execve(minishell->cmd, *(minishell->env), minishell));
+	else
+		return (pipex(minishell->cmd, minishell->env, minishell));
+}
+
 static int	ft_execution(t_ctrl *minishell)
 {
 	int		nbr_cmd;
@@ -43,36 +51,10 @@ static int	ft_execution(t_ctrl *minishell)
 	{
 		token = minishell->lexer->tokens[minishell->lexer->pos];
 		if (token->type == TOKEN_WORD)
+			minishell->cmd->av[j++] = cmd_suffix(minishell->lexer->pos, minishell);
+		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
 		{
-			minishell->cmd->av[j] = cmd_suffix(minishell->lexer->pos, minishell);
-			j++;
-		}
-		else if (token->type == TOKEN_LESS)
-		{
-			if (!less(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 1;
-			else
-				return (1);
-		}
-		else if (token->type == TOKEN_GREAT)
-		{
-			if (!great(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 1;
-			else
-				return (1);
-		}
-		else if (token->type == TOKEN_DGREAT)
-		{
-			if (!d_great(minishell->cmd, minishell->lexer->tokens, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 1;
-			else
-				return (1);
-		}
-		else if (token->type == TOKEN_DLESS)
-		{
-			if (!d_less(minishell->cmd, minishell, minishell->lexer->pos, minishell->lexer->size))
-				minishell->lexer->pos += 1;
-			else
+			if(less_great(token, minishell))
 				return (1);
 		}
 		else if (token->type == TOKEN_PIPE)
@@ -82,15 +64,7 @@ static int	ft_execution(t_ctrl *minishell)
 		}
 		minishell->lexer->pos++;
 	}
-	if (minishell->cmd->input_file == -1)
-		minishell->cmd->input_file = open("/dev/stdin", O_RDONLY);
-	if (minishell->cmd->output_file == -1)
-		minishell->cmd->output_file = open("/dev/stdout", O_CREAT | O_RDWR | O_TRUNC, 0000644);
-	if (nbr_cmd == 1)
-		simple_execve(minishell->cmd, *(minishell->env), minishell);
-	else
-		pipex(minishell->cmd, minishell->env, minishell);
-	return (0);
+	return (choose_execve(nbr_cmd, minishell));
 }
 
 void	ft_input(t_ctrl *minishell)

@@ -6,7 +6,7 @@
 #    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/07/09 05:02:50 by nargouse         ###   ########.fr        #
+#    Updated: 2022/07/09 17:41:56 by ldubuche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FILES	= main.c start_shell.c cd.c echo.c env.c exit.c export.c pwd.c unset.c\
 			utils.c default_env.c environnement.c built_in.c execve.c\
 			here_doc.c input_file.c output_file.c pipex.c substitution.c\
 			error.c exit_shell.c free_env.c free_lexer.c command.c input.c\
-			signal_handler.c double_lexer.c handle_quote_substi.c\
+			signal_handler.c double_lexer.c less_great.c handle_quote_substi.c\
 			malloc_token.c utils_parsing.c get_token.c handle_token.c\
 			malloc_lexer.c tokenize.c simple_cmd.c malloc_cmd.c free_cmd.c
 
