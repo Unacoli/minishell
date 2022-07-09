@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 15:08:36 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 05:28:16 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 	envp = transform_env(env);
 	if (id == 0)
 	{
-		redirection( cmd->input_file, cmd->output_file);
+		redirection(cmd->input_file, cmd->output_file);
 		if (cmd->input_file != 0)
 			close(cmd->input_file);
 		if (cmd->output_file != 1)

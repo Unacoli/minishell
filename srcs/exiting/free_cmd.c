@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:41:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/09 15:07:41 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 05:15:15 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,27 @@
 /* Juste un debut a partir des structures, il y aura problement besoin de 
 	la modifier*/
 
-static void	free_simple_command(t_simplecmd *splcmd)
+static void	free_command(t_cmd *cmd)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (splcmd)
-	{
-		if (splcmd->av)
+	j = 0;
+	if (cmd->av)
+	{	
+		while (cmd->av[i] != NULL)
 		{
-			while (splcmd->av[i] != NULL)
+			j = 0;
+			while (cmd->av[i][j] != NULL)
 			{
-				free(splcmd->av[i]);
-				i++;
+				free(cmd->av[i][j]);
+				j++;
 			}
-			free(splcmd->av);
+			free(cmd->av[i]);
+			i++;
 		}
-		free(splcmd);
+		free(cmd->av);
 	}
 }
 
@@ -39,16 +43,7 @@ void	free_cmd(t_cmd *cmd)
 {
 	if (cmd)
 	{
-		if (cmd->simple_cmd)
-		{
-			cmd->cmd_count = 0;
-			while (cmd->cmd_count < cmd->cap)
-			{
-				free_simple_command(cmd->simple_cmd[cmd->cmd_count]);
-				cmd->cmd_count++;
-			}
-			free(cmd->simple_cmd);
-		}
+		free_command(cmd);
 		free(cmd);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/08 19:32:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 07:11:19 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static int	ft_execution(t_ctrl *minishell)
 		}
 		minishell->lexer->pos++;
 	}
-	minishell->cmd->av[j] = NULL;
 	if (minishell->cmd->input_file == -1)
 		minishell->cmd->input_file = open("/dev/stdin", O_RDONLY);
 	if (minishell->cmd->output_file == -1)

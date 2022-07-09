@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/27 12:05:52 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 07:07:45 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,50 @@
 /*	Parcours tout l'input jusqu'a la quote correspondante 
 	Et le stocke dans un seul token */
 
+char	*delete_quote(char *str)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(str) - 2;
+	while (i < len)
+	{
+		str[i] = str[i + 1];
+		i++;	
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 t_regex	handle_quote(char *input, char c)
 {
 	int		i;
 	char	*str;
+	int		j;
 
 	i = 1;
-	while (input[i] != c)
+	j = 0;
+	str = NULL;
+	while (input[i])
 	{
-		if (!input[i] && input[i] != c)
+		if (input[i] == c)
 		{
-			printf("Quote is not closed !");
-			return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
+			j++;
+			if (j == 1)
+			{
+				str = (char *) malloc(sizeof(char) * (i + 1));
+				if (str == NULL)
+					return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
+				ft_strlcpy(str, input, i + 2);
+				str = delete_quote(str);
+				return ((t_regex){str, i + 1, TOKEN_WORD});
+			}
 		}
 		i++;
 	}
-	str = (char *) malloc(sizeof(char) * (i + 3));
-	if (str == NULL)
-		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
-	ft_strlcpy(str, input, i + 2);
-	return ((t_regex){str, i + 1, TOKEN_WORD});
+	printf("Quote is not closed !\n");
+	return ((t_regex){NULL, 1, TOKEN_NOT_VALID});
 }
 
 t_regex	handle_substitution(char *input)

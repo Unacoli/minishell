@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 10:59:46 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 05:04:06 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_cmd
 	char	***av;
 	int		input_file;
 	int		output_file;
-	struct t_cmd	*next;
+//	struct t_cmd	*next;
 }				t_cmd;
 
 typedef struct s_pipe

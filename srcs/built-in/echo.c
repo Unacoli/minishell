@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:43:08 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 11:30:46 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/09 06:07:12 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	echo(char **args)
 {
 	int	n;
 
-	printf("echo %s\n", args[1]);
 	n = 1;
 	if (!ft_strncmp("-n", args[1], 3))
 		n = 2;
