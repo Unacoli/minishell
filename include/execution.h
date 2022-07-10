@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 17:41:36 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:41:56 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_cmd
 	char	***av;
 	int		input_file;
 	int		output_file;
-//	struct t_cmd	*next;
 }				t_cmd;
 
 typedef struct s_pipe
@@ -64,13 +63,13 @@ t_cmd	*simple_cmd(size_t pos, t_ctrl *minishell, t_cmd *cmd);
 int		d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
 int		great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
 int		less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
-int 	d_less(t_cmd *cmd, t_ctrl *minishell, int pos, int lexer_size);
+int		d_less(t_cmd *cmd, t_ctrl *minishell, int pos, int lexer_size);
 int		pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell);
 char	**cmd_suffix(size_t pos, t_ctrl *minishell);
 
 /*Malloc functions*/
 
 t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd);
-int less_great(t_token *token, t_ctrl *minishell);
+int		less_great(t_token *token, t_ctrl *minishell);
 
 #endif

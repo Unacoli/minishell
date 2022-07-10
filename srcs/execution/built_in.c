@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 15:49:59 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:21:56 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	built_in(char **arg, t_env *env, t_ctrl *minishell)
 {
-	// fprintf(stderr, "built in : %s\n", arg[0]);
 	if (ft_strncmp(arg[0], "cd", ft_strlen(arg[0])) == 0)
 		cd(env, arg);
 	else if (ft_strncmp(arg[0], "echo", ft_strlen(arg[0])) == 0)

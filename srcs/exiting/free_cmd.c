@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:41:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 17:23:27 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:40:18 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@ static void	free_command(t_cmd *cmd)
 	j = 0;
 	if (cmd->av)
 	{	
-		while (cmd->av[i] != NULL)
+		while (cmd->av[i])
 		{
 			j = 0;
-			while (cmd->av[i][j] && cmd->av[i][j]!= NULL)
+			while (cmd->av[i][j])
 			{
-				if (cmd->av[i][j])
+				if (cmd->av[i][j] != NULL)
 					free(cmd->av[i][j]);
 				j++;
 			}
-			free(cmd->av[i]);
+			if (cmd->av[i] != NULL)
+				free(cmd->av[i]);
 			i++;
 		}
 		free(cmd->av);

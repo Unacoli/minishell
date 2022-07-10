@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:18:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 17:34:06 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:32:47 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 {
 	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
 	{
-		cmd->output_file = open(tokens[pos + 1]->str, O_CREAT | O_RDWR | O_TRUNC, 0000644);
+		cmd->output_file = open(tokens[pos + 1]->str,
+				O_CREAT | O_RDWR | O_TRUNC, 0000644);
 		if (cmd->output_file >= 0)
 			return (0);
 		else
@@ -28,7 +29,7 @@ int	great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 	else
 	{
 		printf("Syntax error near token GREAT\n");
-		return  (1);
+		return (1);
 	}
 	return (1);
 }
@@ -37,7 +38,8 @@ int	d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 {
 	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
 	{
-		cmd->output_file = open(tokens[pos + 1]->str, O_WRONLY | O_CREAT | O_APPEND, 0000644);
+		cmd->output_file = open(tokens[pos + 1]->str,
+				O_WRONLY | O_CREAT | O_APPEND, 0000644);
 		if (cmd->output_file >= 0)
 			return (0);
 		else
@@ -49,7 +51,7 @@ int	d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 	else
 	{
 		printf("Syntax error near token DGREAT\n");
-		return  (1);
+		return (1);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:12:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 04:39:52 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:17:02 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Besoin du token word just apres + deplace la position de deux */
 /* Doit etre suivi d'un token WORD */
 
-int less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
+int	less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 {
 	if (pos + 1 < lexer_size && tokens[pos + 1]->type == TOKEN_WORD)
 	{
@@ -31,7 +31,7 @@ int less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size)
 	else
 	{
 		printf("Syntax error near token LESS\n");
-		return  (1);
+		return (1);
 	}
 	return (1);
 }

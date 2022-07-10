@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/08 03:16:22 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:27:22 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_regex	handle_word(char *input)
 
 static t_regex	handle_operator(int i)
 {
-	char *str;
+	char	*str;
 
 	str = create_str((char *) g_rlist[i].str, g_rlist[i].len);
 	return ((t_regex){str, g_rlist[i].len, g_rlist[i].type});

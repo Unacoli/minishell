@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 07:07:45 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:09:04 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,20 @@ char	*delete_quote(char *str)
 	while (i < len)
 	{
 		str[i] = str[i + 1];
-		i++;	
+		i++;
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+static t_regex	cpystr(char *str, char *input, int i)
+{
+	str = (char *) malloc(sizeof(char) * (i + 1));
+	if (str == NULL)
+		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
+	ft_strlcpy(str, input, i + 2);
+	str = delete_quote(str);
+	return ((t_regex){str, i + 1, TOKEN_WORD});
 }
 
 t_regex	handle_quote(char *input, char c)
@@ -46,14 +56,7 @@ t_regex	handle_quote(char *input, char c)
 		{
 			j++;
 			if (j == 1)
-			{
-				str = (char *) malloc(sizeof(char) * (i + 1));
-				if (str == NULL)
-					return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
-				ft_strlcpy(str, input, i + 2);
-				str = delete_quote(str);
-				return ((t_regex){str, i + 1, TOKEN_WORD});
-			}
+				return (cpystr(str, input, i));
 		}
 		i++;
 	}

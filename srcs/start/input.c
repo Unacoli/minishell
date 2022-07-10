@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/09 17:47:03 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:09:37 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	count_pipe(t_token **tokens, size_t lexer_size)
 	return (pipe_nbr + 1);
 }
 
-int choose_execve(int nbr_cmd, t_ctrl *minishell)
+int	choose_execve(int nbr_cmd, t_ctrl *minishell)
 {
 	if (nbr_cmd == 1)
 		return (simple_execve(minishell->cmd, *(minishell->env), minishell));
@@ -36,35 +36,35 @@ int choose_execve(int nbr_cmd, t_ctrl *minishell)
 		return (pipex(minishell->cmd, minishell->env, minishell));
 }
 
-static int	ft_execution(t_ctrl *minishell)
+static int	ft_execution(t_ctrl *mini)
 {
 	int		nbr_cmd;
 	t_token	*token;
 	int		j;
 
-	nbr_cmd = count_pipe(minishell->lexer->tokens, minishell->lexer->size);
-	minishell->cmd = malloc_cmd(minishell->cmd, nbr_cmd);
-	minishell->lexer->pos = 0;
+	nbr_cmd = count_pipe(mini->lexer->tokens, mini->lexer->size);
+	mini->cmd = malloc_cmd(mini->cmd, nbr_cmd);
+	mini->lexer->pos = 0;
 	token = NULL;
 	j = 0;
-	while (minishell->lexer->pos < minishell->lexer->size)
+	while (mini->lexer->pos < mini->lexer->size)
 	{
-		token = minishell->lexer->tokens[minishell->lexer->pos];
+		token = mini->lexer->tokens[mini->lexer->pos];
 		if (token->type == TOKEN_WORD)
-			minishell->cmd->av[j++] = cmd_suffix(minishell->lexer->pos, minishell);
+			mini->cmd->av[j++] = cmd_suffix(mini->lexer->pos, mini);
 		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
 		{
-			if(less_great(token, minishell))
+			if (less_great(token, mini))
 				return (1);
 		}
 		else if (token->type == TOKEN_PIPE)
 		{
-			if (minishell->lexer->pos == 0 || minishell->lexer->pos == minishell->lexer->size - 1)
+			if (mini->lexer->pos == 0 || mini->lexer->pos == mini->lexer->size - 1)
 				return (printf("Parse error near '|'\n"));
 		}
-		minishell->lexer->pos++;
+		mini->lexer->pos++;
 	}
-	return (choose_execve(nbr_cmd, minishell));
+	return (choose_execve(nbr_cmd, mini));
 }
 
 void	ft_input(t_ctrl *minishell)

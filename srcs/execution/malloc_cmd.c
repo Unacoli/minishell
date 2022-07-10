@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:02:37 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/09 10:48:08 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 05:44:26 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd)
 		return (NULL);
 	cmd->input_file = 0;
 	cmd->output_file = 1;
+	cmd->av = NULL;
 	cmd->av = malloc(sizeof(char ***) * (nbr_cmd + 1));
 	if (!cmd->av)
 		return (NULL);

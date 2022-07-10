@@ -1,4 +1,3 @@
-                     
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/23 23:58:21 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:03:31 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +47,7 @@ static int	prompt(t_ctrl *shell)
 	if (!shell->lexer->input)
 		handle_eof(shell);
 	else if (shell->lexer->input[0] == '\0')
-		return(new_line(shell));
+		return (new_line(shell));
 	else
 		add_history(shell->lexer->input);
 	return (read_input(shell->lexer));
@@ -63,7 +62,6 @@ int	ft_command(t_ctrl *shell)
 	if (!shell->lexer)
 		exit_shell(shell);
 	lines = prompt(shell);
-
 	while (lines == 1)
 		lines = prompt(shell);
 	if (lines == 0)

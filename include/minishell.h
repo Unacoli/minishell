@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/08 04:31:45 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:41:15 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int		running_shell(t_ctrl *minishell);
 
 /*Built-in functions*/
 
-int	built_in(char **arg, t_env *env, t_ctrl *minishell);
+int		built_in(char **arg, t_env *env, t_ctrl *minishell);
 
 #endif

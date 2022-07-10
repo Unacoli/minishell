@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 15:52:57 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 04:14:50 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 	int		id;
 	char	*cmd_path;
 	char	**envp;
-	// char	*buff;
-	// int i;
 
 	if (ft_strncmp(cmd->av[0][0], "exit", ft_strlen(cmd->av[0][0])) == 0)
 		exit_shell(minishell);
@@ -110,27 +108,19 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 			close(cmd->input_file);
 		if (cmd->output_file != 1)
 			close(cmd->output_file);
-		// buff = malloc(sizeof(char) *202);
-		// i = read(0, buff, 200);
-		// buff[i] = '\0';
-		// printf("buff = %s", buff);
-		// fprintf(stdout, "output 3\n");
 		if (built_in(cmd->av[0], &env, minishell) == 0)
 			return (1);
 		else if (access(cmd->av[0][0], X_OK) == 0)
 		{
-			printf("Enter exeption\n");
+			printf("Enter exception\n");
 			execve(cmd->av[0][0], cmd->av[0], envp);
 		}
-		// fprintf(stderr, "output 2,5\n");
 		cmd_path = p_cmd(envp, cmd->av[0][0]);
-		// fprintf(stdout, "output 2\n");
 		if (!cmd_path)
 		{
 			fprintf(stderr, "command not found %s\n", cmd->av[0][0]);
 			exit(1);
 		}
-		// fprintf(stdout, "output 1\n");
 		execve((const char *)cmd_path, cmd->av[0], envp);
 		perror("Execve");
 	}
