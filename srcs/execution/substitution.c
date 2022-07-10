@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:11:48 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/10 12:17:55 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,13 @@ char	*substitution(char *str, int position, t_env *env)
 	char	*value;
 
 	j = position;
-	while (str[j] && !is_space(str[j]))
+	while (str[j] && (!is_space(str[j]) && isalnum(str[j])))
 		j++;
 	variable = ft_calloc(j - position + 1, sizeof(char));
 	ft_strlcpy(variable, str + position, (j - position + 1));
 	value = search_env(*env, variable);
+	if (value == NULL)
+		value = ft_strdup("");
 	return (make_3_str(str, position, j, value));
 }
 

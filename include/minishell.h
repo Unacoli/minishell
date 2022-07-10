@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 04:41:15 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 13:18:37 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <errno.h>
+
+# define _GNU_SOURCE 
+# include <unistd.h>
+# include <sys/syscall.h>
 
 # include "parsing.h"
 # include "environnement.h"

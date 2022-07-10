@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/08 03:11:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:37:36 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define MAX_TOKENS 12
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
+# define BACK_SLASH 92
 
 typedef enum e_ttype
 {

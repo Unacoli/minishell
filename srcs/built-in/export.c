@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/09 07:38:10 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 14:22:16 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,43 +54,43 @@ static int	export_value(t_env *env, char *arg)
 	return (0);
 }
 
-static void	affiche(char *lower)
+static void	affiche(char *lower, int fd)
 {
-	write(1, "declare -x ", 11);
+	write(fd, "declare -x ", 11);
 	while (*lower && *lower != '=')
 	{
-		write(1, lower, 1);
+		write(fd, lower, 1);
 		lower++;
 	}
 	if (*lower)
 		lower++;
-	write(1, "=\"", 2);
+	write(fd, "=\"", 2);
 	while (*lower)
 	{
-		write(1, lower, 1);
+		write(fd, lower, 1);
 		lower++;
 	}
-	write(1, "\"\n", 2);
+	write(fd, "\"\n", 2);
 }
 
-static void	affiche_env_alpha(t_env *env)
+static void	affiche_env_alpha(t_env *env, int fd)
 {
 	t_env	*temp;
 	char	*lower;
 
 	temp = env;
 	lower = first_lower(*env);
-	affiche(lower);
+	affiche(lower, fd);
 	while (lower != NULL)
 	{
 		env = temp;
 		lower = next_lower(*env, lower);
 		if (lower != NULL)
-			affiche(lower);
+			affiche(lower, fd);
 	}
 }
 
-int	exporti(t_env *env, char **args)
+int	exporti(t_env *env, char **args, int fd)
 {
 	int	i;
 	int	retour;
@@ -98,7 +98,7 @@ int	exporti(t_env *env, char **args)
 	i = 1;
 	retour = 0;
 	if (args[1] == NULL)
-		affiche_env_alpha(env);
+		affiche_env_alpha(env, fd);
 	else
 	{
 		while (args[i])

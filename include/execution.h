@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 04:41:56 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:17:25 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_pipe
 	char	**cmd_paths;
 	char	***cmd;
 	int		*pipe;
-	int		id;
+	int		*id;
 }	t_pipe;
 
 typedef struct s_ctrl
@@ -44,6 +44,7 @@ typedef struct s_ctrl
 	t_lexer	*lexer;
 	t_cmd	*cmd;
 	t_env	*env;
+	int		status;
 }				t_ctrl;
 
 /* Substitution functions */
@@ -55,7 +56,7 @@ char	*join_3_str(char *before, char *substi, char *after);
 
 /* Built-in functions*/
 
-int		simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell);
+int		simple_execve(t_cmd *cmd, t_env env);
 char	**transform_env(t_env env);
 char	*p_cmd(char **envp, char *cmd);
 void	redirection(int fd_0, int fd_1);
@@ -71,5 +72,8 @@ char	**cmd_suffix(size_t pos, t_ctrl *minishell);
 
 t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd);
 int		less_great(t_token *token, t_ctrl *minishell);
-
+void	signal_handler_exec(void);
+void	choose_execve(int nbr_cmd, t_ctrl *minishell);
+int		treat_token(t_ctrl *mini);
+void	close_fd(t_cmd *cmd);
 #endif

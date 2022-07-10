@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execve.c                                           :+:      :+:    :+:   */
+/*   simple_execve.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 04:14:50 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:59:33 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,39 +91,29 @@ char	**transform_env(t_env env)
 	return (envp);
 }
 
-int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
+int	simple_execve(t_cmd *cmd, t_env env)
 {
 	int		id;
 	char	*cmd_path;
 	char	**envp;
 
-	if (ft_strncmp(cmd->av[0][0], "exit", ft_strlen(cmd->av[0][0])) == 0)
-		exit_shell(minishell);
 	id = fork();
-	envp = transform_env(env);
 	if (id == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		envp = transform_env(env);
 		redirection(cmd->input_file, cmd->output_file);
-		if (cmd->input_file != 0)
-			close(cmd->input_file);
-		if (cmd->output_file != 1)
-			close(cmd->output_file);
-		if (built_in(cmd->av[0], &env, minishell) == 0)
-			return (1);
-		else if (access(cmd->av[0][0], X_OK) == 0)
-		{
-			printf("Enter exception\n");
+		close_fd(cmd);
+		if (access(cmd->av[0][0], X_OK) == 0)
 			execve(cmd->av[0][0], cmd->av[0], envp);
-		}
 		cmd_path = p_cmd(envp, cmd->av[0][0]);
 		if (!cmd_path)
-		{
-			fprintf(stderr, "command not found %s\n", cmd->av[0][0]);
-			exit(1);
-		}
+			error_exit(cmd->av[0][0]);
 		execve((const char *)cmd_path, cmd->av[0], envp);
 		perror("Execve");
+		exit(0);
 	}
-	waitpid(-1, NULL, 0);
+	waitpid(id, NULL, 0);
 	return (1);
 }

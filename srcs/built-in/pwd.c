@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:28:54 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/07 01:09:15 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/10 14:24:23 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ char	*get_pwd(void)
 	return (buf);
 }
 
-int	pwd(void)
+int	pwd(int fd)
 {
 	char	*path;
 
 	path = get_pwd();
 	if (!path)
 		return (1);
-	printf("%s\n", path);
+	ft_putstr_fd(path, fd);
+	ft_putstr_fd("\n", fd);
 	free(path);
 	return (0);
 }
