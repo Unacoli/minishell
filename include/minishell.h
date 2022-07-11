@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 21:00:27 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/11 18:42:59 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:44:07 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include "input.h"
 # include "built_in.h"
 
-extern int g_status;
+extern int	g_status;
 
 /*Functions for main, starting minishell*/
 
