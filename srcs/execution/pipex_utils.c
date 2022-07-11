@@ -6,11 +6,20 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:16:35 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 16:25:10 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:25:29 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	status_handler(int wstatus)
+{
+	if (WIFEXITED(wstatus))
+		return (WEXITSTATUS(wstatus));
+	if (WIFSIGNALED(wstatus))
+		return (128 + WTERMSIG(wstatus));
+	return (wstatus);
+}
 
 int	init_pipex(t_pipe *s_pipe, t_cmd *cmd, t_env *env)
 {
