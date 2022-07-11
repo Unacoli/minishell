@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 16:26:04 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:06:12 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 /*	Une fonction qui recoit une structure ou deux ? (simplecmd) et qui doit pipe
 	l'output de la premiere commande dans la deuxieme */
+
+void	free_pipex(t_pipe *pipex)
+{
+	if (pipex->pipe)
+		free(pipex->pipe);
+	if (pipex->id)
+		free(pipex->id);
+}
 
 void	redir(t_pipe pipex, int i)
 {
@@ -55,6 +63,18 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	return (1);
 }
 
+void	wait_childs()
+{
+	int j;
+
+	j = 0;
+	while (j < s_pipe.nbr_cmd)
+	{
+		waitpid(s_pipe.id[j], &wstatus, 0);
+		j++;
+	}
+}
+
 int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 {
 	t_pipe	s_pipe;
@@ -74,12 +94,7 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 		i++;
 	}
 	close_pipes(&s_pipe);
-	j = 0;
-	while (j < s_pipe.nbr_cmd)
-	{
-		waitpid(s_pipe.id[j], &wstatus, 0);
-		j++;
-	}
-	// free_pipex(&s_pipe);
+	wait_childs(s_pipe);
+	free_pipex(&s_pipe);
 	return (0);
 }
