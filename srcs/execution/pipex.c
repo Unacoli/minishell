@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 17:45:16 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:35:07 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	return (1);
 }
 
-void	wait_childs(t_pipe *s_pipe, t_ctrl *minishell)
+void	wait_childs(t_pipe *s_pipe)
 {
 	int	j;
 	int	wstatus;
@@ -74,7 +74,7 @@ void	wait_childs(t_pipe *s_pipe, t_ctrl *minishell)
 	{
 		waitpid(s_pipe->id[j], &wstatus, 0);
 		if (j == s_pipe->nbr_cmd - 1)
-			minishell->status = status_handler(wstatus);
+			g_status = status_handler(wstatus);
 		j++;
 	}
 }
@@ -95,7 +95,7 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 		i++;
 	}
 	close_pipes(&s_pipe);
-	wait_childs(&s_pipe, minishell);
+	wait_childs(&s_pipe);
 	free_pipex(&s_pipe);
 	return (0);
 }

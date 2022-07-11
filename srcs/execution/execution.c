@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:08:20 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 15:54:21 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:34:39 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	close_fd(t_cmd *cmd)
 
 void	choose_execve(int nbr_cmd, t_ctrl *minishell)
 {
-	minishell->status = 0;
+	g_status = 0;
 	if (nbr_cmd == 1)
 	{
 		if (built_in(minishell->cmd->av[0], minishell->env, minishell, \

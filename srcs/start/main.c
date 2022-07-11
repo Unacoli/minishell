@@ -6,11 +6,13 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:59:55 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 13:33:10 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:34:41 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_status = 0;
 
 int	main(int ac, char **av, char **env)
 {

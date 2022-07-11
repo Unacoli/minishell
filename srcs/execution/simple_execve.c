@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 16:10:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 18:34:39 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	**transform_env(t_env env)
 int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 {
 	int		id;
+	int		wstatus;
 	char	*cmd_path;
 	char	**envp;
 
@@ -112,6 +113,7 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 		perror("Execve");
 		exit(0);
 	}
-	waitpid(id, NULL, 0);
+	waitpid(id, &wstatus, 0);
+	g_status = status_handler(wstatus);
 	return (1);
 }

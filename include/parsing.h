@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 00:50:58 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 19:34:46 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int		is_space(char c);
 char	*create_str(char *input, int i);
 int		is_operator(char *input);
 int		delimite_word(char *input, int i);
+int		delimite_word_substi(char *input, int i);
 
 #endif

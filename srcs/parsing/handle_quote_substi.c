@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 04:00:23 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 19:24:23 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ t_regex	handle_substitution(char *input, t_env *env)
 	int		i;
 	char	*str;
 
-	i = delimite_word(input, 0);
+	i = delimite_word_substi(input, 0);
 	str = create_str(input, i + 1);
 	if (str == NULL)
 		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
 	str = search_substi(env, str);
+	// printf("str = %s\n");
 	return ((t_regex){str, ft_strlen(str), TOKEN_WORD});
 }
