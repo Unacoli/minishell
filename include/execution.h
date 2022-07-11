@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 00:54:08 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:25:38 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_regex	handle_substitution(char *input, t_env *env);
 
 /* Built-in functions*/
 
-int		simple_execve(t_cmd *cmd, t_env env);
+int		simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell);
 char	**transform_env(t_env env);
 char	*p_cmd(char **envp, char *cmd);
 void	redirection(int fd_0, int fd_1);
@@ -79,5 +79,8 @@ void	signal_handler_exec(void);
 void	choose_execve(int nbr_cmd, t_ctrl *minishell);
 int		treat_token(t_ctrl *mini);
 void	close_fd(t_cmd *cmd);
+int		init_pipex(t_pipe *s_pipe, t_cmd *cmd, t_env *env);
+void	pipe_time(t_pipe *pipex);
+void	close_pipes(t_pipe *s_pipe);
 
 #endif

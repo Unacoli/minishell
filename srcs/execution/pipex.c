@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 13:49:41 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:26:04 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,16 @@
 /*	Une fonction qui recoit une structure ou deux ? (simplecmd) et qui doit pipe
 	l'output de la premiere commande dans la deuxieme */
 
-void	redirection(int fd_0, int fd_1)
+void	redir(t_pipe pipex, int i)
 {
-	dup2(fd_0, 0);
-	dup2(fd_1, 1);
-}
-
-void	pipe_time(t_pipe *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (i < pipex->nbr_cmd - 1)
-	{
-		if (pipe(pipex->pipe + (2 * i)) < 0)
-			perror("Pipe process fail");
-		i++;
-	}
-}
-
-void	close_pipes(t_pipe *s_pipe)
-{
-	int	i;
-
-	i = 0;
-	while (i < s_pipe->pipe_nbr)
-	{
-		if (s_pipe->pipe[i] != -1)
-		{
-			close(s_pipe->pipe[i]);
-			s_pipe->pipe[i] = -1;
-		}
-		i++;
-	}
+	if (i == 0)
+		redirection(pipex.fd1, pipex.pipe[1]);
+	else if (i == pipex.nbr_cmd - 1)
+		redirection(pipex.pipe[2 * i - 2], pipex.fd2);
+	else
+		redirection(pipex.pipe[2 * i - 2], \
+		pipex.pipe[2 * i + 1]);
+	close_pipes(&pipex);
 }
 
 int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
@@ -59,27 +36,18 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	pipex.id[i] = fork();
 	if (pipex.id[i] == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
 		envp = transform_env(*env);
-		if (i == 0)
-			redirection(pipex.fd1, pipex.pipe[1]);
-		else if (i == pipex.nbr_cmd - 1)
-			redirection(pipex.pipe[2 * i - 2], pipex.fd2);
-		else
-			redirection(pipex.pipe[2 * i - 2], \
-			pipex.pipe[2 * i + 1]);
-		close_pipes(&pipex);
+		redir(pipex, i);
 		args = pipex.cmd[i];
-		if (built_in(args, env, minishell) == 0)
+		if (built_in(args, env, minishell, 1) == 0)
 			exit (1);
 		if (access(args[0], X_OK) == 0)
 			execve(args[0], args, envp);
 		cmd_path = p_cmd(envp, args[0]);
 		if (!cmd_path)
 		{
-			fprintf(stderr, "command not found %s\n", args[0]);
-			exit(1);
+			fprintf(stderr, "%s : command not found\n", args[0]);
+			exit_shell(minishell);
 		}
 		execve((const char *)cmd_path, args, envp);
 		perror("Pipex :");
@@ -96,19 +64,8 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 
 	i = 0;
 	wstatus = 0;
-	s_pipe.fd1 = cmd->input_file;
-	s_pipe.fd2 = cmd->output_file;
-	s_pipe.cmd = cmd->av;
-	s_pipe.nbr_cmd = cmd->ac;
-	s_pipe.pipe_nbr = 2 * (cmd->ac - 1);
-	s_pipe.env_path = search_env(*env, "PATH");
-	if (s_pipe.env_path != NULL)
-	{
-		s_pipe.cmd_paths = ft_split(s_pipe.env_path, ':');
-		if (s_pipe.cmd_paths == NULL)
-			return (1);
-	}
-	s_pipe.pipe = (int *) malloc(sizeof(int) * s_pipe.pipe_nbr); //verif malloc 
+	init_pipex(&s_pipe, cmd, env);
+	s_pipe.pipe = (int *) malloc(sizeof(int) * s_pipe.pipe_nbr);
 	s_pipe.id = (int *) malloc(sizeof(int) * s_pipe.nbr_cmd);
 	pipe_time(&s_pipe);
 	while (i < s_pipe.nbr_cmd)

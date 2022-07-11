@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:43:32 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 18:26:58 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 15:25:41 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		error_message(char *msg, int ret);
 /*Exit functions*/
 
 void	exit_shell(t_ctrl *minishell);
-void	error_exit(char *str);
+void	error_exit(char *str, t_ctrl *minishell);
+void	free_split(char **tab, int i);
 
 #endif

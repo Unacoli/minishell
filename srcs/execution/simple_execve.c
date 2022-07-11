@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 03:28:12 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:10:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ char	*p_cmd(char **envp, char *cmd)
 
 	i = 0;
 	paths = ft_split(path(envp), ':');
-	while (paths[i])
+	while (paths && paths[i])
 	{
-		tmp = ft_strjoin_free1(paths[i], "/");
+		tmp = ft_strjoin_free1(paths[i++], "/");
 		if (tmp == NULL)
 			printf("Strjoin fail\n");
 		command = ft_strjoin(tmp, cmd);
@@ -65,8 +65,8 @@ char	*p_cmd(char **envp, char *cmd)
 		if (access(command, X_OK) == 0)
 			return (command);
 		free(command);
-		i++;
 	}
+	free_split(paths, i);
 	return (NULL);
 }
 
@@ -91,7 +91,7 @@ char	**transform_env(t_env env)
 	return (envp);
 }
 
-int	simple_execve(t_cmd *cmd, t_env env)
+int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 {
 	int		id;
 	char	*cmd_path;
@@ -107,7 +107,7 @@ int	simple_execve(t_cmd *cmd, t_env env)
 			execve(cmd->av[0][0], cmd->av[0], envp);
 		cmd_path = p_cmd(envp, cmd->av[0][0]);
 		if (!cmd_path)
-			error_exit(cmd->av[0][0]);
+			error_exit(cmd->av[0][0], minishell);
 		execve((const char *)cmd_path, cmd->av[0], envp);
 		perror("Execve");
 		exit(0);

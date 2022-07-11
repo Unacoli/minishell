@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:09:50 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 19:21:06 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 16:04:05 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,15 @@ int	less_great(t_token *token, t_ctrl *ms)
 	return (1);
 }
 
+int	deal_with_less_great(t_token *token, t_ctrl *mini, int j, int nbr_cmd)
+{
+	if (!less_great(token, mini))
+		return (1);
+	if (j < nbr_cmd)
+		mini->cmd->output_file = 1;
+	return (0);
+}
+
 int	treat_token(t_ctrl *mini)
 {
 	int		nbr_cmd;
@@ -82,7 +91,7 @@ int	treat_token(t_ctrl *mini)
 			mini->cmd->av[j++] = cmd_suffix(mini->lexer->pos, mini);
 		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
 		{
-			if (!less_great(token, mini))
+			if (deal_with_less_great(token, mini, j, nbr_cmd))
 				return (1);
 		}
 		mini->lexer->pos++;

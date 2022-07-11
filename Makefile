@@ -6,7 +6,7 @@
 #    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/07/11 01:28:04 by nargouse         ###   ########.fr        #
+#    Updated: 2022/07/11 16:21:23 by ldubuche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILES	= main.c start_shell.c cd.c echo.c env.c exit.c export.c pwd.c unset.c\
 			signal_handler.c double_lexer.c handle_quote_substi.c\
 			malloc_token.c utils_parsing.c get_token.c handle_token.c\
 			malloc_lexer.c tokenize.c simple_cmd.c malloc_cmd.c free_cmd.c\
-			treat_token.c execution.c
+			treat_token.c execution.c free_split.c pipex_utils.c
 
 SRCS	= $(addprefix ./srcs/*/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))
