@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 19:24:23 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 20:56:53 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ char	*delete_quote(char *str)
 	return (str);
 }
 
-static t_regex	cpystr(char *str, char *input, int i)
+static t_token	cpystr(char *str, char *input, int i)
 {
 	str = (char *) malloc(sizeof(char) * (i + 2));
 	if (str == NULL)
-		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
+		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	ft_strlcpy(str, input, i + 2);
 	str = delete_quote(str);
-	return ((t_regex){str, i + 1, TOKEN_WORD});
+	return ((t_token){str, i + 1, TOKEN_WORD});
 }
 
-t_regex	handle_quote(char *input, char c)
+t_token	handle_quote(char *input, char c)
 {
 	int		i;
 	char	*str;
@@ -61,19 +61,18 @@ t_regex	handle_quote(char *input, char c)
 		i++;
 	}
 	ft_putstr_fd("Quote is not closed !\n", STDERR_FILENO);
-	return ((t_regex){NULL, i, TOKEN_NOT_VALID});
+	return ((t_token){NULL, i, TOKEN_NOT_VALID});
 }
 
-t_regex	handle_substitution(char *input, t_env *env)
+t_token	handle_substitution(char *input, t_env *env, t_token *rlist)
 {
 	int		i;
 	char	*str;
 
-	i = delimite_word_substi(input, 0);
+	i = delimite_word_substi(input, 0, rlist);
 	str = create_str(input, i + 1);
 	if (str == NULL)
-		return ((t_regex){NULL, 0, TOKEN_NOT_VALID});
+		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	str = search_substi(env, str);
-	// printf("str = %s\n");
-	return ((t_regex){str, ft_strlen(str), TOKEN_WORD});
+	return ((t_token){str, ft_strlen(str), TOKEN_WORD});
 }

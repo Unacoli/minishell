@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:55:25 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 20:55:32 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ char	*create_str(char *input, int i)
 	return (str);
 }
 
-int	delimite_word(char *input, int i)
+int	delimite_word(char *input, int i, t_token *rlist)
 {
-	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i])) \
+	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
 	&& input[i] != '\n')
 		i++;
 	return (i);
 }
 
-int	delimite_word_substi(char *input, int i)
+int	delimite_word_substi(char *input, int i, t_token *rlist)
 {
 	if (input[i + 1] == '?')
 		return (i + 1);
-	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i])) \
+	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
 	&& input[i] != '\n')
 		i++;
 	return (i);

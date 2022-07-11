@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:31:40 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 20:57:25 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char	*substitution(char *str, int position, t_env *env);
 char	*make_3_str(char *str, int position, int j, char *value);
 char	*join_3_str(char *before, char *substi, char *after);
 int		tokenize(t_lexer *lexer, t_env *env);
-t_regex	get_token(char *input, t_env *env);
-t_regex	handle_substitution(char *input, t_env *env);
+t_token	get_token(char *input, t_env *env, t_token *rlist);
+t_token	handle_substitution(char *input, t_env *env, t_token *rlist);
 
 /* Built-in functions*/
 

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 19:34:46 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 20:56:07 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ typedef enum e_ttype
 	TOKEN_WORD,
 }				t_ttype;
 
-typedef struct s_regex
-{
-	const char	*str;
-	size_t		len;
-	t_ttype		type;
-}				t_regex;
-
 typedef struct s_token
 {
 	char	*str;
@@ -58,7 +51,7 @@ typedef struct s_lexer
 
 void	create_lexer(t_lexer *lexer, size_t cap);
 t_lexer	*malloc_lexer(size_t cap);
-void	handle_token(t_lexer *lexer, t_regex token);
+void	handle_token(t_lexer *lexer, t_token token);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
 void	double_lexer(t_lexer *lexer);
@@ -67,14 +60,14 @@ void	double_lexer(t_lexer *lexer);
 
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
-t_regex	handle_quote(char *input, char c);
+t_token	handle_quote(char *input, char c);
 
 /* Utils parsing */
 
 int		is_space(char c);
 char	*create_str(char *input, int i);
-int		is_operator(char *input);
-int		delimite_word(char *input, int i);
-int		delimite_word_substi(char *input, int i);
+int		is_operator(char *input, t_token *rlist);
+int		delimite_word(char *input, int i, t_token *rlist);
+int		delimite_word_substi(char *input, int i, t_token *rlist);
 
 #endif

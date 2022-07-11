@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:43:08 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:55:57 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 21:15:44 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	echo(char **args, int fd)
 		n++;
 	while (args[n])
 	{
-		printf("args = %s\n", args[n]);
 		ft_putstr_fd(args[n], fd);
 		if (args[n + 1] != NULL)
 			ft_putstr_fd(" ", fd);
