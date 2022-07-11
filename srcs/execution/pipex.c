@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 01:06:12 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 13:49:41 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	close_pipes(t_pipe *s_pipe)
 	int	i;
 
 	i = 0;
-	while (i < s_pipe->nbr_cmd - 1)
+	while (i < s_pipe->pipe_nbr)
 	{
 		if (s_pipe->pipe[i] != -1)
 		{
@@ -72,7 +72,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 		close_pipes(&pipex);
 		args = pipex.cmd[i];
 		if (built_in(args, env, minishell) == 0)
-			return (1);
+			exit (1);
 		if (access(args[0], X_OK) == 0)
 			execve(args[0], args, envp);
 		cmd_path = p_cmd(envp, args[0]);
@@ -118,7 +118,6 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 	}
 	close_pipes(&s_pipe);
 	j = 0;
-	close(STDIN_FILENO);
 	while (j < s_pipe.nbr_cmd)
 	{
 		waitpid(s_pipe.id[j], &wstatus, 0);

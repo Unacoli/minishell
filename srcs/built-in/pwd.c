@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:28:54 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 14:24:23 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:36:02 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,16 @@ char	*get_pwd(void)
 	char	*buf;
 	int		size;
 
-	size = 50;
+	size = 250;
 	buf = NULL;
 	buf = ft_calloc(size, sizeof(char));
 	if (!buf)
 		return (NULL);
-	while (getcwd(buf, size) == NULL)
+	if (getcwd(buf, size) == NULL)
 	{
 		free(buf);
-		size += 50;
-		buf = ft_calloc(size, sizeof(char));
-		if (!buf)
-			return (NULL);
+		error_message("pwd", 1);
+		return (NULL);
 	}
 	return (buf);
 }

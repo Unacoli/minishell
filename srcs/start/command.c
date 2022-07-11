@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/11 04:06:54 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:27:49 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	ft_command(t_ctrl *shell)
 	if (!shell->lexer)
 		exit_shell(shell);
 	lines = prompt(shell);
-	while (lines == 1)
-		lines = prompt(shell);
+	if (lines == 1)
+		return (-1);
 	if (lines == 0)
 		return (EXIT_SUCCESS);
 	return (lines);

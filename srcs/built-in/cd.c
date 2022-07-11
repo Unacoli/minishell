@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 14:41:38 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 12:23:19 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ int	cd(t_env *env, char **args)
 	if (path == NULL)
 		return (error_message("cd: Path to HOME not found", 1));
 	if (chdir(path))
-	{
-		printf("enter error_message\n");
 		return (error_message(NULL, 1));
-	}
 	else
 	{
 		if (ft_change_pwd(*env))
