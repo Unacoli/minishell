@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 17:06:12 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:09:55 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,17 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	return (1);
 }
 
-void	wait_childs()
+void	wait_childs(t_pipe *s_pipe, t_ctrl *minishell)
 {
-	int j;
+	int	j;
+	int	wstatus;
 
 	j = 0;
-	while (j < s_pipe.nbr_cmd)
+	while (j < s_pipe->nbr_cmd)
 	{
-		waitpid(s_pipe.id[j], &wstatus, 0);
+		waitpid(s_pipe->id[j], &wstatus, 0);
+		if (j == s_pipe->nbr_cmd - 1)
+			minishell->status = wstatus;
 		j++;
 	}
 }
@@ -79,11 +82,8 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 {
 	t_pipe	s_pipe;
 	int		i;
-	int		j;
-	int		wstatus;
 
 	i = 0;
-	wstatus = 0;
 	init_pipex(&s_pipe, cmd, env);
 	s_pipe.pipe = (int *) malloc(sizeof(int) * s_pipe.pipe_nbr);
 	s_pipe.id = (int *) malloc(sizeof(int) * s_pipe.nbr_cmd);
@@ -94,7 +94,7 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 		i++;
 	}
 	close_pipes(&s_pipe);
-	wait_childs(s_pipe);
+	wait_childs(&s_pipe, minishell);
 	free_pipex(&s_pipe);
 	return (0);
 }
