@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 18:59:33 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 03:28:12 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	simple_execve(t_cmd *cmd, t_env env)
 	id = fork();
 	if (id == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
 		envp = transform_env(env);
 		redirection(cmd->input_file, cmd->output_file);
 		close_fd(cmd);

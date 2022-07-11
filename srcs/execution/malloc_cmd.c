@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 03:02:37 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 19:17:22 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 00:17:50 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd)
 	cmd->av = (char ***) malloc(sizeof(char **) * (nbr_cmd + 1));
 	if (!cmd->av)
 		return (NULL);
+	cmd->av[nbr_cmd] = NULL;
 	cmd->ac = nbr_cmd;
 	return (cmd);
 }

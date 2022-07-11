@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 17:37:36 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 00:50:58 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void	double_lexer(t_lexer *lexer);
 
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
-int		tokenize(t_lexer *lexer);
-t_regex	get_token(char *input);
 t_regex	handle_quote(char *input, char c);
-t_regex	handle_substitution(char *input);
 
 /* Utils parsing */
 

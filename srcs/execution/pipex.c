@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 18:26:15 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 01:06:12 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 		if (s_pipe.cmd_paths == NULL)
 			return (1);
 	}
-	s_pipe.pipe = (int *) malloc(sizeof(int) * s_pipe.pipe_nbr); //verif return malloc 
+	s_pipe.pipe = (int *) malloc(sizeof(int) * s_pipe.pipe_nbr); //verif malloc 
 	s_pipe.id = (int *) malloc(sizeof(int) * s_pipe.nbr_cmd);
 	pipe_time(&s_pipe);
 	while (i < s_pipe.nbr_cmd)

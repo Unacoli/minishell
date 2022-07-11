@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 04:27:22 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 03:33:39 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_regex	handle_operator(int i)
 	En cas d'erreur cette fonction et toute les dependantes renvoie 
 	TOKEN_NOT_VALID */
 
-t_regex	get_token(char *input)
+t_regex	get_token(char *input, t_env *env)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ t_regex	get_token(char *input)
 	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
 		return (handle_quote(input, *input));
 	if (*input == '$')
-		return (handle_substitution(input));
+		return (handle_substitution(input, env));
 	else
 		return (handle_word(input));
 }

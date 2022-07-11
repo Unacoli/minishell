@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
-/*   Updated: 2022/06/02 10:13:01 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 01:50:40 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_lexer	*malloc_lexer(size_t cap)
 {
 	t_lexer	*result;
 
-	result = malloc(sizeof(t_lexer));
+	result = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!result)
 		return (NULL);
 	create_lexer(result, cap);

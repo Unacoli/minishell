@@ -6,7 +6,7 @@
 #    By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/23 22:47:57 by nargouse          #+#    #+#              #
-#    Updated: 2022/07/10 17:56:17 by ldubuche         ###   ########.fr        #
+#    Updated: 2022/07/11 01:28:04 by nargouse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES	= main.c start_shell.c cd.c echo.c env.c exit.c export.c pwd.c unset.c\
 			treat_token.c execution.c
 
 SRCS	= $(addprefix ./srcs/*/, $(FILES))
-OBJS	= $(addprefix ./objs/, $(MAIN:.c=.o) $(FILES:.c=.o))
+OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))
 
 all: $(NAME)
 

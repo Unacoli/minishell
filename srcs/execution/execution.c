@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:08:20 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 19:22:03 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 03:28:44 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void	close_fd(t_cmd *cmd)
 		cmd->output_file = -1;
 	}
 }
-// ajouter un gestion de la valeur de retour avec WIFEXITED et WIFSIGNALED a la fin
+
+//add un gestion de la valeur de retour avec WIFEXITED et WIFSIGNALED a la fin
 
 void	choose_execve(int nbr_cmd, t_ctrl *minishell)
 {
 	minishell->status = 0;
-	signal_handler_exec();
+	printf("%d\n", nbr_cmd);
 	if (nbr_cmd == 1)
 	{
 		if (built_in(minishell->cmd->av[0], minishell->env, minishell) != 0)
@@ -39,4 +40,5 @@ void	choose_execve(int nbr_cmd, t_ctrl *minishell)
 	else
 		pipex(minishell->cmd, minishell->env, minishell);
 	signal_handler();
+	free_cmd(minishell->cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 04:03:31 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/11 04:06:54 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 static void	handle_eof(t_ctrl *shell)
 {
 	ft_putchar_fd('\n', 1);
-	exit_shell(shell);
+	free_lexer(shell->lexer);
+	free_env(shell->env);
+	exit(0);
 }
 
 static int	new_line(t_ctrl *shell)
 {	
 	free(shell->lexer->input);
-	free_lexer(shell->lexer);
 	return (-1);
 }
 
-static int	read_input(t_lexer *lexer)
+static int	read_input(t_lexer *lexer, t_env *env)
 {
 	int	ret;
 
@@ -33,7 +34,7 @@ static int	read_input(t_lexer *lexer)
 	lexer->pos = 0;
 	if (lexer->input)
 	{
-		ret = tokenize(lexer);
+		ret = tokenize(lexer, env);
 		free(lexer->input);
 		lexer->input = NULL;
 	}
@@ -50,7 +51,7 @@ static int	prompt(t_ctrl *shell)
 		return (new_line(shell));
 	else
 		add_history(shell->lexer->input);
-	return (read_input(shell->lexer));
+	return (read_input(shell->lexer, shell->env));
 }
 
 int	ft_command(t_ctrl *shell)

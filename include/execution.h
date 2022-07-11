@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 18:17:25 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 00:54:08 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ char	*search_substi(t_env *env, char *str);
 char	*substitution(char *str, int position, t_env *env);
 char	*make_3_str(char *str, int position, int j, char *value);
 char	*join_3_str(char *before, char *substi, char *after);
+int		tokenize(t_lexer *lexer, t_env *env);
+t_regex	get_token(char *input, t_env *env);
+t_regex	handle_substitution(char *input, t_env *env);
 
 /* Built-in functions*/
 
@@ -76,4 +79,5 @@ void	signal_handler_exec(void);
 void	choose_execve(int nbr_cmd, t_ctrl *minishell);
 int		treat_token(t_ctrl *mini);
 void	close_fd(t_cmd *cmd);
+
 #endif
