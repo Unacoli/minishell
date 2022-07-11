@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 16:25:38 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:28:31 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	close_fd(t_cmd *cmd);
 int		init_pipex(t_pipe *s_pipe, t_cmd *cmd, t_env *env);
 void	pipe_time(t_pipe *pipex);
 void	close_pipes(t_pipe *s_pipe);
+int		status_handler(int wstatus);
 
 #endif
