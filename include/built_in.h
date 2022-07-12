@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:47:06 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/10 14:14:17 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:27:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*next_lower(t_env env, char *previous);
 char	*first_lower(t_env env);
 int		non_valid_identifier(char *arg, char *function);
 char	*get_pwd(void);
+char	*create_line(char *arg, int i, char *old_line);
 
 #endif

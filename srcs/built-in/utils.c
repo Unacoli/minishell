@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:51:59 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/06/02 10:05:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:27:28 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,17 @@ int	non_valid_identifier(char *arg, char *function)
 {
 	printf("%s: '%s' : not a valid identifier\n", function, arg);
 	return (1);
+}
+
+char	*create_line(char *arg, int i, char *old_line)
+{
+	char	*temp;
+
+	temp = ft_calloc(sizeof(char *), ft_strlen(arg) + 1);
+	if (!temp)
+		return (NULL);
+	ft_strlcpy(temp, arg, strlen(arg) + 1);
+	if (i)
+		free(old_line);
+	return (temp);
 }
