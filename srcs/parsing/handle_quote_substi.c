@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 18:27:23 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:34:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_token	handle_quote(char *input, char c)
 		i++;
 	}
 	ft_putstr_fd("Quote is not closed !\n", STDERR_FILENO);
+	g_status = 1;
 	return ((t_token){NULL, i, TOKEN_NOT_VALID});
 }
 
