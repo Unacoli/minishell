@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 20:27:22 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 21:22:11 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ static int	export_value(t_env *env, char *arg)
 		env->next = ft_calloc(1, sizeof(t_env));
 		if (!env->next)
 			return (error_message(NULL, 1));
-		env->line = create_line(arg, 0, env->line);
 		env = env->next;
+		env->line = create_line(arg, 0, env->line);
+		env = NULL;
 	}
 	else
 		env->line = create_line(arg, 1, env->line);
 	env = temp;
+	free(key);
 	return (0);
 }
 
