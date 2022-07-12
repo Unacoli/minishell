@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:35:00 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 14:16:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:35:55 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ char	*finish_substi(char *to_treat, t_env *env)
 	return (str);
 }
 
-void	find_arg(t_ctrl *minishell, int *pos, int *i)
+void	find_arg(t_ctrl *minishell, size_t *pos, int *i, char **arg)
 {
-	if (minishell->lexer->tokens[pos]->type >= TOKEN_LESS \
-		&& minishell->lexer->tokens[pos]->type <= TOKEN_DLESS)
+	if (minishell->lexer->tokens[*pos]->type >= TOKEN_LESS \
+		&& minishell->lexer->tokens[*pos]->type <= TOKEN_DLESS)
 		*pos += 2;
 	else
 	{
-		arg[i] = finish_substi(minishell->lexer->tokens[pos]->str, \
+		arg[*i] = finish_substi(minishell->lexer->tokens[*pos]->str, \
 		minishell->env);
-		*pos++;
-		*i++;
+		(*pos)++;
+		(*i)++;
 	}
 }
 
@@ -62,7 +62,7 @@ char	**cmd_suffix(size_t pos, t_ctrl *minishell)
 	while (pos < minishell->lexer->size
 		&& minishell->lexer->tokens[pos]->type != TOKEN_PIPE)
 	{
-		find_arg();
+		find_arg(minishell, &pos, &i, arg);
 	}
 	arg[i] = NULL;
 	minishell->lexer->pos += i - 1;
