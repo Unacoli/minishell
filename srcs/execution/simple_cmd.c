@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:35:00 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 14:35:55 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:53:05 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 char	*finish_substi(char *to_treat, t_env *env)
 {
 	char	*str;
+	int		i;
 
+	i = 0;
 	if (to_treat[0] == SINGLE_QUOTE || to_treat[0] == DOUBLE_QUOTE)
 	{
 		if (to_treat[0] == DOUBLE_QUOTE)
 		{
 			str = search_substi(env, to_treat);
-			str = delete_quote(str);
+			if (ft_strncmp(str, to_treat, ft_strlen(to_treat)) == 0)
+				i = 1;			
+			str = delete_quote(str, i);
 		}
 		else
-			str = delete_quote(to_treat);
+			str = delete_quote(to_treat, i);
 	}
 	else
 	{

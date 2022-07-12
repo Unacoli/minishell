@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:28:42 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/12 18:32:56 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:37:50 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,15 @@ static int	check_error(t_lexer *lexer)
 	while (i < lexer->size)
 	{
 		if (lexer->tokens[i]->str == NULL)
+		{
+			g_status = 1;
 			return (1);
+		}
 		if (lexer->tokens[i]->type == TOKEN_NOT_VALID)
+		{
+			g_status = 1;
 			return (1);
+		}
 		i++;
 	}
 	return (0);

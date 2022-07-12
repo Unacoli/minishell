@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 10:11:44 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:54:06 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ char	*create_str(char *input, int i);
 int		is_operator(char *input, t_token *rlist);
 int		delimite_word(char *input, int i, t_token *rlist);
 int		delimite_word_substi(char *input, int i, t_token *rlist);
-char	*delete_quote(char *str);
+char	*delete_quote(char *str, int i);
 
 #endif

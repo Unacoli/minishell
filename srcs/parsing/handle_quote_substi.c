@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 18:34:34 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:53:51 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*	Parcours tout l'input jusqu'a la quote correspondante 
 	Et le stocke dans un seul token */
 
-char	*delete_quote(char *str)
+char	*delete_quote(char *str, int i)
 {
 	char	*result;
 
@@ -23,7 +23,8 @@ char	*delete_quote(char *str)
 	if (result == NULL)
 		return (NULL);
 	ft_strlcpy(result, str + 1, ft_strlen(str) - 1);
-	free(str);
+	if (i != 1)
+		free(str);
 	return (result);
 }
 
@@ -57,7 +58,9 @@ t_token	handle_quote(char *input, char c)
 	}
 	ft_putstr_fd("Quote is not closed !\n", STDERR_FILENO);
 	g_status = 1;
-	return ((t_token){NULL, i, TOKEN_NOT_VALID});
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	ft_strlcpy(str, input, i);
+	return ((t_token){str, i, TOKEN_NOT_VALID});
 }
 
 t_token	handle_substitution(char *input, t_env *env, t_token *rlist)
