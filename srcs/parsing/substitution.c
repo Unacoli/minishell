@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 14:52:56 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:12:29 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ char	*make_3_str(char *str, int position, int j, char *value)
 	char	*substi;
 	char	*after_substi;
 
-	before_substi = ft_calloc(position, sizeof(char));
+	before_substi = ft_calloc(position + 1, sizeof(char));
 	substi = ft_calloc(ft_strlen(value) + 1, sizeof(char));
 	after_substi = ft_calloc((ft_strlen(str) - j) + 1, sizeof(char));
-	ft_strlcpy(before_substi, str, position);
+	ft_strlcpy(before_substi, str, position + 1);
 	ft_strlcpy(substi, value, ft_strlen(value) + 1);
 	ft_strlcpy(after_substi, str + j, (ft_strlen(str) - j) + 1);
+	if (str[position] == '?')
+		free(value);
 	return (join_3_str(before_substi, substi, after_substi));
 }
 
@@ -45,8 +47,7 @@ char	*substitution(char *str, int position, t_env *env)
 	j = position;
 	if (str[position] == '?')
 	{
-		variable = ft_itoa(g_status);
-		value = variable;
+		value = ft_itoa(g_status);
 		j++;
 	}
 	else
@@ -57,6 +58,7 @@ char	*substitution(char *str, int position, t_env *env)
 		variable = ft_calloc(j - position + 1, sizeof(char));
 		ft_strlcpy(variable, str + position, (j - position + 1));
 		value = search_env(*env, variable);
+		free(variable);
 		if (value == NULL)
 			value = ft_strdup("");
 	}
@@ -65,13 +67,21 @@ char	*substitution(char *str, int position, t_env *env)
 
 char	*search_substi(t_env *env, char *str)
 {
-	int	i;
+	int		i;
+	char	**tab;
+	char	*result;
 
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
-			str = substitution(str, i + 1, env);
+		{
+			tab = ft_split(str, '$');
+			result = ft_strjoin_free2(tab[0], tab[1]);
+			free(tab);
+			str = substitution(result, i, env);
+			free(result);
+		}
 		else
 			i++;
 	}
