@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:28:54 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 12:36:02 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 11:16:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_pwd(void)
 	if (getcwd(buf, size) == NULL)
 	{
 		free(buf);
-		error_message("pwd", 1);
+		error_message(NULL, 1);
 		return (NULL);
 	}
 	return (buf);

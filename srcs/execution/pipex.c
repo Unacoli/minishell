@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:35:07 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 13:40:37 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 		if (!cmd_path)
 		{
 			fprintf(stderr, "%s : command not found\n", args[0]);
+			g_status = 127;
 			exit_shell(minishell);
 		}
 		execve((const char *)cmd_path, args, envp);

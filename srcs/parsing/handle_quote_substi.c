@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 20:56:53 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/12 10:58:46 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static t_token	cpystr(char *str, char *input, int i)
 	if (str == NULL)
 		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	ft_strlcpy(str, input, i + 2);
-	str = delete_quote(str);
 	return ((t_token){str, i + 1, TOKEN_WORD});
 }
 
@@ -74,5 +73,5 @@ t_token	handle_substitution(char *input, t_env *env, t_token *rlist)
 	if (str == NULL)
 		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	str = search_substi(env, str);
-	return ((t_token){str, ft_strlen(str), TOKEN_WORD});
+	return ((t_token){str, i, TOKEN_WORD});
 }

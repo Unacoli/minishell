@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 20:55:32 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/12 10:43:53 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	delimite_word(char *input, int i, t_token *rlist)
 int	delimite_word_substi(char *input, int i, t_token *rlist)
 {
 	if (input[i + 1] == '?')
-		return (i + 1);
+		return (i + 2);
 	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
 	&& input[i] != '\n')
 		i++;

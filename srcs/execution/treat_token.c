@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:09:50 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 16:04:05 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 12:26:16 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,40 @@ int	deal_with_less_great(t_token *token, t_ctrl *mini, int j, int nbr_cmd)
 	return (0);
 }
 
+int	init_treat_token(int *nbr_cmd, t_ctrl *mini, int *j, int *pipe)
+{
+	*nbr_cmd = count_pipe(mini->lexer->tokens, mini->lexer->size);
+	if (*nbr_cmd == -1)
+		return (0);
+	mini->cmd = malloc_cmd(mini->cmd, *nbr_cmd);
+	mini->lexer->pos = 0;
+	*j = 0;
+	*pipe = 0;
+	return (1);
+}
+
 int	treat_token(t_ctrl *mini)
 {
 	int		nbr_cmd;
 	t_token	*token;
 	int		j;
+	int		pipe;
 
-	nbr_cmd = count_pipe(mini->lexer->tokens, mini->lexer->size);
-	if (nbr_cmd == -1)
+	if (!init_treat_token(&nbr_cmd, mini, &j, &pipe))
 		return (0);
-	mini->cmd = malloc_cmd(mini->cmd, nbr_cmd);
-	mini->lexer->pos = 0;
 	token = NULL;
-	j = 0;
 	while (mini->lexer->pos < mini->lexer->size)
 	{
 		token = mini->lexer->tokens[mini->lexer->pos];
-		if (token->type == TOKEN_WORD)
+		if (token->type == TOKEN_WORD && j < nbr_cmd && j == pipe)
 			mini->cmd->av[j++] = cmd_suffix(mini->lexer->pos, mini);
 		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
 		{
 			if (deal_with_less_great(token, mini, j, nbr_cmd))
 				return (1);
 		}
+		else if (token->type == TOKEN_PIPE)
+			pipe++;
 		mini->lexer->pos++;
 	}
 	return (nbr_cmd);

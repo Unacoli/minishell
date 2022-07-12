@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 19:28:25 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 11:28:33 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ char	*substitution(char *str, int position, t_env *env)
 	}
 	else
 	{
-		while (str[j] && (!is_space(str[j]) && isalnum(str[j])))
+		while (str[j] && (!is_space(str[j]) && (isalnum(str[j]) \
+		|| str[j] == '_')))
 			j++;
 		variable = ft_calloc(j - position + 1, sizeof(char));
 		ft_strlcpy(variable, str + position, (j - position + 1));
@@ -71,7 +72,8 @@ char	*search_substi(t_env *env, char *str)
 	{
 		if (str[i] == '$')
 			str = substitution(str, i + 1, env);
-		i++;
+		else
+			i++;
 	}
 	return (str);
 }

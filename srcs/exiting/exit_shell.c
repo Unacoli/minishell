@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:23:23 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/10 13:32:58 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 11:05:18 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@
 void	exit_shell(t_ctrl *minishell)
 {
 	exit_free(minishell);
-	exit(0);
+	exit(g_status);
 }
