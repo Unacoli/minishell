@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 14:56:59 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:56:58 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,18 @@
 
 char	*delete_quote(char *str)
 {
-	int	i;
-	int	len;
+	char	*result;
 
-	i = 0;
-	len = ft_strlen(str) - 2;
-	while (i < len)
-	{
-		str[i] = str[i + 1];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	result = (char *)malloc(sizeof(char) * (ft_strlen(str) - 1));
+	if (result == NULL)
+		return (NULL);
+	ft_strlcpy(result, str + 1, ft_strlen(str) - 1);
+	return (result);
 }
 
 static t_token	cpystr(char *str, char *input, int i)
 {
-	str = (char *) malloc(sizeof(char) * (i + 2));
+	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (str == NULL)
 		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	ft_strlcpy(str, input, i + 2);

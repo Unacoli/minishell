@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:08:20 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:34:39 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 15:24:36 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	choose_execve(int nbr_cmd, t_ctrl *minishell)
 	else
 		pipex(minishell->cmd, minishell->env, minishell);
 	signal_handler();
-	free_cmd(minishell->cmd);
+	if (minishell->cmd)
+		free_cmd(minishell->cmd);
 }
