@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:50:01 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 10:58:46 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:56:59 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_token	handle_substitution(char *input, t_env *env, t_token *rlist)
 	char	*str;
 
 	i = delimite_word_substi(input, 0, rlist);
-	str = create_str(input, i + 1);
+	str = create_str(input, i);
 	if (str == NULL)
 		return ((t_token){NULL, 0, TOKEN_NOT_VALID});
 	str = search_substi(env, str);
