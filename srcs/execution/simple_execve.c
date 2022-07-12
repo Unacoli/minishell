@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 11:06:06 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:49:20 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
 		cmd_path = p_cmd(envp, cmd->av[0][0]);
 		if (!cmd_path)
 			error_exit(cmd->av[0][0], minishell);
+		int i = 0;
+		while (cmd->av[0][i])
+			printf("args = .%s.\n", cmd->av[0][i++]);
 		execve((const char *)cmd_path, cmd->av[0], envp);
 		perror("Execve");
 		exit(errno);
