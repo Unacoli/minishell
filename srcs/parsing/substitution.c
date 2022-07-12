@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 18:12:29 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/12 18:22:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,14 @@ char	*search_substi(t_env *env, char *str)
 		if (str[i] == '$')
 		{
 			tab = ft_split(str, '$');
-			result = ft_strjoin_free2(tab[0], tab[1]);
-			free(tab);
+			if (tab [1])
+				result = ft_strjoin(tab[0], tab[1]);
+			else
+				result = tab[0];
 			str = substitution(result, i, env);
-			free(result);
+			if (tab [1])
+				free(result);
+			free_split(tab, 0);
 		}
 		else
 			i++;
