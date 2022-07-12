@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 01:36:50 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/12 20:46:47 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/12 21:44:41 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_input(t_ctrl *minishell)
 		if (treat_token(minishell))
 			choose_execve(minishell->cmd->ac, minishell);
 		else
+		{
+			g_status = 1;
 			free_cmd(minishell->cmd);
+		}
 	}
 	if (minishell->lexer)
 		free_lexer(minishell->lexer);
