@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:09:50 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 12:26:16 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:55:42 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ int	deal_with_less_great(t_token *token, t_ctrl *mini, int j, int nbr_cmd)
 
 int	init_treat_token(int *nbr_cmd, t_ctrl *mini, int *j, int *pipe)
 {
+	*nbr_cmd = 0;
 	*nbr_cmd = count_pipe(mini->lexer->tokens, mini->lexer->size);
 	if (*nbr_cmd == -1)
 		return (0);
+	mini->cmd = NULL;
 	mini->cmd = malloc_cmd(mini->cmd, *nbr_cmd);
 	mini->lexer->pos = 0;
 	*j = 0;
@@ -101,7 +103,7 @@ int	treat_token(t_ctrl *mini)
 		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
 		{
 			if (deal_with_less_great(token, mini, j, nbr_cmd))
-				return (1);
+				return (0);
 		}
 		else if (token->type == TOKEN_PIPE)
 			pipe++;
