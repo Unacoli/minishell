@@ -98,7 +98,6 @@ int	exporti(t_env *env, char **args, int fd)
 {
 	int	i;
 	int	retour;
-	char	*result;
 
 	i = 1;
 	retour = 0;
@@ -106,6 +105,7 @@ int	exporti(t_env *env, char **args, int fd)
 		affiche_env_alpha(env, fd);
 	else
 	{
+		args = join_token(args);
 		while (args[i])
 		{
 			printf("ARGS[i] ===== %s\n", args[i]);

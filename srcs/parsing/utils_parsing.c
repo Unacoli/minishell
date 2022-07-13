@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+char	**join_token(char **args)
+{
+	int		i;
+	char	**result;
+
+	i = 0;
+	while (args[i])
+		i++;
+	if (i > 1)
+	{
+		while (args[i])
+	}
+	return (args);
+}
+
 int	is_space(char c)
 {
 	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')

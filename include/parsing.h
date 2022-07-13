@@ -61,6 +61,7 @@ void	double_lexer(t_lexer *lexer);
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 t_token	handle_quote(char *input, char c);
+char	**join_token(args);
 
 /* Utils parsing */
 
