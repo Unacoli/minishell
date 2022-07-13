@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 20:19:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:10:24 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	export_value(t_env *env, char *arg)
 	key = find_key(arg);
 	if (!key)
 		return (error_message(NULL, 1));
-	while (env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
+	while (env && env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
 		env = env->next;
 	if (!env->next && ft_strncmp(env->line, key, ft_strlen(env->line)) != 0)
 	{
@@ -49,7 +49,7 @@ static int	export_value(t_env *env, char *arg)
 			return (error_message(NULL, 1));
 		env = env->next;
 		env->line = create_line(arg, 0, env->line);
-		env = NULL;
+		env->next = NULL;
 	}
 	else
 		env->line = create_line(arg, 1, env->line);
@@ -94,7 +94,7 @@ static void	affiche_env_alpha(t_env *env, int fd)
 	}
 }
 
-int	exporti(t_env *env, char **args, int fd)
+int	exporti(t_env **env, char **args, int fd)
 {
 	int		i;
 	int		retour;
@@ -103,7 +103,7 @@ int	exporti(t_env *env, char **args, int fd)
 	i = 1;
 	retour = 0;
 	if (args[1] == NULL)
-		affiche_env_alpha(env, fd);
+		affiche_env_alpha(*env, fd);
 	else
 	{
 		result = join_token(args);
@@ -111,7 +111,9 @@ int	exporti(t_env *env, char **args, int fd)
 			args = result;
 		while (args[i])
 		{
-			if (export_value(env, args[i]))
+			if (*env == NULL)
+				*env = new_elem(args[i]);
+			else if (export_value(*env, args[i]))
 				retour = 1;
 			i++;
 		}
