@@ -6,29 +6,11 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:45:04 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 15:33:17 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 03:08:43 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**join_token(char **args)
-{
-	int		i;
-	char	**result;
-
-	i = 0;
-	while (args[i])
-		i++;
-	if (i > 1)
-	{
-		while (args[i])
-		{
-			;
-		}
-	}
-	return (args);
-}
 
 int	is_space(char c)
 {
