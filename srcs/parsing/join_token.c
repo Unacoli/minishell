@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 03:08:26 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 04:01:54 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:26:35 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,14 @@ static char	**find_tokens(char **args, int nbr)
 	result = ft_calloc(sizeof(char *), nbr + 1);
 	while (args[i] != NULL && j < nbr)
 	{
-		temp = args[i];
-		printf("find : args = %s\n", args[i + 1]);
-		while (args[i + 1] && !is_equal(args[i + 1]))
+		if (is_equal(args[i]))
+			temp = args[i++];
+		while (args[i] && !is_equal(args[i]))
 		{
-			temp = ft_strjoin_free1(temp, args[i + 1]);
-			printf("find : temp = %s\n", temp);
+			temp = ft_strjoin_free1(temp, args[i]);
 			i++;
 		}
 		result[j] = ft_strdup(temp);
-		printf("find : result[j] = %s\n", result[j]);
 		j++;
 	}
 	result[j] = NULL;
@@ -69,11 +67,9 @@ char	**join_token(char **args)
 			nbr_res++;
 		i++;
 	}
-	printf("i = %d\n", i);
 	if (i > 1)
 	{
 		result = find_tokens(args, nbr_res);
-		printf("join: result[0] = %s\n", result[0]);
 	}
 	return (result);
 }
