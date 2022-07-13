@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 21:49:07 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:03:16 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	built_in(char **arg, t_env *env, t_ctrl *minishell, int fd)
 	else if (ft_strncmp(arg[0], "env", 3) == 0)
 		envi(env, fd);
 	else if (ft_strncmp(arg[0], "export", 6) == 0)
-		exporti(&(minishell->env), arg, fd);
+		exporti(env, arg, fd);
 	else if (ft_strncmp(arg[0], "pwd", 3) == 0)
 		pwd(fd);
 	else if (ft_strncmp(arg[0], "unset", 5) == 0)

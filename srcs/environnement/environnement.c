@@ -6,21 +6,11 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 14:59:46 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 21:40:28 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/12 22:51:00 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_env	*new_elem(char *str)
-{
-	t_env	*env;
-
-	env = (t_env *) ft_calloc(1, sizeof(t_env));
-	env->line = ft_strdup(str);
-	env->next = NULL;
-	return (env);
-}
 
 t_env	*init_env(char **env)
 {
