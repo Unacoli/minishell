@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 18:55:06 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:32:24 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int	prompt(t_ctrl *shell)
 	{
 		add_history(shell->lexer->input);
 		free(shell->lexer->input);
+		shell->lexer->input = NULL;
 	}
 	return (ret);
 }
