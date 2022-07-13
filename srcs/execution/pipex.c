@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 18:04:58 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:14:38 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 			execve(args[0], args, envp);
 		cmd_path = p_cmd(envp, args[0]);
 		if (!cmd_path)
-			error_exit(args[0], minishell);
+			error_exit(args[0], minishell, envp);
 		execve((const char *)cmd_path, args, envp);
 		perror("Pipex :");
 	}
