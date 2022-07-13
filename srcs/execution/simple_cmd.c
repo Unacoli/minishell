@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 16:35:00 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 20:08:01 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:57:42 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ char	**cmd_suffix(size_t pos, t_ctrl *minishell)
 		find_arg(minishell, &pos, &i, arg);
 	}
 	arg[i] = NULL;
+	i = 0;
+	while (pos < minishell->lexer->size
+		&& minishell->lexer->tokens[pos]->type == TOKEN_WORD)
+		i++;
 	minishell->lexer->pos += i - 1;
 	return (arg);
 }
