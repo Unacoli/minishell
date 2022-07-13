@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 03:08:26 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 22:13:37 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:51:38 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**join_token(char **args)
 	result = NULL;
 	while (args[i])
 	{
+		printf("%s\n", args[i]);
 		if (is_equal(args[i]))
 			nbr_res++;
 		i++;

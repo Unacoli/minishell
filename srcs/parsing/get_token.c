@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:38:59 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/12 19:21:58 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:56:28 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_token	get_token(char *input, t_env *env, t_token *rlist)
 	int		i;
 
 	i = 0;
+	printf("%s\n", input);
 	while (i < (MAX_TOKENS - 1))
 	{
 		if (!ft_strncmp(rlist[i].str, input, rlist[i].len))
