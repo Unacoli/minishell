@@ -6,25 +6,51 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 12:23:19 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 02:21:17 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_change_old_pwd(t_env *env, char *path)
+static int	create_new_elem(t_env *envi, char *msg)
 {
-	int		diff;
-	char	*temp;
+	while (envi->next)
+		envi = envi->next;
+	envi->next = ft_calloc(1, sizeof(t_env));
+	if (!envi->next)
+		return (error_message(NULL, 1));
+	envi = envi->next;
+	envi->line = create_line(msg, 0, envi->line);
+	envi = NULL;
+	return (0);
+}
 
-	free(env->line);
-	diff = ft_strrchr(path, '/') - path;
-	temp = (char *) malloc(sizeof(char) * (diff + 1));
-	if (!temp)
-		return (1);
-	ft_strlcpy(temp, path, diff + 1);
-	env->line = ft_strjoin_free("OLD_PWD=", temp + 4);
-	if (!(env->line))
+static char	*reset_pwd(t_env env, char *path)
+{
+	t_env	*envi;
+	char	*temp;
+	char	*old_pwd;
+
+	envi = &env;
+	old_pwd = NULL;
+	temp = search_env(env, "PWD");
+	if (temp == NULL)
+		create_new_elem(envi, "PWD=");
+	else
+		old_pwd = ft_strdup(temp);
+	temp = search_env(env, "OLDPWD");
+	if (temp == NULL)
+		create_new_elem(envi, "OLDPWD=");
+	if (old_pwd == NULL)
+		old_pwd = ft_strdup(path);
+	return (old_pwd);
+}
+
+static int	create_new_pwd(t_env *envi, char *msg, char *str)
+{
+	free(envi->line);
+	envi->line = ft_strjoin(msg, str);
+	if (!(envi->line))
 		return (1);
 	return (0);
 }
@@ -33,25 +59,24 @@ static int	ft_change_pwd(t_env env)
 {
 	t_env	*envi;
 	char	*path;
+	char	*old_pwd;
 
+	old_pwd = NULL;
 	envi = &env;
 	path = get_pwd();
 	if (path == NULL)
 		return (1);
-	while (envi->next != NULL)
+	old_pwd = reset_pwd(env, path);
+	while (envi != NULL)
 	{
 		if (!ft_strncmp(envi->line, "PWD=", 4))
-		{
-			free(envi->line);
-			envi->line = ft_strjoin_free("PWD=", path);
-			if (!(envi->line))
-				return (1);
-		}
-		else if (!ft_strncmp(envi->line, "OLD_PWD=", 4))
-			if (ft_change_old_pwd(envi, path))
-				return (1);
+			create_new_pwd(envi, "PWD=", path);
+		else if (!ft_strncmp(envi->line, "OLDPWD=", 4))
+			create_new_pwd(envi, "OLDPWD=", old_pwd);
 		envi = envi->next;
 	}
+	free(path);
+	free(old_pwd);
 	return (0);
 }
 

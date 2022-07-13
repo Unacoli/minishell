@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 18:22:47 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 02:25:25 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*make_3_str(char *str, int position, int j, char *value)
 	ft_strlcpy(before_substi, str, position + 1);
 	ft_strlcpy(substi, value, ft_strlen(value) + 1);
 	ft_strlcpy(after_substi, str + j, (ft_strlen(str) - j) + 1);
-	if (str[position] == '?')
+	if (str[position] == '?' || value[0] == '\0')
 		free(value);
 	return (join_3_str(before_substi, substi, after_substi));
 }
