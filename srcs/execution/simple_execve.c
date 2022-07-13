@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 17:14:07 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:32:06 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ char	*p_cmd(char **envp, char *cmd)
 	return (NULL);
 }
 
-char	**transform_env(t_env env)
+char	**transform_env(t_env *env)
 {
 	char	**envp;
 	int		len;
 	t_env	*temp;
 	int		i;
 
-	len = env_len(&env);
+	len = env_len(env);
 	envp = (char **) malloc(sizeof(char *) * (len + 1));
-	temp = &env;
+	temp = env;
 	i = 0;
 	while (temp)
 	{
@@ -91,7 +91,7 @@ char	**transform_env(t_env env)
 	return (envp);
 }
 
-int	simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell)
+int	simple_execve(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 {
 	int		id;
 	int		wstatus;

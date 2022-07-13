@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 16:17:43 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:47:02 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_lexer
 	size_t	size;
 	size_t	capacity;
 	char	*input;
+	char	*history;
 	t_token	**tokens;
 }				t_lexer;
 

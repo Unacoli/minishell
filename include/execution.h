@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 20:57:25 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:27:57 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ t_token	handle_substitution(char *input, t_env *env, t_token *rlist);
 
 /* Built-in functions*/
 
-int		simple_execve(t_cmd *cmd, t_env env, t_ctrl *minishell);
-char	**transform_env(t_env env);
+int		simple_execve(t_cmd *cmd, t_env *env, t_ctrl *minishell);
+char	**transform_env(t_env *env);
 char	*p_cmd(char **envp, char *cmd);
 void	redirection(int fd_0, int fd_1);
 t_cmd	*simple_cmd(size_t pos, t_ctrl *minishell, t_cmd *cmd);

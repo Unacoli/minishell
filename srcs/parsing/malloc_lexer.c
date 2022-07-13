@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 15:37:20 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 16:18:50 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:47:37 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	create_lexer(t_lexer *lexer, size_t cap)
 	lexer->size = 0;
 	lexer->capacity = cap;
 	lexer->input = NULL;
+	lexer->history = NULL;
 	lexer->tokens = ft_calloc((cap + 1), sizeof(t_token *));
 }
 

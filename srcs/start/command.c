@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 16:32:33 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:42:50 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ static int	prompt(t_ctrl *shell)
 		handle_eof(shell);
 	else if (shell->lexer->input[0] == '\0')
 		return (new_line(shell));
-	else
+	else if (shell->lexer->input && *shell->lexer->input)
+	{
 		add_history(shell->lexer->input);
+		printf("after history : %s\n", shell->lexer->input);
+	}
 	return (read_input(shell->lexer, shell->env));
 }
 

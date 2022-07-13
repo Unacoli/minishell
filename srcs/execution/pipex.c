@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 16:35:46 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:28:47 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	child_bonus(t_pipe pipex, int i, t_env *env, t_ctrl *minishell)
 	pipex.id[i] = fork();
 	if (pipex.id[i] == 0)
 	{
-		envp = transform_env(*env);
+		envp = transform_env(env);
 		redir(pipex, i);
 		args = pipex.cmd[i];
 		if (built_in(args, env, minishell, 1) == 0)
