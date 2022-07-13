@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:16:35 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 17:25:29 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:55:07 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	init_pipex(t_pipe *s_pipe, t_cmd *cmd, t_env *env)
 	s_pipe->nbr_cmd = cmd->ac;
 	s_pipe->pipe_nbr = 2 * (cmd->ac - 1);
 	s_pipe->env_path = search_env(*env, "PATH");
-	if (s_pipe->env_path != NULL)
-	{
-		s_pipe->cmd_paths = ft_split(s_pipe->env_path, ':');
-		if (s_pipe->cmd_paths == NULL)
-			return (1);
-	}
 	return (0);
 }
 

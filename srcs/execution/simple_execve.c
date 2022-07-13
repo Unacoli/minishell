@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 17:14:07 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:22:44 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*p_cmd(char **envp, char *cmd)
 		if (tmp == NULL)
 			printf("Strjoin fail\n");
 		command = ft_strjoin(tmp, cmd);
-		if (tmp == NULL)
+		if (command == NULL)
 		{
 			free(tmp);
 			printf("Strjoin fail\n");

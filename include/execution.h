@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:50:19 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 20:57:25 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:58:31 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_pipe
 	int		pipe_nbr;
 	int		nbr_cmd;
 	char	*env_path;
-	char	**cmd_paths;
 	char	***cmd;
 	int		*pipe;
 	int		*id;

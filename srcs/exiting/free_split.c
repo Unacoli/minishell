@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:20:17 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 15:25:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:46:56 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	free_split(char **tab, int i)
 		while (tab[i])
 		{
 			if (tab[i])
+			{
 				free(tab[i]);
+				tab[i] = NULL;
+			}
 			i++;
 		}
 		free(tab);
+		tab = NULL;
 	}
 }
