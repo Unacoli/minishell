@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:44:34 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 18:00:17 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:49:07 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 
 void	exit_free(t_ctrl *minishell)
 {
-	printf("before clear : %s\n", minishell->lexer->input);
 	rl_clear_history();
-	printf("after clear : %s\n", minishell->lexer->input);
 	if (minishell)
 	{
 		if (minishell->lexer)
@@ -28,6 +26,5 @@ void	exit_free(t_ctrl *minishell)
 		if (minishell->cmd)
 			free_cmd(minishell->cmd);
 	}
-	rl_clear_history();
 	exit(g_status);
 }

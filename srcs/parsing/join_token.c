@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 03:08:26 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 15:26:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:29:37 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,17 @@ static char	**find_tokens(char **args, int nbr)
 			temp = args[i++];
 		while (args[i] && !is_equal(args[i]))
 		{
-			temp = ft_strjoin_free1(temp, args[i]);
+			if (is_equal(temp) && result[0])
+				temp = ft_strjoin(temp, args[i]);
+			else
+				temp = ft_strjoin_free1(temp, args[i]);
 			i++;
 		}
 		result[j] = ft_strdup(temp);
 		j++;
 	}
 	result[j] = NULL;
+	free(temp);
 	return (result);
 }
 
@@ -68,8 +72,6 @@ char	**join_token(char **args)
 		i++;
 	}
 	if (i > 1)
-	{
 		result = find_tokens(args, nbr_res);
-	}
 	return (result);
 }

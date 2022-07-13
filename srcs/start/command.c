@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 17:42:50 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:55:06 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,29 @@ static int	read_input(t_lexer *lexer, t_env *env)
 	ret = 0;
 	lexer->pos = 0;
 	if (lexer->input)
-	{
 		ret = tokenize(lexer, env);
-		free(lexer->input);
-		lexer->input = NULL;
-	}
 	return (ret);
 }
 
 static int	prompt(t_ctrl *shell)
 {
+	int	ret;
+
+	ret = 0;
 	shell->lexer->input = NULL;
 	shell->lexer->input = readline("minishell% ");
 	if (!shell->lexer->input)
 		handle_eof(shell);
 	else if (shell->lexer->input[0] == '\0')
 		return (new_line(shell));
-	else if (shell->lexer->input && *shell->lexer->input)
+	if (shell->lexer->input)
+		ret = read_input(shell->lexer, shell->env);
+	if (shell->lexer->input && *shell->lexer->input)
 	{
 		add_history(shell->lexer->input);
-		printf("after history : %s\n", shell->lexer->input);
+		free(shell->lexer->input);
 	}
-	return (read_input(shell->lexer, shell->env));
+	return (ret);
 }
 
 int	ft_command(t_ctrl *shell)

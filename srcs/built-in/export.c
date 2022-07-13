@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 15:23:13 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:25:35 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,13 @@ int	exporti(t_env *env, char **args, int fd)
 	else
 	{
 		args = join_token(args);
-		printf("args = %s\n", args[i]);
 		while (args[i])
 		{
-			printf("ARGS[i] ===== %s\n", args[i]);
 			if (export_value(env, args[i]))
 				retour = 1;
 			i++;
 		}
+		free_split(args, 0);
 	}
 	return (retour);
 }
