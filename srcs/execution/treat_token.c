@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:09:50 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 22:57:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:12:09 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	treat_token(t_ctrl *mini)
 	while (mini->lexer->pos < mini->lexer->size)
 	{
 		token = mini->lexer->tokens[mini->lexer->pos];
-		printf("%s\n", token->str);
 		if (token->type == TOKEN_WORD && j < nbr_cmd && j == pipe)
 			mini->cmd->av[j++] = cmd_suffix(mini->lexer->pos, mini);
 		else if (token->type >= TOKEN_LESS && token->type <= TOKEN_DLESS)
