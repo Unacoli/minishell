@@ -33,8 +33,10 @@ char	*create_str(char *input, int i)
 int	delimite_word(char *input, int i, t_token *rlist)
 {
 	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
-	&& input[i] != '\n')
+	&& input[i] != '\n' && input[i] != '\'' && input[i] != '"')
+	{
 		i++;
+	}
 	return (i);
 }
 

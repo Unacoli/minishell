@@ -22,7 +22,7 @@ static int	is_identifier_valid(char *name)
 	i++;
 	while (name[i] && name[i] != '=')
 	{
-		if (!(ft_isalnum(name[i]) || name[i] == '_'))
+		if (!(ft_isalnum(name[i]) || name[i] == '_' || name[i] == ' '))
 			return (0);
 		i++;
 	}
@@ -98,6 +98,7 @@ int	exporti(t_env *env, char **args, int fd)
 {
 	int	i;
 	int	retour;
+	char	*result;
 
 	i = 1;
 	retour = 0;
@@ -107,6 +108,7 @@ int	exporti(t_env *env, char **args, int fd)
 	{
 		while (args[i])
 		{
+			printf("ARGS[i] ===== %s\n", args[i]);
 			if (export_value(env, args[i]))
 				retour = 1;
 			i++;
