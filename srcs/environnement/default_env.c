@@ -6,13 +6,13 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:31 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 04:55:02 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:42:02 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_env	*add_pwd(t_env *next_elem)
+static t_env	*add_pwd(void)
 {
 	t_env	*buf;
 
@@ -23,7 +23,7 @@ static t_env	*add_pwd(t_env *next_elem)
 	buf->line = ft_strjoin_free("PWD=", buf->line);
 	if (!buf->line)
 		return (NULL);
-	buf->next = next_elem;
+	buf->next = NULL;
 	return (buf);
 }
 
@@ -31,7 +31,7 @@ t_env	*default_env(void)
 {
 	t_env	*env;
 
-	env = add_pwd(NULL);
+	env = add_pwd();
 	if (env)
 		env->next = NULL;
 	if (!env)
