@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 19:25:35 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:49:52 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ static void	affiche_env_alpha(t_env *env, int fd)
 
 int	exporti(t_env *env, char **args, int fd)
 {
-	int	i;
-	int	retour;
+	int		i;
+	int		retour;
+	char	**result;
 
 	i = 0;
 	retour = 0;
@@ -105,14 +106,17 @@ int	exporti(t_env *env, char **args, int fd)
 		affiche_env_alpha(env, fd);
 	else
 	{
-		args = join_token(args);
+		result = join_token(args);
+		if (result != NULL)
+			args = result;
 		while (args[i])
 		{
 			if (export_value(env, args[i]))
 				retour = 1;
 			i++;
 		}
-		free_split(args, 0);
+		if (result != NULL)
+			free_split(args, 0);
 	}
 	return (retour);
 }
