@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/13 19:32:24 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:11:56 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void	handle_eof(t_ctrl *shell)
 {
+	rl_clear_history();
 	ft_putchar_fd('\n', 1);
 	free_lexer(shell->lexer);
 	free_env(shell->env);
-	exit(0);
+	exit(g_status);
 }
 
 static int	new_line(t_ctrl *shell)

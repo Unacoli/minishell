@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:35:55 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 18:21:17 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 20:02:10 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,10 @@ int	simple_execve(t_cmd *cmd, t_env *env, t_ctrl *minishell)
 		if (access(cmd->av[0][0], X_OK) == 0)
 			execve(cmd->av[0][0], cmd->av[0], envp);
 		cmd_path = p_cmd(envp, cmd->av[0][0]);
-		free(envp);
 		if (!cmd_path)
-			error_exit(cmd->av[0][0], minishell);
+			error_exit(cmd->av[0][0], minishell, envp);
 		execve((const char *)cmd_path, cmd->av[0], envp);
-		perror("Execve");
-		exit(errno);
+		exit_free(minishell);
 	}
 	waitpid(id, &wstatus, 0);
 	g_status = status_handler(wstatus);
