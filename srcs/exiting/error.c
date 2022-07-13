@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 10:57:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 12:35:05 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:33:43 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	error_exit(char *str, t_ctrl *minishell)
 	ft_putstr_fd("Command not found ", STDERR_FILENO);
 	ft_putendl_fd(str, STDERR_FILENO);
 	g_status = 127;
-	exit_shell(minishell);
+	exit_free(minishell);
 }

@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:41:58 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 05:40:06 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 15:38:15 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	free_command(t_cmd *cmd)
 			i++;
 		}
 		free(cmd->av);
+		cmd->av = NULL;
 	}
 }
 
@@ -47,5 +48,6 @@ void	free_cmd(t_cmd *cmd)
 	{
 		free_command(cmd);
 		free(cmd);
+		cmd = NULL;
 	}
 }

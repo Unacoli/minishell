@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 21:34:05 by nargouse          #+#    #+#             */
-/*   Updated: 2022/07/12 14:54:59 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:32:33 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_command(t_ctrl *shell)
 	lines = 0;
 	shell->lexer = malloc_lexer(42);
 	if (!shell->lexer)
-		exit_shell(shell);
+		exit_free(shell);
 	lines = prompt(shell);
 	if (lines == 1 || !shell->lexer->tokens[0])
 		return (-1);

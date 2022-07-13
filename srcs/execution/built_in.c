@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 05:32:12 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 16:32:55 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	built_in(char **arg, t_env *env, t_ctrl *minishell, int fd)
 	{
 		if (arg[1])
 			g_status = ft_atoi(arg[1]);
-		exit_shell(minishell);
+		exit_free(minishell);
 	}
 	else if (ft_strncmp(arg[0], "echo", 4) == 0)
 		echo(arg, fd);
