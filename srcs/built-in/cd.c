@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 02:21:17 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 04:44:29 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,15 @@ static int	create_new_elem(t_env *envi, char *msg)
 	return (0);
 }
 
-static char	*reset_pwd(t_env env, char *path)
+static void	reset_pwd(t_env *env)
 {
 	t_env	*envi;
 	char	*temp;
-	char	*old_pwd;
 
-	envi = &env;
-	old_pwd = NULL;
-	temp = search_env(env, "PWD");
+	envi = env;
+	temp = search_env(*env, "PWD");
 	if (temp == NULL)
 		create_new_elem(envi, "PWD=");
-	else
-		old_pwd = ft_strdup(temp);
-	temp = search_env(env, "OLDPWD");
-	if (temp == NULL)
-		create_new_elem(envi, "OLDPWD=");
-	if (old_pwd == NULL)
-		old_pwd = ft_strdup(path);
-	return (old_pwd);
 }
 
 static int	create_new_pwd(t_env *envi, char *msg, char *str)
@@ -55,28 +45,23 @@ static int	create_new_pwd(t_env *envi, char *msg, char *str)
 	return (0);
 }
 
-static int	ft_change_pwd(t_env env)
+static int	ft_change_pwd(t_env *env)
 {
 	t_env	*envi;
 	char	*path;
-	char	*old_pwd;
 
-	old_pwd = NULL;
-	envi = &env;
+	envi = env;
 	path = get_pwd();
 	if (path == NULL)
 		return (1);
-	old_pwd = reset_pwd(env, path);
+	reset_pwd(env);
 	while (envi != NULL)
 	{
 		if (!ft_strncmp(envi->line, "PWD=", 4))
 			create_new_pwd(envi, "PWD=", path);
-		else if (!ft_strncmp(envi->line, "OLDPWD=", 4))
-			create_new_pwd(envi, "OLDPWD=", old_pwd);
 		envi = envi->next;
 	}
 	free(path);
-	free(old_pwd);
 	return (0);
 }
 
@@ -98,7 +83,7 @@ int	cd(t_env *env, char **args)
 		return (error_message(NULL, 1));
 	else
 	{
-		if (ft_change_pwd(*env))
+		if (ft_change_pwd(env))
 			return (error_message(NULL, 1));
 		else
 			return (0);
