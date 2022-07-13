@@ -23,6 +23,9 @@ char	**join_token(char **args)
 	if (i > 1)
 	{
 		while (args[i])
+		{
+			;
+		}
 	}
 	return (args);
 }
