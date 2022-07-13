@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:37:10 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/12 19:54:06 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 04:10:25 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	double_lexer(t_lexer *lexer);
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 t_token	handle_quote(char *input, char c);
-char	**join_token(char **args);
 
 /* Utils parsing */
 
@@ -71,5 +70,6 @@ int		is_operator(char *input, t_token *rlist);
 int		delimite_word(char *input, int i, t_token *rlist);
 int		delimite_word_substi(char *input, int i, t_token *rlist);
 char	*delete_quote(char *str, int i);
+char	**join_token(char **args);
 
 #endif
