@@ -6,7 +6,11 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:49:31 by ldubuche          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/07/13 03:29:26 by ldubuche         ###   ########.fr       */
+=======
+/*   Updated: 2022/07/13 03:40:09 by nargouse         ###   ########.fr       */
+>>>>>>> 9af27c9ae76da6fb126b99c2f2072487cca8303a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +46,7 @@ static t_env	*add_old_pwd(char *pwd, t_env *next_elem)
 		return (NULL);
 	ft_strlcpy(temp, pwd, diff + 1);
 	buf->line = ft_strjoin("OLDPWD=", temp + 4);
+	free(temp);
 	if (!buf->line)
 		return (NULL);
 	buf->next = next_elem;
