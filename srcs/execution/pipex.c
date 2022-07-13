@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:28:29 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 17:28:47 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:04:58 by nargouse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	free_pipex(t_pipe *pipex)
 		free(pipex->pipe);
 	if (pipex->id)
 		free(pipex->id);
-	free_split(pipex->cmd_paths, 0);
 }
 
 void	redir(t_pipe pipex, int i)

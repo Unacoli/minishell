@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 16:24:46 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/11 18:09:42 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:01:29 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	d_less(t_cmd *cmd, t_ctrl *ms, int pos, int lexer_size)
 {
 	if (pos + 1 < lexer_size && ms->lexer->tokens[pos + 1]->type == TOKEN_WORD)
 	{
+		if (cmd->input_file > 2)
+			close(cmd->input_file);
 		cmd->input_file
 			= here_doc(ft_strjoin(ms->lexer->tokens[pos + 1]->str, "\n"),
 				ms->env);
