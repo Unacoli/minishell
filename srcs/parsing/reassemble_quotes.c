@@ -10,11 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// echo 12345 67"890 a bcd efgh ij"
+//            4                 12               
+// echo 12345 67"890 a bcd efgh ij" ab cd ef
+// echo 12345 67"890abcdefghij" ab cd ed
+//            >------------------<
 
 #include "minishell.h"
 
-static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_fermante)
+static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int *i_fermante)
 {
 	int	len;
 	int	i;
@@ -25,13 +28,13 @@ static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_
 
 	i = i_ouvrante - 1;
 	len = 0;
-	while (i < i_fermante)
+	while (i < *i_fermante)
 		len += lexer->tokens[i++]->len;
 	str_new = ft_newstr(len + 1);
 	
 	i = i_ouvrante - 1;
 	j = 0;
-	while (i < i_fermante)
+	while (i < *i_fermante)
 	{
 		k = 0;
 		while (lexer->tokens[i]->str[k] != '\0')
@@ -42,13 +45,11 @@ static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_
 		}
 		i++;
 	}
+	str_new[j] = '\0';
 	new = malloc_token(str_new, len, TOKEN_WORD);
 
 	t_token **new_tokens;
-	printf("taille newt tokens: %lu\n", lexer->size - (i_fermante - i_ouvrante));
-	printf("offset: %d\n", i_fermante - i_ouvrante + 1);
-	printf("iuv: %d\n", i_ouvrante);
-	new_tokens = (t_token **)ft_calloc(lexer->size - (i_fermante - i_ouvrante), sizeof(t_token *));
+	new_tokens = (t_token **)ft_calloc(lexer->size - (*i_fermante - i_ouvrante), sizeof(t_token *));
 	k = 0;
 
 	while (k < i_ouvrante - 1)
@@ -57,17 +58,24 @@ static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_
 		k++;
 	}
 	new_tokens[k++] = new;
-	while (k < (int)lexer->size - (i_fermante - i_ouvrante))
+	while (k < (int)lexer->size - (*i_fermante - i_ouvrante))
 	{
-		printf("k: %d\nk:%d\n\n", k, k + (i_fermante - i_ouvrante - 1));
-		new_tokens[k] = lexer->tokens[k + (i_fermante - i_ouvrante - 1)];
+		new_tokens[k] = lexer->tokens[k + (*i_fermante - i_ouvrante)];
 		k++;
 	}
 
-	free_tokens(lexer);
+	i = i_ouvrante;
+	// while (i >= 4 && i <= 12)
+	while (i > i_ouvrante && i <= *i_fermante)
+		free(lexer->tokens[i++ - 1]);
+	free(lexer->tokens);
+
+	//free_tokens(lexer);
 	lexer->tokens = new_tokens;
 	lexer->size = k;
 	lexer->capacity = k;
+
+	*i_fermante = k + 1;
 
 	return ;
 }
@@ -90,12 +98,20 @@ static char	*find_double_quote(t_lexer *lexer, int *i)
 		if (chr_fermante != NULL)
 		{
 			(*i)++;
-			quote_closed_in_another_token(lexer, i_ouvrante, *i);
+			quote_closed_in_another_token(lexer, i_ouvrante, i);
 			return (chr_fermante);
 		}
 		(*i)++;
 	}
-	quote_not_closed(lexer->tokens[*i - 1]);
+printf("%d><\n", *i);
+	int ii = 0;
+	while (ii < (int)lexer->size)
+	{
+		printf("%s\n", lexer->tokens[ii]->str);
+		ii++;
+	}
+
+	quote_not_closed(lexer->tokens[*i]);
 	return (NULL);
 }
 

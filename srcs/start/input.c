@@ -19,7 +19,7 @@ void	ft_input(t_ctrl *minishell)
 
 	cmd = ft_command(minishell);
 	i = 0;
-	while (minishell->lexer->tokens[i])
+	while (i < (int)minishell->lexer->size)
 	{
 		printf("%s\n", minishell->lexer->tokens[i]->str);
 		i++;
