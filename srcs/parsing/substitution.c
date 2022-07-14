@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/14 13:26:38 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:50:47 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*search_substi(t_env *env, char *str)
 			else
 				substi = 1;
 			str = temp;
-			i++;
+			i = 0;
 		}
 		else
 			i++;
