@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 23:19:52 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 02:25:25 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 13:26:38 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*make_3_str(char *str, int position, int j, char *value)
 	char	*substi;
 	char	*after_substi;
 
-	before_substi = ft_calloc(position + 1, sizeof(char));
+	before_substi = ft_calloc(position, sizeof(char));
 	substi = ft_calloc(ft_strlen(value) + 1, sizeof(char));
 	after_substi = ft_calloc((ft_strlen(str) - j) + 1, sizeof(char));
-	ft_strlcpy(before_substi, str, position + 1);
+	ft_strlcpy(before_substi, str, position);
 	ft_strlcpy(substi, value, ft_strlen(value) + 1);
 	ft_strlcpy(after_substi, str + j, (ft_strlen(str) - j) + 1);
 	if (str[position] == '?' || value[0] == '\0')
@@ -68,23 +68,22 @@ char	*substitution(char *str, int position, t_env *env)
 char	*search_substi(t_env *env, char *str)
 {
 	int		i;
-	char	**tab;
-	char	*result;
+	int		substi;
+	char	*temp;
 
 	i = 0;
+	substi = 0;
 	while (str[i])
 	{
 		if (str[i] == '$')
 		{
-			tab = ft_split(str, '$');
-			if (tab [1])
-				result = ft_strjoin(tab[0], tab[1]);
+			temp = substitution(str, i + 1, env);
+			if (substi == 1)
+				free(str);
 			else
-				result = tab[0];
-			str = substitution(result, i, env);
-			if (tab [1])
-				free(result);
-			free_split(tab, 0);
+				substi = 1;
+			str = temp;
+			i++;
 		}
 		else
 			i++;
