@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 16:00:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 21:49:07 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:19:02 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	built_in(char **arg, t_env *env, t_ctrl *minishell, int fd)
 {
 	if (ft_strncmp(arg[0], "cd", 2) == 0)
-		cd(env, arg);
+		cd(&(minishell->env), arg);
 	else if (ft_strncmp(arg[0], "exit", 4) == 0)
 	{
 		if (arg[1])

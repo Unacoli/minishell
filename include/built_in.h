@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 18:47:06 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 21:49:23 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:19:12 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*	BUILT-IN functions */
 
-int		cd(t_env *env, char **args);
+int		cd(t_env **env, char **args);
 int		echo(char **args, int fd);
 int		envi(t_env *env, int fd);
 void	exit_free(t_ctrl *minishell);

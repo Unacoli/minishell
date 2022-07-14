@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:40:42 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 04:44:29 by nargouse         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:19:55 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,24 @@ static int	create_new_elem(t_env *envi, char *msg)
 	return (0);
 }
 
-static void	reset_pwd(t_env *env)
+static void	reset_pwd(t_env **env, char *path)
 {
 	t_env	*envi;
 	char	*temp;
 
-	envi = env;
-	temp = search_env(*env, "PWD");
-	if (temp == NULL)
-		create_new_elem(envi, "PWD=");
+	envi = *env;
+	if (*env == NULL)
+	{
+		temp = ft_strjoin("PWD=", path);
+		*env = new_elem(temp);
+		free(temp);
+	}
+	else
+	{
+		temp = search_env(**env, "PWD");
+		if (temp == NULL)
+			create_new_elem(envi, "PWD=");
+	}
 }
 
 static int	create_new_pwd(t_env *envi, char *msg, char *str)
@@ -45,16 +54,16 @@ static int	create_new_pwd(t_env *envi, char *msg, char *str)
 	return (0);
 }
 
-static int	ft_change_pwd(t_env *env)
+static int	ft_change_pwd(t_env **env)
 {
 	t_env	*envi;
 	char	*path;
 
-	envi = env;
+	envi = *env;
 	path = get_pwd();
 	if (path == NULL)
 		return (1);
-	reset_pwd(env);
+	reset_pwd(env, path);
 	while (envi != NULL)
 	{
 		if (!ft_strncmp(envi->line, "PWD=", 4))
@@ -65,12 +74,12 @@ static int	ft_change_pwd(t_env *env)
 	return (0);
 }
 
-int	cd(t_env *env, char **args)
+int	cd(t_env **env, char **args)
 {
 	char	*path;
 
 	if (args[1] == NULL)
-		path = search_env(*env, "HOME");
+		path = search_env(**env, "HOME");
 	else
 	{
 		path = args[1];
