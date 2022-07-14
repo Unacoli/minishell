@@ -24,7 +24,7 @@
 typedef enum e_ttype
 {
 	TOKEN_NOT_VALID = 0,
-	TOKEN_PASS,
+	TOKEN_BLANK,
 	TOKEN_PIPE,
 	TOKEN_LESS,
 	TOKEN_GREAT,

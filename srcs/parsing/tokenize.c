@@ -44,11 +44,11 @@ static t_token	*create_rlist(t_token *rlist)
 	rlist[3] = create_token("|", 1, TOKEN_PIPE);
 	rlist[4] = create_token(">", 1, TOKEN_GREAT);
 	rlist[5] = create_token("<", 1, TOKEN_LESS);
-	rlist[6] = create_token(" ", 1, TOKEN_PASS);
-	rlist[7] = create_token("\v", 1, TOKEN_PASS);
-	rlist[8] = create_token("\t", 1, TOKEN_PASS);
-	rlist[9] = create_token("\r", 1, TOKEN_PASS);
-	rlist[10] = create_token("\f", 1, TOKEN_PASS);
+	rlist[6] = create_token(" ", 1, TOKEN_BLANK);
+	rlist[7] = create_token("\v", 1, TOKEN_BLANK);
+	rlist[8] = create_token("\t", 1, TOKEN_BLANK);
+	rlist[9] = create_token("\r", 1, TOKEN_BLANK);
+	rlist[10] = create_token("\f", 1, TOKEN_BLANK);
 	rlist[11] = create_token(NULL, 0, TOKEN_NOT_VALID);
 	if (rlist->str == NULL)
 		return (NULL);

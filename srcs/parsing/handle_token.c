@@ -27,7 +27,6 @@ void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t l, t_ttype typ)
 
 void	handle_token(t_lexer *lexer, t_token token)
 {
-	if (token.type != TOKEN_PASS)
-		add_token_to_lexer(lexer, token.str, ft_strlen(token.str), token.type);
+	add_token_to_lexer(lexer, token.str, ft_strlen(token.str), token.type);
 	lexer->pos += token.len;
 }

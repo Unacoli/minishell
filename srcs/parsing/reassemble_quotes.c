@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-static void	quote_closed_in_another_token(t_lexer *lexer, int i)
+static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_fermante)
 {
-	printf("quote closed dans un autre token\n");
 	(void)lexer;
-	(void)i;
+	printf("i_ouvrante: %d | i_fermante: %d\n", i_ouvrante, i_fermante);
+	printf("quote closed dans un autre token\n");
 	return ;
 }
 
@@ -29,15 +29,16 @@ static void	quote_not_closed(t_token *token)
 
 static char	*find_double_quote(t_lexer *lexer, char *chr_ouvrante, int *i)
 {
-	char *chr_fermante;
+	char		*chr_fermante;
+	const int	i_ouvrante = *i;
 
-	while (lexer->tokens[*i] && lexer->tokens[*i]->type == TOKEN_WORD)
+	while (lexer->tokens[*i] && (lexer->tokens[*i]->type == TOKEN_WORD || lexer->tokens[*i]->type == TOKEN_BLANK))
 	{
 		chr_fermante = ft_strchr(lexer->tokens[*i]->str, '"');
 		if (chr_fermante != NULL)
 		{
-			quote_closed_in_another_token(lexer, *i);
 			(*i)++;
+			quote_closed_in_another_token(lexer, i_ouvrante, *i);
 			return (chr_fermante);
 		}
 		(*i)++;
@@ -54,7 +55,7 @@ void	reassemble_quotes(t_lexer *lexer)
 	char	*chr_fermante;
 
 	i = 0;
-	while (lexer->tokens[i] && lexer->tokens[i]->type == TOKEN_WORD)
+	while (lexer->tokens[i] && (lexer->tokens[i]->type == TOKEN_WORD || lexer->tokens[i]->type == TOKEN_BLANK))
 	{
 		chr_ouvrante = ft_strchr(lexer->tokens[i]->str, '"');
 		while (chr_ouvrante != NULL)
