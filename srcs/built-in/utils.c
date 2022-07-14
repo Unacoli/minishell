@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:51:59 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 01:22:26 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 15:01:20 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*create_line(char *arg, int i, char *old_line)
 	temp = ft_calloc(sizeof(char *), ft_strlen(arg) + 1);
 	if (!temp)
 		return (NULL);
-	ft_strlcpy(temp, arg, strlen(arg) + 1);
+	ft_strlcpy(temp, arg, ft_strlen(arg) + 1);
 	if (i)
 		free(old_line);
 	return (temp);
