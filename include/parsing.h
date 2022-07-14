@@ -56,12 +56,16 @@ void	handle_token(t_lexer *lexer, t_token token);
 void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t len,
 			t_ttype type);
 void	double_lexer(t_lexer *lexer);
+void	tokenize(t_lexer *lexer);
+int		check_error(t_lexer *lexer);
+void	reassemble_quotes(t_lexer *lexer);
 
 /*Functions for tokens*/
 
 t_token	create_token(const char *str, size_t len, t_ttype type);
 t_token	*malloc_token(const char *s, size_t len, t_ttype type);
 t_token	handle_quote(char *input, char c);
+t_token	get_token(char *input, t_token *rlist);
 
 /* Utils parsing */
 

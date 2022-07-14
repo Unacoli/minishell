@@ -33,19 +33,41 @@
 # include "environnement.h"
 # include "execution.h"
 # include "exiting.h"
-# include "input.h"
 # include "built_in.h"
 
 extern int	g_status;
 
+typedef struct s_ctrl
+{
+	t_lexer	*lexer;
+	t_cmd	*cmd;
+	t_env	*env;
+}				t_ctrl;
+
 /*Functions for main, starting minishell*/
 
 void	init_shell(t_ctrl *minishell);
-t_env	*choose_env(char **env);
 int		running_shell(t_ctrl *minishell);
 
-/*Built-in functions*/
+void	ft_input(t_ctrl *minishell);
+int		ft_command(t_ctrl *minishell);
+
+/*Signal handler*/
+
+void	signal_handler(void);
+void	error(int signal);
 
 int		built_in(char **arg, t_env *env, t_ctrl *minishell, int fd);
+int		simple_execve(t_cmd *cmd, t_env *env, t_ctrl *minishell);
+int		d_less(t_cmd *cmd, t_ctrl *minishell, int pos, int lexer_size);
+int		pipex(t_cmd *cmd, t_env *env, t_ctrl *minishell);
+char	**cmd_suffix(size_t pos, t_ctrl *minishell);
+int		less_great(t_token *token, t_ctrl *minishell);
+void	choose_execve(int nbr_cmd, t_ctrl *minishell);
+t_cmd	*simple_cmd(size_t pos, t_ctrl *minishell, t_cmd *cmd);
+int		treat_token(t_ctrl *mini);
+
+void	exit_free(t_ctrl *minishell);
+void	error_exit(char *str, t_ctrl *minishell, char **envp);
 
 #endif

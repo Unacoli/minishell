@@ -24,7 +24,8 @@ FILES	= main.c start_shell.c cd.c echo.c env.c exit.c export.c pwd.c unset.c\
 			signal_handler.c double_lexer.c handle_quote_substi.c\
 			malloc_token.c utils_parsing.c get_token.c handle_token.c\
 			malloc_lexer.c tokenize.c simple_cmd.c malloc_cmd.c free_cmd.c\
-			treat_token.c execution.c free_split.c pipex_utils.c join_token.c
+			treat_token.c execution.c free_split.c pipex_utils.c join_token.c\
+			reassemble_quotes.c
 
 SRCS	= $(addprefix ./srcs/*/, $(FILES))
 OBJS	= $(addprefix ./objs/, $(FILES:.c=.o))

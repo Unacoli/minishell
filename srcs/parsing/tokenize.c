@@ -55,7 +55,7 @@ static t_token	*create_rlist(t_token *rlist)
 	return (rlist);
 }
 
-static int	check_error(t_lexer *lexer)
+int	check_error(t_lexer *lexer)
 {
 	size_t	i;
 
@@ -80,7 +80,7 @@ static int	check_error(t_lexer *lexer)
 /* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et
 	il faut alors free lexer */
 
-int	tokenize(t_lexer *lexer)
+void	tokenize(t_lexer *lexer)
 {
 	t_token	token;
 	t_token	*rlist;
@@ -96,7 +96,4 @@ int	tokenize(t_lexer *lexer)
 			free((char *)token.str);
 	}
 	free_list(rlist);
-	if (check_error(lexer) == 1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }

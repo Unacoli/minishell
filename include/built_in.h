@@ -13,12 +13,13 @@
 #ifndef BUILT_IN_H
 # define BUILT_IN_H
 
+#include "environnement.h"
+
 /*	BUILT-IN functions */
 
 int		cd(t_env *env, char **args);
 int		echo(char **args, int fd);
 int		envi(t_env *env, int fd);
-void	exit_free(t_ctrl *minishell);
 int		exporti(t_env *env, char **args, int fd);
 int		pwd(int fd);
 int		unset(t_env **env, char **args);
