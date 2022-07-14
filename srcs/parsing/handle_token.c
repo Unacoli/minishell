@@ -25,6 +25,14 @@ void	add_token_to_lexer(t_lexer *lexer, const char *s, size_t l, t_ttype typ)
 	lexer->size += 1;
 }
 
+void	add_existing_token_to_lexer(t_lexer *lexer, t_token *token)
+{
+	if (lexer_full(lexer))
+		double_lexer(lexer);
+	lexer->tokens[lexer->size] = token;
+	lexer->size += 1;
+}
+
 void	handle_token(t_lexer *lexer, t_token token)
 {
 	add_token_to_lexer(lexer, token.str, ft_strlen(token.str), token.type);

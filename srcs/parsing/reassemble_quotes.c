@@ -10,13 +10,65 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// echo 12345 67"890 a bcd efgh ij"
+
 #include "minishell.h"
 
 static void	quote_closed_in_another_token(t_lexer *lexer, int i_ouvrante, int i_fermante)
 {
-	(void)lexer;
-	printf("i_ouvrante: %d | i_fermante: %d\n", i_ouvrante, i_fermante);
-	printf("quote closed dans un autre token\n");
+	int	len;
+	int	i;
+	t_token *new;
+	char	*str_new;
+	int	k = 0;
+	int j = 0;
+
+	i = i_ouvrante - 1;
+	len = 0;
+	while (i < i_fermante)
+		len += lexer->tokens[i++]->len;
+	str_new = ft_newstr(len + 1);
+	
+	i = i_ouvrante - 1;
+	j = 0;
+	while (i < i_fermante)
+	{
+		k = 0;
+		while (lexer->tokens[i]->str[k] != '\0')
+		{
+			str_new[j] = lexer->tokens[i]->str[k];
+			k++;
+			j++;
+		}
+		i++;
+	}
+	new = malloc_token(str_new, len, TOKEN_WORD);
+
+	t_token **new_tokens;
+	printf("taille newt tokens: %lu\n", lexer->size - (i_fermante - i_ouvrante));
+	printf("offset: %d\n", i_fermante - i_ouvrante + 1);
+	printf("iuv: %d\n", i_ouvrante);
+	new_tokens = (t_token **)ft_calloc(lexer->size - (i_fermante - i_ouvrante), sizeof(t_token *));
+	k = 0;
+
+	while (k < i_ouvrante - 1)
+	{
+		new_tokens[k] = lexer->tokens[k];
+		k++;
+	}
+	new_tokens[k++] = new;
+	while (k < (int)lexer->size - (i_fermante - i_ouvrante))
+	{
+		printf("k: %d\nk:%d\n\n", k, k + (i_fermante - i_ouvrante - 1));
+		new_tokens[k] = lexer->tokens[k + (i_fermante - i_ouvrante - 1)];
+		k++;
+	}
+
+	free_tokens(lexer);
+	lexer->tokens = new_tokens;
+	lexer->size = k;
+	lexer->capacity = k;
+
 	return ;
 }
 
@@ -27,7 +79,7 @@ static void	quote_not_closed(t_token *token)
 	g_status = 1;
 }
 
-static char	*find_double_quote(t_lexer *lexer, char *chr_ouvrante, int *i)
+static char	*find_double_quote(t_lexer *lexer, int *i)
 {
 	char		*chr_fermante;
 	const int	i_ouvrante = *i;
@@ -44,7 +96,6 @@ static char	*find_double_quote(t_lexer *lexer, char *chr_ouvrante, int *i)
 		(*i)++;
 	}
 	quote_not_closed(lexer->tokens[*i - 1]);
-	(void)chr_ouvrante;
 	return (NULL);
 }
 
@@ -71,7 +122,7 @@ void	reassemble_quotes(t_lexer *lexer)
 			{
 				printf("on cherche dans les autres tokens\n");
 				i++;
-				chr_fermante = find_double_quote(lexer, chr_ouvrante, &i);
+				chr_fermante = find_double_quote(lexer, &i);
 				if (chr_fermante == NULL)
 					chr_ouvrante = NULL;
 				else

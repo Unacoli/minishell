@@ -12,27 +12,34 @@
 
 #include "minishell.h"
 
-void	free_lexer(t_lexer *lexer)
+void	free_tokens(t_lexer *lexer)
 {
 	size_t	i;
 
 	i = 0;
+	if (lexer->tokens)
+	{
+		while (i < lexer->size)
+		{
+			if (lexer->tokens[i])
+			{
+				if (lexer->tokens[i]->str)
+					free(lexer->tokens[i]->str);
+				free(lexer->tokens[i]);
+			}
+			i++;
+		}
+		free(lexer->tokens);
+		lexer->size = 0;
+		lexer->capacity = 0;
+	}	
+}
+
+void	free_lexer(t_lexer *lexer)
+{
 	if (lexer)
 	{
-		if (lexer->tokens)
-		{
-			while (i < lexer->size)
-			{
-				if (lexer->tokens[i])
-				{
-					if (lexer->tokens[i]->str)
-						free(lexer->tokens[i]->str);
-					free(lexer->tokens[i]);
-				}
-				i++;
-			}
-			free(lexer->tokens);
-		}	
+		free_tokens(lexer);
 		free(lexer);
 	}
 }

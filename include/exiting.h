@@ -16,6 +16,7 @@
 /*Free functions*/
 
 void	free_lexer(t_lexer *lexer);
+void	free_tokens(t_lexer *lexer);
 void	free_env(t_env *env);
 void	free_cmd(t_cmd *cmd);
 void	free_split(char **tab, int i);
