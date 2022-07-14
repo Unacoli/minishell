@@ -18,11 +18,25 @@ char	*finish_substi(char *to_treat, t_env *env)
 	int		i;
 
 	i = 0;
-	str = search_substi(env, to_treat);
-	if (ft_strncmp(str, to_treat, ft_strlen(to_treat)) == 0)
-		i = 1;
+	if (to_treat[0] == SINGLE_QUOTE || to_treat[0] == DOUBLE_QUOTE)
+	{
+		if (to_treat[0] == DOUBLE_QUOTE)
+		{
+			str = search_substi(env, to_treat);
+			if (ft_strncmp(str, to_treat, ft_strlen(to_treat)) == 0)
+				i = 1;
+			str = delete_quote(str, i);
+		}
+		else
+		{
+			i = 1;
+			str = delete_quote(to_treat, i);
+		}
+	}
 	else
+	{
 		str = ft_strdup(to_treat);
+	}
 	return (str);
 }
 

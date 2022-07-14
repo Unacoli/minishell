@@ -17,10 +17,19 @@ void	ft_input(t_ctrl *minishell)
 	int		cmd;
 
 	cmd = ft_command(minishell);
+	int i = 0;
+	while (minishell->lexer->tokens[i])
+	{
+		printf("%s\n", minishell->lexer->tokens[i]->str);
+		i++;
+	}
+	exit(0);
 	if (cmd != -1)
 	{
 		if (treat_token(minishell))
+		{	
 			choose_execve(minishell->cmd->ac, minishell);
+		}	
 		else
 		{
 			g_status = 1;

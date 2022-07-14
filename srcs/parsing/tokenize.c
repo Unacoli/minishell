@@ -80,7 +80,7 @@ static int	check_error(t_lexer *lexer)
 /* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et
 	il faut alors free lexer */
 
-int	tokenize(t_lexer *lexer, t_env *env)
+int	tokenize(t_lexer *lexer)
 {
 	t_token	token;
 	t_token	*rlist;
@@ -90,7 +90,7 @@ int	tokenize(t_lexer *lexer, t_env *env)
 	lexer->pos = 0;
 	while (lexer->input[lexer->pos])
 	{
-		token = get_token(lexer->input + lexer->pos, env, rlist);
+		token = get_token(lexer->input + lexer->pos, rlist);
 		handle_token(lexer, token);
 		if (token.str)
 			free((char *)token.str);

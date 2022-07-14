@@ -32,11 +32,8 @@ char	*create_str(char *input, int i)
 
 int	delimite_word(char *input, int i, t_token *rlist)
 {
-	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
-	&& input[i] != '\n' && input[i] != '\'' && input[i] != '"')
-	{
+	while (input[i] && !is_separator(&(input[i]), rlist) && input[i] != '\n')
 		i++;
-	}
 	return (i);
 }
 
@@ -44,8 +41,7 @@ int	delimite_word_substi(char *input, int i, t_token *rlist)
 {
 	if (input[i + 1] == '?')
 		return (i + 2);
-	while (input[i] && !is_space(input[i]) && !is_operator(&(input[i]), rlist) \
-	&& input[i] != '\n')
+	while (input[i] && !is_separator(&(input[i]), rlist) && input[i] != '\n')
 		i++;
 	return (i);
 }

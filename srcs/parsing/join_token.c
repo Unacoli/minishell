@@ -33,22 +33,19 @@ static char	**find_tokens(char **args, int nbr)
 	char	**result;
 	char	*temp;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	result = ft_calloc(sizeof(char *), nbr + 1);
-	printf("%s\n", args[i]);
 	while (args[i] != NULL && j < nbr)
 	{
 		if (is_equal(args[i]))
 			temp = args[i++];
-		printf("%s\n", temp);
 		while (args[i] && !is_equal(args[i]))
 		{
 			if (is_equal(temp) && result[0])
 				temp = ft_strjoin(temp, args[i++]);
 			else
 				temp = ft_strjoin_free1(temp, args[i++]);
-			printf("%s\n", temp);
 		}
 		result[j] = ft_strdup(temp);
 		j++;
@@ -73,7 +70,7 @@ char	**join_token(char **args)
 			nbr_res++;
 		i++;
 	}
-	if (nbr_res > 1 && nbr_res < i - 1)
+	if (nbr_res > 1 && nbr_res < i)
 	{
 		result = find_tokens(args, nbr_res);
 		return (result);

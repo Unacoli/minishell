@@ -67,7 +67,7 @@ t_token	handle_quote(char *input, char c);
 
 int		is_space(char c);
 char	*create_str(char *input, int i);
-int		is_operator(char *input, t_token *rlist);
+int		is_separator(char *input, t_token *rlist);
 int		delimite_word(char *input, int i, t_token *rlist);
 int		delimite_word_substi(char *input, int i, t_token *rlist);
 char	*delete_quote(char *str, int i);

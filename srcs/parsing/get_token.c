@@ -25,7 +25,7 @@ static t_token	handle_word(char *input, t_token *rlist)
 	return ((t_token){str, i, TOKEN_WORD});
 }
 
-int	is_operator(char *input, t_token *rlist)
+int	is_separator(char *input, t_token *rlist)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ static t_token	handle_operator(int i, t_token *rlist)
 	En cas d'erreur cette fonction et toute les dependantes renvoie 
 	TOKEN_NOT_VALID */
 
-t_token	get_token(char *input, t_env *env, t_token *rlist)
+t_token	get_token(char *input, t_token *rlist)
 {
 	int		i;
 
@@ -63,10 +63,5 @@ t_token	get_token(char *input, t_env *env, t_token *rlist)
 			return (handle_operator(i, rlist));
 		i++;
 	}
-	if (*input == DOUBLE_QUOTE || *input == SINGLE_QUOTE)
-		return (handle_quote(input, *input));
-	if (*input == '$')
-		return (handle_substitution(input, env, rlist));
-	else
-		return (handle_word(input, rlist));
+	return (handle_word(input, rlist));
 }

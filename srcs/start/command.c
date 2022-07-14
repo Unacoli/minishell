@@ -32,9 +32,13 @@ static int	read_input(t_lexer *lexer, t_env *env)
 	int	ret;
 
 	ret = 0;
+	(void)env;
 	lexer->pos = 0;
 	if (lexer->input)
-		ret = tokenize(lexer, env);
+		ret = tokenize(lexer);
+	// reassemble_quotes(lexer);
+	// substitutions(lexer);
+	// delete_quotes(lexer);
 	return (ret);
 }
 

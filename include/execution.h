@@ -52,8 +52,8 @@ char	*search_substi(t_env *env, char *str);
 char	*substitution(char *str, int position, t_env *env);
 char	*make_3_str(char *str, int position, int j, char *value);
 char	*join_3_str(char *before, char *substi, char *after);
-int		tokenize(t_lexer *lexer, t_env *env);
-t_token	get_token(char *input, t_env *env, t_token *rlist);
+int		tokenize(t_lexer *lexer);
+t_token	get_token(char *input, t_token *rlist);
 t_token	handle_substitution(char *input, t_env *env, t_token *rlist);
 
 /* Built-in functions*/
