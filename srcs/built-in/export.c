@@ -6,7 +6,7 @@
 /*   By: ldubuche <ldubuche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 14:29:22 by ldubuche          #+#    #+#             */
-/*   Updated: 2022/07/13 22:10:24 by ldubuche         ###   ########.fr       */
+/*   Updated: 2022/07/14 14:43:34 by ldubuche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	export_value(t_env *env, char *arg)
 	key = find_key(arg);
 	if (!key)
 		return (error_message(NULL, 1));
-	while (env && env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
+	while (env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
 		env = env->next;
-	if (!env->next && ft_strncmp(env->line, key, ft_strlen(env->line)) != 0)
+	if (!env->next && ft_strncmp(env->line, key, ft_strlen(key)) != 0)
 	{
 		env->next = ft_calloc(1, sizeof(t_env));
 		if (!env->next)
