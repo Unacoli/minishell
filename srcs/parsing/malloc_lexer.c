@@ -18,7 +18,6 @@ void	create_lexer(t_lexer *lexer, size_t cap)
 	lexer->size = 0;
 	lexer->capacity = cap;
 	lexer->input = NULL;
-	lexer->history = NULL;
 	lexer->tokens = ft_calloc((cap + 1), sizeof(t_token *));
 }
 

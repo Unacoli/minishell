@@ -38,8 +38,8 @@ static int	read_input(t_lexer *lexer, t_env *env)
 	{
 		tokenize(lexer);
 		reassemble_quotes(lexer);
-	// substitutions(lexer);
-	// delete_quotes(lexer);
+		substitutions(lexer, env);
+		delete_quotes(lexer);
 	}
 	ret = check_error(lexer);
 	return (ret);

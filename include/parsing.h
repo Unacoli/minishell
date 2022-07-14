@@ -18,6 +18,9 @@
 # define DOUBLE_QUOTE 34
 # define BACK_SLASH 92
 
+# include "environnement.h"
+# include "execution.h"
+
 typedef enum e_ttype
 {
 	TOKEN_NOT_VALID = 0,
@@ -44,7 +47,6 @@ typedef struct s_lexer
 	size_t	size;
 	size_t	capacity;
 	char	*input;
-	char	*history;
 	t_token	**tokens;
 }				t_lexer;
 
@@ -59,6 +61,9 @@ void	double_lexer(t_lexer *lexer);
 void	tokenize(t_lexer *lexer);
 int		check_error(t_lexer *lexer);
 void	reassemble_quotes(t_lexer *lexer);
+void	substitutions(t_lexer *lexer, t_env *env);
+void	delete_quotes(t_lexer *lexer);
+t_token	handle_substitution(char *input, t_env *env, t_token *rlist);
 
 /*Functions for tokens*/
 
@@ -76,5 +81,9 @@ int		delimite_word(char *input, int i, t_token *rlist);
 int		delimite_word_substi(char *input, int i, t_token *rlist);
 char	*delete_quote(char *str, int i);
 char	**join_token(char **args);
+size_t	count_pipe(t_token **tokens, size_t lexer_size);
+int		d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
+int		great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
+int		less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
 
 #endif

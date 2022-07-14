@@ -55,28 +55,6 @@ static t_token	*create_rlist(t_token *rlist)
 	return (rlist);
 }
 
-int	check_error(t_lexer *lexer)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < lexer->size)
-	{
-		if (lexer->tokens[i]->str == NULL)
-		{
-			g_status = 1;
-			return (1);
-		}
-		if (lexer->tokens[i]->type == TOKEN_NOT_VALID)
-		{
-			g_status = 1;
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 /* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et
 	il faut alors free lexer */
 

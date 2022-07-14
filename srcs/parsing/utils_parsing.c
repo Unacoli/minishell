@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+int	check_error(t_lexer *lexer)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < lexer->size)
+	{
+		if (lexer->tokens[i]->str == NULL)
+		{
+			g_status = 1;
+			return (1);
+		}
+		if (lexer->tokens[i]->type == TOKEN_NOT_VALID)
+		{
+			g_status = 1;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	is_space(char c)
 {
 	if (c == ' ' || c == '\v' || c == '\t' || c == '\r' || c == '\f')

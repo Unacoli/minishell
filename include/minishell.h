@@ -67,6 +67,8 @@ void	choose_execve(int nbr_cmd, t_ctrl *minishell);
 t_cmd	*simple_cmd(size_t pos, t_ctrl *minishell, t_cmd *cmd);
 int		treat_token(t_ctrl *mini);
 
+/*Exit functions*/
+
 void	exit_free(t_ctrl *minishell);
 void	error_exit(char *str, t_ctrl *minishell, char **envp);
 

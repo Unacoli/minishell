@@ -46,15 +46,11 @@ char	*join_3_str(char *before, char *substi, char *after);
 
 char	*p_cmd(char **envp, char *cmd);
 void	redirection(int fd_0, int fd_1);
-int		d_great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
-int		great(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
-int		less(t_cmd *cmd, t_token **tokens, int pos, int lexer_size);
 
 /*Malloc functions*/
 
 t_cmd	*malloc_cmd(t_cmd *cmd, size_t nbr_cmd);
 void	signal_handler_exec(void);
-size_t	count_pipe(t_token **tokens, size_t lexer_size);
 void	close_fd(t_cmd *cmd);
 void	pipe_time(t_pipe *pipex);
 void	close_pipes(t_pipe *s_pipe);

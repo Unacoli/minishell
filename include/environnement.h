@@ -30,7 +30,6 @@ t_env	*default_env(void);
 
 /*Function for substitution*/
 
-t_token	handle_substitution(char *input, t_env *env, t_token *rlist);
 char	*search_substi(t_env *env, char *str);
 char	*substitution(char *str, int position, t_env *env);
 
