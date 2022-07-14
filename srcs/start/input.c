@@ -24,19 +24,19 @@ void	ft_input(t_ctrl *minishell)
 		printf("%s\n", minishell->lexer->tokens[i]->str);
 		i++;
 	}
-	exit(0);
-	if (cmd != -1)
-	{
-		if (treat_token(minishell))
-		{	
-			choose_execve(minishell->cmd->ac, minishell);
-		}	
-		else
-		{
-			g_status = 1;
-			free_cmd(minishell->cmd);
-		}
-	}
-	if (minishell->lexer)
-		free_lexer(minishell->lexer);
+	// exit(0);
+	// if (cmd != -1)
+	// {
+	// 	if (treat_token(minishell))
+	// 	{	
+	// 		choose_execve(minishell->cmd->ac, minishell);
+	// 	}	
+	// 	else
+	// 	{
+	// 		g_status = 1;
+	// 		free_cmd(minishell->cmd);
+	// 	}
+	// }
+	// if (minishell->lexer)
+	// 	free_lexer(minishell->lexer);
 }

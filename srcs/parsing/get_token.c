@@ -39,7 +39,7 @@ int	is_separator(char *input, t_token *rlist)
 	return (0);
 }
 
-static t_token	handle_operator(int i, t_token *rlist)
+static t_token	handle_separator(int i, t_token *rlist)
 {
 	char	*str;
 
@@ -47,10 +47,8 @@ static t_token	handle_operator(int i, t_token *rlist)
 	return ((t_token){str, rlist[i].len, rlist[i].type});
 }
 
-/*	Affilie les tokens operator, puis les quotes, puis les substitutions
-	et si ce n'est aucun des trois, considere que c'est un mot 
-	En cas d'erreur cette fonction et toute les dependantes renvoie 
-	TOKEN_NOT_VALID */
+/*	Affilie les tokens operator, puis les tokens word
+	en fonction des separateurs*/
 
 t_token	get_token(char *input, t_token *rlist)
 {
@@ -60,7 +58,7 @@ t_token	get_token(char *input, t_token *rlist)
 	while (i < (MAX_TOKENS - 1))
 	{
 		if (!ft_strncmp(rlist[i].str, input, rlist[i].len))
-			return (handle_operator(i, rlist));
+			return (handle_separator(i, rlist));
 		i++;
 	}
 	return (handle_word(input, rlist));

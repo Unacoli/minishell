@@ -55,8 +55,7 @@ static t_token	*create_rlist(t_token *rlist)
 	return (rlist);
 }
 
-/* 	Si on repere un TOKEN_NOT_VALID,  on renvoit EXIT_FAILURE et
-	il faut alors free lexer */
+/* 	Put tokens into lexer */
 
 void	tokenize(t_lexer *lexer)
 {
